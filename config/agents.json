@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "agents": {
+    "strategy": {
+      "name": "strategy",
+      "description": "CEO/founder-mode plan review with 4 scope modes",
+      "file": "agent/strategy.md",
+      "mode": "EXPANSION, SELECTIVE, HOLD, REDUCTION",
+      "triggers": ["/strategy", "strategy review", "ceo review"]
+    },
+    "architect": {
+      "name": "architect", 
+      "description": "Engineering review - lock in execution plan",
+      "file": "agent/architect.md",
+      "mode": "subagent",
+      "triggers": ["/architect", "engineering review", "arch review"]
+    },
+    "designer": {
+      "name": "designer",
+      "description": "Design review - 7-pass visual QA with 0-10 scoring",
+      "file": "agent/designer.md", 
+      "mode": "subagent",
+      "triggers": ["/designer", "design review", "visual qa"]
+    },
+    "second-opinion": {
+      "name": "second-opinion",
+      "description": "Independent second opinion on code changes",
+      "file": "agent/second-opinion.md",
+      "mode": "review, challenge, consult",
+      "triggers": ["/second-opinion", "second opinion", "codex review"]
+    }
+  },
+  "categories": {
+    "plan-review": "Plan review agents for different perspectives",
+    "code-review": "Code quality and architecture review"
+  }
+}
