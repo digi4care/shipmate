@@ -1,0 +1,459 @@
+[0.1s] Before we start, I need to clear
+[1.4s] something up because the internet loves
+[3.0s] putting people in weird boxes. I am not
+[5.4s] an AI automation expert. I'm a software
+[7.8s] developer. That's my lane. I build
+[9.4s] products. I engineer. I ship features. I
+[11.5s] debug broken systems. I deal with real
+[13.4s] deadlines, real users, and real
+[15.4s] consequences when things break. AI is
+[17.3s] not my identity. AI is just a tool I use
+[19.7s] inside the same work I have always done.
+[21.4s] And that matters cuz I'm not saying what
+[22.6s] I'm about to say from a hype angle. I'm
+[24.3s] saying it from the perspective of
+[25.4s] someone who has shipped a lot of
+[26.6s] software and also wasted a lot of time
+[28.4s] pretending I was blocked by things that
+[30.0s] were actually not a blocker. Everyone
+[31.7s] keeps saying AI makes engineers 10 times
+[33.7s] more productive. And I think that
+[35.0s] framing is wrong. AI didn't make me
+[36.6s] faster. AI removed my excuses for
+[38.5s] staying slow because before AI, there
+[40.5s] were real barriers. Now there are fewer
+[42.4s] barriers. And that means the
+[43.7s] uncomfortable truth is harder to dodge.
+[45.5s] The bottleneck is not the tool. The
+[47.3s] bottleneck is the person using it.
+[49.0s] Here's a frame that explains everything
+[50.7s] else. AI is an amplifier. It does not
+[52.8s] create capability. and multiplies
+[54.3s] whatever is already there. If you have
+[56.5s] discipline, AI makes you move faster and
+[58.6s] think clearer and ship more
+[59.8s] consistently. But if you don't have
+[61.1s] discipline, AI makes you generate chaos
+[63.1s] faster than ever before. You have more
+[64.8s] drafts, more halffinish projects, more
+[66.8s] random ideas, more almost done products,
+[69.3s] more scattered effort, but the same
+[71.0s] tool, different person. And that is why
+[72.5s] the AI makes you 10x conversation annoys
+[74.9s] me because it makes people think that
+[76.6s] they need access to the two when they
+[78.2s] actually don't. They just need the
+[79.2s] habits and the judgment to make the two
+[81.0s] useful. So, let's rewind to what the
+[82.5s] world looked like before AI because
+[84.1s] context matters. Before AI, you could
+[85.9s] hide behind friction and it was often
+[87.4s] legitimate friction. You could say, "I'm
+[89.2s] slow because setup takes forever." You
+[90.8s] could say, "I'm slow because boilerplate
+[92.4s] is painful." And you could say, "I'm
+[93.9s] slow because I need hours of research
+[95.4s] just to find a workable path." And that
+[97.0s] was usually true, but now a lot of that
+[99.0s] friction is crushed. Boiler plate is
+[100.9s] cheap. First drafts are cheap. You can
+[102.7s] get three viable approaches to almost
+[104.5s] any technical problem in minutes. You
+[106.2s] can draft documentation. You can outline
+[107.9s] a system. And you can turn rough notes.
+[109.5s] You can get a testing plan. you can get
+[110.8s] a starting point. So, if you're still
+[112.2s] slow, you have to ask what is really
+[113.8s] happening. And in my experience, what is
+[115.5s] really happening is not a skill gap. It
+[117.4s] is an avoidance pattern. You're
+[118.6s] negotiating with yourself, and I've done
+[120.2s] this myself. You're delaying commitment
+[122.0s] because commitment creates
+[123.1s] accountability. You're chasing certainty
+[125.1s] because certainty feels safe, even
+[126.7s] though certainty is usually fake. So,
+[128.5s] let me hit that directly. People used to
+[130.1s] hide behind believable excuses. The most
+[132.4s] common ones, especially in software, is
+[134.2s] that I'm just not technical enough.
+[135.8s] Maybe I don't have time to learn
+[137.0s] marketing. Or maybe I need a team to
+[138.5s] ship this. I'm just an engineer. I'm not
+[140.2s] a product person. I'm not the type who
+[141.7s] posts content. Here I am. And I'm not
+[143.7s] mocking those statements, but those
+[145.5s] barriers are real for a long time. But
+[147.6s] now AI demolishes most of them. So now
+[150.2s] you have to ask what's left. It's the
+[151.8s] fear of looking stupid. I thought about
+[153.7s] this for quite a long time before I
+[155.0s] started recording videos. But I said,
+[156.2s] "Fuck it. Here I am." Cuz perfectionism
+[158.2s] is disguised as high standards.
+[160.2s] Procrastination disguises planning and
+[162.3s] comfort disguises identity. AI didn't
+[164.2s] give you new abilities. AI removed the
+[166.0s] technical friction you use as cover. Now
+[167.8s] you're left staring at the truth, right?
+[169.6s] Because like I am facing this a lot. The
+[171.5s] blocker is actually just you. Let me
+[173.6s] make this right about side of software
+[175.0s] because this is not an engineering
+[176.2s] problem. It's a human problem. Okay? So
+[178.2s] just think about a gym. A gym can buy
+[179.8s] the best equipment in the world. Have
+[181.5s] brand new racks, premium machines, and a
+[183.6s] beautiful flooring. Got perfect lighting
+[185.5s] and the gym can still fail. Why? Because
+[188.2s] equipment is not operations. Operations
+[190.7s] is cleaning routines, staff standards,
+[192.9s] member onboarding, class scheduling,
+[194.9s] maintenance, retention, follow-ups. If
+[197.3s] the gym has messy operations, the
+[199.1s] equipment is just expensive metal. AI is
+[201.2s] the exact same. People think buying the
+[202.7s] tool is a win. It's not. If your
+[204.6s] workflow is chaos, AI just makes you
+[206.3s] produce chaos faster. The win is having
+[208.2s] disciplined operations cuz AI is just
+[210.2s] the equipment. It's the barrier. But
+[211.7s] discipline is the operations. It's doing
+[213.4s] the same thing day in day out. But now I
+[215.1s] want to anchor this with a story cuz I'm
+[216.8s] not speaking from theory cuz for years I
+[218.7s] plot myself from even thinking of
+[220.2s] posting content. Here I am years and my
+[222.6s] excuses in my head sounded smart. I told
+[224.7s] myself I just needed the right setup. I
+[226.2s] told myself I needed the right structure
+[227.5s] and I told myself I needed the right
+[228.9s] niche. I told myself I needed a proper
+[230.7s] plan and better equipment. What was
+[232.2s] actually happening was simple. I had all
+[233.8s] these ideas in my head but I never just
+[235.2s] sat down and opened with voice and just
+[237.0s] viewed. So even for this video like
+[239.0s] literally my preparation wasn't like oh
+[241.3s] how will I do this? Will I do this? I
+[242.6s] was like I'm just going to sit down and
+[243.8s] think what has stopped me from doing
+[245.5s] things in the past and what has
+[246.9s] accelerated me. And when those like
+[248.6s] blockers are gone, how can you just move
+[250.5s] on? This is kind of the crux of this,
+[252.6s] right? Cuz I did not want to be a
+[253.7s] beginner in public. I did not want to
+[255.4s] post something average. I did not want
+[257.0s] to look clumsy. So I delayed my college
+[259.4s] standards. Then one day I just started
+[261.2s] anyway, right? A three-hour video of me
+[263.5s] just talking about messing with an AI
+[266.3s] trying to code something. It didn't work
+[267.8s] out great. Then one day I started
+[269.4s] anyway. No perfect studio, no perfect
+[271.4s] script, no perfect anything. And I
+[273.2s] realized something immediately, right?
+[274.9s] The barrier was never technical. The
+[276.5s] barrier was emotional. AI didn't teach
+[278.2s] me how to talk on camera. AI removed the
+[279.9s] technical excuses I used to avoid the
+[281.6s] discomfort. So let me say something
+[282.9s] blunt. Perfectionism is often fear in a
+[284.8s] hoodie. It looks like standards. It
+[286.7s] sounds like quality, but it is fear.
+[288.5s] It's fear of being judged, fear of being
+[290.2s] wrong, fear of looking like a beginner.
+[291.8s] And AI does not remove that fear. It
+[293.5s] just removes the mask. Because once AI
+[295.2s] can draft the first version in minutes,
+[296.8s] you cannot pretend the reason you're not
+[298.3s] moving is because you need more time.
+[299.6s] Cuz time was never the issue. Your issue
+[301.4s] was your willingness to ship something
+[302.7s] imperfect. Now, let's talk about how
+[304.0s] excuses compound. Because excuses are
+[305.8s] not neutral. They are expensive. If
+[307.4s] you're an engineer, excuses keep you
+[309.0s] narrow. You stay great at
+[309.9s] implementation, but you never build
+[311.3s] leverage. You're never going to have a
+[312.4s] sell. You never go in distribution. You
+[314.0s] never learn how to talk to users. You
+[315.7s] remain just the engineer while other
+[317.1s] people become the operators. And years
+[318.7s] go by. If you're a service business
+[320.2s] owner, excuses keep you trapped. You
+[321.9s] have revenue. You have clients, but your
+[323.7s] back end is chaos. Your business runs on
+[325.6s] your brain. Every question routes to
+[327.0s] you. Every decision routes to you. Every
+[328.9s] handoff breaks without you. You're not
+[330.6s] burnt out because you are weak. You're
+[331.8s] burnt out because you were doing work
+[333.2s] your system should be doing. And you can
+[335.1s] feel it. You know the business cannot
+[336.5s] scale like this. But you're also
+[337.8s] thinking fixing it requires shutting
+[339.3s] everything down for 6 months. So you
+[341.0s] keep pushing and you keep paying that
+[342.7s] burnout tax. So let me use a restaurant
+[344.4s] analogy because it makes the problem
+[346.0s] obvious. Imagine a kitchen with no wheel
+[348.1s] system. No clear rolls, no consistent
+[350.2s] prep, no station discipline. The chef is
+[352.7s] stressed, servers are confused, orders
+[355.0s] come out late, mistakes happen,
+[357.0s] customers complain. Now imagine a
+[358.6s] restaurant installs a new ordering
+[359.8s] tablet that sends tickets twice as fast.
+[361.7s] Does the restaurant get better? No. The
+[363.5s] chaos arrives faster. That is AI. When
+[365.4s] you bolt it on to broken operations, AI
+[367.4s] just speeds up inputs. But if the system
+[369.1s] is broken, faster inputs aren't going to
+[371.0s] help you. They're just going to expose
+[372.2s] you faster. And to top this, here's
+[374.1s] another analogy from an airport. Because
+[375.6s] airports are the clearest examples of
+[377.1s] systems. An airport is not a building.
+[378.5s] An airport is flow. It's check-in,
+[380.3s] security, gates, boarding, baggage,
+[382.6s] crew, logistics, communication. And if
+[384.6s] you speed up one part without fixing the
+[386.2s] flow, you just move the bottleneck. You
+[387.8s] can buy the fastest scanners in the
+[389.2s] world, but if staffing and lane
+[390.5s] management are broken, you just don't
+[391.9s] get a better airport. You get a faster
+[393.5s] pileup. And this is what happens when
+[394.8s] businesses bolt a to chaos. They speed
+[397.0s] up one step and expose how broken the
+[398.8s] rest is. So now let's pivot into the
+[400.3s] reframe because this is where it becomes
+[402.4s] useful. The false belief is this. AI
+[404.2s] will make me 10 times more productive.
+[406.0s] So I should wait until I master the
+[407.4s] tools. Then I'll finally be unstoppable.
+[409.1s] But the truth is AI will make
+[410.6s] disciplined experienced people fast, but
+[412.4s] it makes undisiplined inexperienced
+[414.2s] people dangerous. So the bottleneck is
+[415.8s] never the tool. The bottleneck is who
+[417.2s] you are when you sit down with the work.
+[418.5s] I use a simple principle as a filter.
+[420.0s] Now you're as fast as your discipline,
+[421.8s] not your lack of skill. Now let's get
+[423.4s] practical. When I say discipline, I
+[425.4s] don't mean some like wax on, wax off
+[427.4s] karate kid stuff, grinding for 15 hours
+[429.4s] a day. I mean creating conditions where
+[431.0s] action is the default and avoidance is
+[432.8s] expensive. I think about discipline in
+[434.3s] three layers. Discipline one is
+[435.7s] environmental discipline. Layer two is
+[437.4s] decision discipline and layer three is
+[439.1s] execution discipline. So for layer one,
+[441.0s] we talk let's talk environment. If your
+[442.7s] environment is noisy, your mind is
+[444.4s] noisy. If your mind is noisy, you avoid
+[446.2s] hard tasks. If you avoid hard task, you
+[448.0s] default to distractions. So here's a
+[449.5s] boring or real rule. Before you even
+[451.1s] open up your laptop, spend 10 minutes
+[452.7s] making your environment can clear
+[454.4s] visible clutter. Make your bed. Reset
+[456.6s] the space. Open the window. Create a
+[459.0s] room that makes focus easy. This is not
+[461.3s] productivity theater. This is cognitive
+[463.1s] load management because AI cannot
+[465.0s] compensate for a scattered mind. If you
+[466.5s] try this for 5 days and see how
+[467.8s] different you feel, you realize some
+[469.8s] seriously good results. Now, layer two
+[471.4s] is just decision discipline. Developers
+[473.1s] love thinking, operators love thinking,
+[474.9s] too. And the modern failure mode is not
+[476.6s] that you cannot find an answer. The
+[478.1s] modern failure mode is that you can find
+[479.6s] infinite answers and hide inside
+[481.7s] options. So if you use a simple protocol
+[483.6s] like when I hit a problem, I ask AI for
+[485.5s] three approaches with trade-offs and a
+[487.3s] recommended path for my constraints.
+[488.6s] Then I just pick one quickly and
+[490.2s] implement a small slice. I don't debate
+[491.9s] in my head for hours. I just find one,
+[493.5s] go with it, and that's it. Then you can
+[494.9s] just let reality give you feedback. You
+[496.4s] can actually test it, see what happens,
+[497.8s] and you iterate from there. This is a
+[499.3s] practical rule that stops AI from
+[500.7s] turning into anxiety. Okay, there's a
+[502.4s] two-prong rule. You're allowed to ask AI
+[504.8s] twice. Prompt one is for a plan with
+[506.4s] trade-offs. And prompt two is for
+[507.8s] debugging a specific error. After that,
+[509.4s] you stop prompting and you execute. Cuz
+[511.1s] on discipline, people treat AI like a
+[513.0s] slot machine. They keep pulling the
+[514.3s] lever until they feel certainty. But
+[515.9s] that is not productivity. That's just
+[517.6s] fear. Then if we get to layer three, we
+[519.3s] got execution discipline. This is where
+[521.0s] the V coding conversation needs honesty
+[523.0s] because to be fair, AI is not a
+[525.4s] replacement for reps. AI is a
+[526.9s] replacement for friction. Experienced
+[528.3s] developers do not use AI to think for
+[530.2s] them. They use AI to compress execution.
+[532.8s] They are already embedding all their
+[534.5s] thoughts, all they know, how to solve
+[536.3s] problems time and time again into a
+[538.4s] prompt and pointing at the problem, but
+[540.7s] getting to a solution much faster than
+[542.5s] they would have to type. They already
+[544.3s] know what problem they're solving. They
+[545.8s] already know what good looks like, and
+[547.2s] they use AI to remove typing and boiler
+[549.6s] plate, but they keep judgment in the
+[551.1s] driver's seat. But inexperienced people
+[552.7s] try to use AI as a replacement for
+[554.5s] judgment. They think you can just throw
+[555.9s] [ __ ] at the wall and the wall is going
+[557.5s] to be this pristine glass clear
+[560.9s] magnificent [ __ ] spectacle. But
+[563.0s] that's where expensive mistakes happen.
+[564.3s] Cuz if you don't know what good looks
+[565.9s] like, you cannot evaluate the output. So
+[568.2s] if you accept shortcuts, you don't
+[570.2s] understand. You're just stack complexity
+[572.1s] and then you just end up shipping
+[573.2s] something fast that collapses on the
+[574.7s] real usage. So there's a simple way to
+[576.2s] think about V coding. It works if you
+[578.2s] have reps, but it's dangerous if you
+[580.0s] don't. So you still need to know the
+[581.5s] fundamentals and this is across
+[583.0s] everything. It's across marketing,
+[584.3s] sales, engineering, you name it. Now, if
+[586.1s] you want to build a practical way to
+[587.2s] build discipline without pretending
+[588.4s] you're a robot, you can use this. Okay?
+[590.3s] It's a 15-minute momentum sprint. You
+[592.3s] just pick one tiny outcome that moves
+[593.9s] the project forward. Not a huge feature,
+[596.1s] just one step. Create the repo, wire the
+[598.2s] login, draft the onboarding email, write
+[600.2s] me the first page of the spec, record
+[601.6s] the first rough take of the video, set a
+[603.5s] timer for 15 minutes, do only that. When
+[605.4s] the timer ends, decide if you do another
+[607.1s] 50. Most people don't need more time.
+[608.8s] They just need a clean start. Once you
+[610.3s] start, your brain stops making it this
+[611.9s] big scary thing cuz AI is going to help
+[613.8s] you because it'll remove initial
+[615.7s] friction. You can just get going. And
+[617.4s] then discipline is you doing it right
+[619.2s] over and over again. So now let's get
+[621.1s] back to service business owners cuz this
+[623.3s] is where the pain is loud. If you're
+[625.0s] running a service business and you feel
+[626.4s] burnt out, you're probably not burnt out
+[628.0s] because you're weak. You're burnt out
+[629.4s] because the business runs on your brain.
+[631.4s] So here's a practical exercise that will
+[633.1s] actually improve your life. For 3 days,
+[634.7s] track every repeated question and every
+[636.5s] repeated decision. Anytime someone asks
+[638.4s] you something you've answered before,
+[640.3s] just write it down. Anytime a handoff
+[642.0s] breaks, write it down. Anytime you have
+[643.7s] to clarify what done means, just write
+[645.4s] it down. At the end of the three days,
+[647.3s] that list is your business begging for
+[648.9s] systems. Now, you can pick the top three
+[650.3s] items and build one simple artifact for
+[652.2s] each a checklist, a template, a one page
+[654.3s] SOP, a decision rule, whatever it is, AI
+[656.8s] can drop those artifacts in minutes. But
+[658.4s] the discipline isn't forcing them. It's
+[659.9s] going into the real world and it's
+[661.2s] seeing when these things crop up, how
+[662.6s] you can apply it over and over again.
+[664.4s] let you stop being the glue and start
+[665.8s] being the operator. You actually react
+[667.6s] in action instead of procrastinating and
+[669.5s] just handling [ __ ] coming at you like a
+[671.3s] fire hose. Now, I want to warn you about
+[672.7s] something because there is the
+[674.1s] automation trap. Most people are buying
+[675.6s] automations and calling them systems.
+[677.1s] That's a mistake. Automations connect
+[678.7s] tasks. Systems designed flow. If your
+[680.6s] system breaks the moment you change your
+[681.9s] offer, change your onboarding, or hire a
+[683.4s] new team member. It's not a system. It
+[684.9s] is duct tape. AI makes this worse
+[686.6s] because it is easier than ever to build
+[688.5s] duct tape quickly. And the goal is not
+[690.2s] to automate clicks. The goal is to build
+[691.8s] infrastructure that survives change. So
+[693.4s] you start with intent, who owns what,
+[695.1s] what is the flow, where are decisions
+[696.7s] made, what happens when something fails,
+[698.3s] and then you choose tools, then you
+[699.8s] automate edges. That is what prevents
+[701.3s] collapse every time reality shifts. I
+[703.3s] want to land the biggest shift AI
+[704.6s] created for me as an engineer because AI
+[706.6s] did not just make me type faster. Okay,
+[708.5s] that's important. It shifted where my
+[710.0s] attention goes. When execution is
+[711.5s] cheaper, thinking becomes way more
+[713.1s] valuable. When boilerplate is easy,
+[714.9s] judgment becomes a differentiator. When
+[716.4s] you can ship a version quickly, feedback
+[718.1s] becomes the advantage. So the real 10
+[719.9s] time effect is not typing faster. The
+[721.8s] real 10 time effect is that you can
+[723.1s] operate at a higher level while still
+[724.6s] being able to ship. You can think like
+[725.7s] an operator. You can think like a
+[726.9s] product person. You can think like a
+[728.2s] system designer and you can still
+[729.5s] implement. That is a real leverage. You
+[731.0s] can do three people's jobs at the price
+[732.8s] of one. And so here's the pros. If
+[734.6s] you're watching this and thinking,
+[735.4s] "Yeah, this guy talked [ __ ] way too
+[737.7s] long." That's okay. But also, if you
+[739.8s] think that you're not technical enough
+[741.0s] or if you don't know where to start or
+[742.4s] you need to learn X first, just stop
+[744.3s] because they're the stories you're
+[745.4s] telling yourself when it's not the
+[746.4s] truth. You have access to more knowledge
+[747.7s] than any human in history and the only
+[749.2s] question is whether you're disciplined
+[750.5s] enough to use it. So, here's the
+[751.4s] practical challenge. Pick one thing that
+[752.9s] you've been delaying, just one. And
+[754.5s] commit to shipping a minimum viable
+[756.2s] version in 7 days. Not perfect, not
+[758.7s] impressive, just real. If you're an
+[760.5s] engineer, ship the thin version. If
+[762.1s] you're an operator, ship the checklist.
+[763.7s] If you're a creator, ship the first
+[765.1s] video because you do not build
+[766.6s] confidence by preparing. You build
+[768.1s] confidence by shipping and surviving the
+[769.8s] feedback loop. I'm going to post this,
+[771.4s] get a bunch of random [ __ ] I hate
+[773.4s] comments or some [ __ ] troll, which
+[775.0s] I've gotten in my shorts. But that's
+[776.4s] fine because look, AI's removed your
+[778.1s] excuses. Now, you just got to face the
+[779.6s] truer. Okay. The tool is not the
+[781.1s] limiter. You are.

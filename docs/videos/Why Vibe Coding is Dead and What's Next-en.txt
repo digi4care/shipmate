@@ -1,0 +1,401 @@
+[0.2s] Six months ago, I called vibe coding the
+[2.0s] most dangerous trend in software. And
+[3.8s] people told me I was overreacting. But
+[5.4s] just last week, Andre Karpathy, the guy
+[7.2s] who literally coined the term vibe
+[8.5s] coding, declared it pass and named
+[10.6s] exactly what's coming next. He didn't
+[12.2s] walk it back quietly. He put a name on
+[13.7s] the replacement, aentic engineering. His
+[16.0s] words. Today, I'm going to break down
+[17.9s] exactly what happened, why the backlash
+[19.9s] is justified, and give you the
+[21.1s] three-level framework for using AI
+[22.7s] without destroying your codebase. And
+[24.6s] this isn't one guy changing his mind.
+[26.2s] The leading voices are shifting.
+[27.8s] Hackaday covered a research paper called
+[30.2s] how vibe coding is killing open source.
+[32.2s] Red Hash published the uncomfortable
+[33.8s] truth about vibe coding and stack
+[35.4s] overflow's 2025 developer survey had
+[37.6s] 49,000 respondents and found that 66% of
+[40.7s] developers say almost right but AI code
+[43.4s] is their number one frustration. The
+[45.0s] trust in the accuracy has dropped from
+[46.6s] 40 to 29%. That's 11 points in a single
+[49.4s] year and the hype cycle is cracking. And
+[51.7s] the people who built their entire
+[53.0s] workflow in bi coding are about to find
+[54.5s] out what that costs. Now, I've been
+[56.2s] building production software for almost
+[57.6s] 15 years at companies like Shopify,
+[59.1s] Brex, Motorola, Fizer, and many more. I
+[61.8s] prompted Claude 47 times yesterday. I'm
+[64.0s] no stranger to AI. I'm not anti-AI, I'm
+[66.4s] anti-reckless, and I've been inside the
+[68.1s] code bases where VIP coding is doing
+[69.6s] real damage. Let me show you.
+[73.8s] Let me tell you what I'm seeing in the
+[75.0s] field because the data is one thing, the
+[76.6s] reality is worse. I work with companies.
+[78.4s] I get inside their codebase and over the
+[79.9s] last 6 months, a pattern has emerged
+[81.4s] that is devastating. And this is a true
+[83.2s] story. Now a client would bring me in.
+[84.7s] They could be bootstrapped their series
+[85.9s] A startup. One such had said to me that
+[88.2s] they move so fast with AI tools, but now
+[90.3s] things are breaking. I opened their
+[91.8s] codebase and the first thing I found was
+[93.4s] a PKC authentication flow. Now that's
+[95.7s] the security handshake your app does
+[97.6s] when users log in. The LLM generated it.
+[100.2s] It looked right. It passed basic tests,
+[102.0s] but there was a subtle flaw in how it
+[103.4s] handled the code verifier. In
+[105.4s] production, roughly one in every 50
+[108.2s] login attempts would silently fail, and
+[110.1s] the users would get a blank screen and
+[111.6s] just leave. and they'd been losing
+[112.9s] customers for three months and nobody
+[115.0s] knew. And the second thing I find these
+[117.1s] ESLint rules, the team had configured
+[118.9s] them. They were good rules, but the AI
+[120.4s] generated code ignored them. Not
+[122.2s] sometimes, but every time. The AI would
+[124.0s] write code and they would accept that.
+[125.6s] And the linting errors would get
+[126.7s] suppressed because the AI's output
+[128.4s] looked right. The third thing was
+[130.5s] duplicate logic. The same business rule
+[132.6s] pricing calculation, but was implemented
+[134.2s] in four different places. four slightly
+[137.1s] different each time because every time a
+[138.5s] developer asked AI to build a feature,
+[140.1s] it generated the logic fresh instead of
+[141.8s] referencing what already existed. When
+[143.7s] they needed to change the pricing model,
+[145.4s] four places to update and they found
+[147.0s] three. The fourth one silently charged
+[149.7s] customers the wrong amount for two
+[151.6s] weeks. Think about that. A broken
+[153.4s] offflow, ignored lint rules, duplicate
+[155.4s] business lodging, charging the wrong
+[156.9s] prices. That's three problems, one
+[158.9s] codebase, and one root cause. Nobody
+[161.8s] read the code. They generated it. They
+[164.2s] accepted it. They shipped it and they
+[166.2s] moved on to the next prompt. Now, that's
+[168.2s] not a bug, but that's what happens when
+[169.8s] nobody understands the code they're
+[171.1s] shipping. These weren't juniors. These
+[172.7s] were experienced engineers, but the AI
+[174.5s] made them fast and fast felt like
+[176.4s] productive. So, nobody stopped to ask,
+[178.3s] "Do we understand what we're shipping?"
+[183.0s] Now, let's talk about what happens when
+[184.5s] this spreads because the broken off
+[186.0s] flow, that's a symptom. The disease is
+[187.8s] deeper. Tailwind's founder publicly
+[190.1s] attributed layoffs to AI's impact of
+[192.0s] their business. 75% of their engineering
+[194.5s] team was gone. Their documentation
+[196.5s] traffic dropped 40%. Not because fewer
+[198.9s] people were using Tailwind, but because
+[200.3s] developers were asking the AI instead of
+[202.6s] reading the docs. And here's the kicker.
+[205.2s] Documentation was also Tailwind's
+[207.2s] monetization surface. Fewer eyeballs on
+[209.6s] docs meant less revenue. The business
+[211.7s] model got hollowed out from underneath
+[213.2s] them, not by a competitor, but by the
+[215.3s] workflow shift itself. And that's what
+[217.3s] happens at the company level. At the
+[219.0s] team level, it cascades. Code review
+[221.3s] becomes theater. Nobody's reading the AI
+[223.3s] output carefully. They're scanning it.
+[225.2s] Looks right because the new standard and
+[227.2s] looks right is how bugs hide. I've seen
+[229.8s] this play out. Pull request comes in.
+[231.6s] 400 lines of AI generated code. The
+[234.2s] reviewer opens it, scrolls for about 8
+[236.2s] seconds, and leaves a comment. Looks
+[238.2s] good to me. Four letters. LGTM. In 8
+[241.6s] seconds, 400 lines of code that now
+[243.4s] lives in productions. Nobody read it.
+[245.4s] Nobody questioned it. And nobody tested
+[247.0s] the edge cases. And three weeks later,
+[249.4s] when that code breaks at 2 am, the
+[251.3s] person who approved it says, "I taught
+[253.2s] the AI handled that." No, you handle
+[256.1s] that. You clicked approve. Test coverage
+[258.2s] drops not because people stop writing
+[259.7s] tests, but because the AI doesn't write
+[261.2s] tests for the edge cases it doesn't know
+[262.7s] about and the humans stop thinking about
+[264.6s] the edge cases because the AI handled
+[267.0s] it. Trust the roads between founders and
+[269.0s] team, between engineering and product,
+[270.8s] and between company and customers. The
+[273.0s] speed was an illusion. The debt was
+[274.7s] real. And I'll say it again, the speed
+[276.7s] was an illusion. You fell fast. Your
+[278.7s] sprint velocity looked great. Your jura
+[280.7s] board or hopefully linear board was
+[282.4s] green. But under the surface, every
+[284.2s] shortcut was compounding. And compound
+[285.9s] interest doesn't care about your
+[287.3s] dashboard. Again, in Stack Overflow's
+[289.4s] 2025 developer survey, only 29% of
+[292.1s] developers trust AI generated code. That
+[294.2s] was down from 40%. That's engineers
+[296.5s] telling you the code AA writes is not
+[298.7s] trustworthy without human judgment. And
+[300.6s] if your team doesn't have that judgment,
+[302.4s] you're compounding technical debt at a
+[304.5s] 10x speed. And congratulations, you're
+[306.6s] not 10x productive, you're 10x in depth.
+[311.8s] So what's the answer? Is it stop using
+[313.7s] AI? No, because that's stupid. That's
+[315.7s] like saying stop using power tools cuz
+[317.3s] someone cut their finger. The answer is
+[318.9s] what Kapari named agentic engineering.
+[320.8s] And let me break down what that actually
+[322.6s] means. There are three levels. So level
+[324.6s] one, the vibe coder. You prompt and pray
+[327.0s] accept whatever the generates and you
+[329.2s] don't read the output carefully. You
+[330.8s] don't understand the architecture. You
+[332.1s] don't write tests for edge cases. You
+[333.4s] ship fast, ship blind. And this is like
+[335.0s] a kid with a machine gun. Let that land.
+[337.4s] Because a veteran with a bayonet is
+[338.9s] dangerous because they know where to
+[340.0s] strike. They've seen the battlefield.
+[341.4s] They know what good looks like. They can
+[342.9s] spot when AI goes off the rails. But a
+[344.7s] kid with a machine gun, they'll spray in
+[346.6s] nearly every direction. They'll hit
+[348.0s] something. They just don't know what.
+[350.0s] And they won't know the difference
+[351.3s] between a hit and a disaster until it
+[353.3s] blows up. And that's level one, which is
+[355.4s] extremely dangerous. Now, level two, the
+[358.2s] tool user. They use AI tactically. They
+[360.6s] generate boiler plate. They get unstuck
+[362.4s] on syntax. They use it for refactoring.
+[364.1s] But they still make all the
+[365.1s] architectural decisions. They still
+[366.9s] review every line. They still write the
+[368.4s] tests. They still own the system. And
+[369.8s] this is a carpenter with a power saw.
+[371.6s] More productive, still skilled. Most
+[374.4s] good engineers are here. And honestly,
+[376.2s] level two is fine. You'll ship. You'll
+[377.7s] be productive. You won't blow things up.
+[379.2s] But you're leaving performance on the
+[380.7s] table. Now, level three, the agentic
+[382.6s] engineer. This is the new thing. This is
+[384.2s] what Karpati is pointing at. This is
+[385.6s] where AI becomes a genuine collaborator,
+[387.4s] but only because the human brings
+[388.9s] genuine judgment. The agentic engineer
+[391.0s] doesn't prompt for code. They prompt for
+[392.6s] options. They define the architecture
+[394.0s] first. They set constraints. They write
+[395.5s] specs. Then they let AI generate within
+[397.9s] those constraints. And then they verify
+[399.8s] everything against that spec. It's the
+[401.8s] difference between build me an O system
+[403.7s] and implement PKC O using this exact
+[406.2s] flow with these exact token lifetimes
+[407.9s] with these exact error states verified
+[409.6s] against these exact test cases. The
+[411.4s] first gives you vibe code. The second
+[413.3s] gives you engineered software. And this
+[415.0s] is a general with a battle plan and an
+[416.7s] army of specialists because the AI is
+[418.6s] the army, but the general picks the
+[420.2s] battles, draws the lines, and knows when
+[422.0s] to retreat. And yes, you might vibe code
+[424.5s] a throwaway prototype, and that's fine.
+[426.4s] The problem is when your level one
+[428.1s] becomes your production default. At
+[430.1s] Mode, when we build client systems, we
+[432.2s] write the architecture spec before a
+[433.6s] single AI prompt fires. We define the
+[435.4s] data model, the permission boundaries,
+[436.8s] the error states, then we let AI
+[438.8s] generate within those guardrails. The
+[440.6s] discipline we practice at Shopify and
+[442.0s] Brex before AI existed is exactly what
+[444.2s] agentic engineering formalizes for the
+[446.0s] AI era. Same principles, new context. At
+[449.3s] Brex, we handle billions of
+[450.6s] transactions. Do you know what happens
+[452.1s] when your off fail flows silently at a
+[454.4s] financial services company? You don't
+[456.0s] lose customers, you lose your banking
+[457.8s] license. And that's why judgment isn't
+[459.4s] optional. It's the whole job. Aenting
+[461.7s] engineering isn't about writing less
+[463.0s] code. It's about understanding more.
+[465.6s] Here's
+[467.2s] what it looks like in practice because
+[468.5s] I'm not going to preach without showing
+[470.2s] you how. There's three practices, five
+[472.2s] steps. If you memorize tree and
+[473.7s] implement five, you'll be golden. So
+[475.5s] practice one, define before you
+[477.2s] generate. So step one, architecture
+[479.5s] before AI. Before you let AI generate a
+[482.0s] single line of code, you need to know
+[483.4s] what you're building. So you got the
+[485.0s] data model, the permission model, the
+[486.5s] core user journeys, the system
+[487.6s] boundaries. You want to write all of
+[488.8s] these down. Now, I'm not talking about a
+[490.4s] 50-page architecture doc that takes a
+[492.1s] quarter. I'm talking about one page, one
+[494.6s] diagram, 30 minutes of clarity, that
+[496.2s] saves 30 days of work. It's a simple
+[498.1s] rule. If you can't explain the
+[499.8s] architecture in five minutes to another
+[501.2s] engineer, you don't understand it well
+[502.8s] enough to let AI code it for you. Now,
+[504.9s] step two is evaluate your constraints,
+[507.0s] not prompts. Stop asking AI open-ended
+[509.5s] questions like, "Build me a dashboard."
+[511.3s] This is vibe coding. What you want to do
+[513.1s] is ask questions like, "Build a
+[514.6s] dashboard showing these three metrics,
+[516.4s] pulling from this API, refreshing every
+[518.2s] 30 seconds, handling loading and error
+[520.0s] states, matching this component
+[521.5s] library." Obviously inject extra context
+[523.4s] in there but that is agentic
+[524.8s] engineering. The more constraints you
+[526.3s] give the better the output because
+[527.8s] constraints are judgment and judgment is
+[529.6s] what makes the code work. Now practice
+[532.5s] two is where you own what you ship. This
+[534.8s] is where we move to step three. Review
+[536.7s] like you wrote it. Every line AI
+[538.3s] generates, you want to review it as if
+[539.8s] you wrote it yourself because you're
+[541.0s] shipping it. Your name is on it. Your
+[542.6s] team is maintaining it. I watch an
+[544.6s] engineer accept 200 lines of AI
+[546.2s] generated all code within a two- second
+[548.3s] glance. It's 3 weeks later at 2 am his
+[551.0s] phone buzzes. Production is down. A is
+[553.4s] broken and the users are locked out. It
+[555.4s] took three hours to diagnose code he
+[557.1s] never actually read. The I wrote it is
+[559.4s] not a root cause. You accepted it. You
+[562.1s] own it. Now step four is when you want
+[564.2s] to test the edge cases, not the happy
+[566.5s] part because AI is phenomenal at the
+[568.4s] happy part. User logs in, clicks the
+[570.9s] button, sees the result. Beautiful. But
+[572.8s] what happens when the network drops mid
+[574.5s] request? What happens when the user
+[575.7s] double clicks? What happens when the
+[577.0s] input is 10,000 characters instead of
+[578.9s] 100? The AI doesn't think about that
+[581.0s] naturally, but you do, and that's your
+[582.8s] job. Now, here's the proof this works.
+[584.8s] One team I worked at adopted this
+[586.2s] approach. Their review time went up 20%.
+[588.6s] Their bug reports dropped 60% in the
+[590.6s] first sprint, and their net velocity was
+[592.4s] faster, not slower. That's not theory.
+[594.7s] That's what we measured. Now, move the
+[596.8s] practice tree. This is where the final
+[598.4s] step exists, where you want to measure
+[599.7s] the debt. So, in step five, you want to
+[601.7s] track it or drown in it. If you're not
+[603.7s] tracking code, quality metrics,
+[606.0s] duplication, test coverage, LIN
+[608.1s] compliance, review toneress, you're
+[609.9s] flying blind. You'll feel fast. Your
+[612.1s] dashboard will look green. And
+[613.3s] underneath the technical debt is
+[614.8s] compounding like credit card interest.
+[616.5s] And I mean that literally. Technical
+[618.4s] debt works exactly like financial debt.
+[620.2s] You're paying interest whether you see
+[621.4s] the invoice or not. Because every
+[623.0s] feature that takes longer than it
+[624.2s] should, that's interest. Every recurring
+[626.2s] bug that your team keeps patching,
+[627.8s] that's interest. And every developer who
+[629.6s] quits because the codebase is now a
+[631.1s] nightmare, that's interest. You didn't
+[633.0s] see a bill, but you paid it. And every
+[634.7s] single sprint, the teams that track it,
+[636.6s] they catch it at 5%. Which is
+[638.4s] manageable. The teams that don't, they
+[640.0s] find out at 50%. By then, you're not
+[642.2s] iterating. You're rebuilding. Your
+[643.6s] velocity will go up because you stop
+[645.0s] spending 40% of your sprint debugging AI
+[647.2s] generated code nobody understood. And
+[649.3s] that's not a productivity hack. That's
+[650.7s] removing waste. So, you want to define
+[652.7s] before you generate. Own what you ship.
+[654.6s] Measure the debt. And discipline doesn't
+[656.9s] slow you down. Chaos slows you down. And
+[659.0s] having discipline is the fastest path to
+[660.8s] building strong philosophy.
+[664.9s] And here's what's happening right now.
+[666.5s] The best teams, the ones that were
+[667.8s] disciplined before AI, are becoming
+[669.3s] unstoppable because AI amplify what was
+[671.4s] already there. Good architecture, fast
+[672.9s] feedback loops, clear ownership, strong
+[674.6s] code review culture. And when you add AI
+[676.5s] to that foundation, you get devastating
+[678.2s] output. They were fast before and now
+[680.2s] they're unreachable. But the worst
+[682.0s] teams, the ones that were chaotic before
+[683.6s] AI, are in freef fall. More code
+[685.8s] generated faster with less understanding
+[688.0s] means more debt which compounds faster
+[690.1s] with less visibility. And they were slow
+[692.7s] before, but now they're slow and buried
+[694.6s] under code that nobody can maintain.
+[696.6s] Again, AI is a force multiplier. It
+[698.5s] multiplies what you already have. And
+[700.3s] the teams I'm working with who've
+[701.6s] adopted this approach are already
+[703.0s] shipping faster. It's not a prediction.
+[705.0s] It's what I'm seeing right now in client
+[706.4s] codebases. So here's the framework.
+[708.2s] Again, three levels. There's level one,
+[710.5s] you've got the vibe coder, prompt and
+[712.2s] pray. This is where the damage happens.
+[713.9s] Level two, the tool user. Exactly like
+[716.6s] we talked about, AI is a tactical tool,
+[718.8s] better but still limited. And then level
+[720.8s] three, where you want to be an agentic
+[722.6s] engineer. You want to be doing spec
+[724.0s] first, identifying constraints first,
+[726.2s] using your judgment, and letting AI
+[728.1s] generate within guard rails. This is the
+[729.9s] future. And what's important is to
+[731.8s] figure out what level your team is at.
+[733.4s] And you want to be honest. If your team
+[734.6s] needs help getting to level three, I've
+[736.2s] got a strategy session link in the
+[737.6s] description because vibe coding is dead.
+[739.5s] Karpathy killed it. The data killed it.
+[741.6s] The production incidents killed it. And
+[743.3s] what comes next is agentic engineering.
+[745.1s] It's not less human involvement. It's
+[746.8s] actually more. It's more human judgment
+[748.6s] but amplified by AI. AI makes
+[750.7s] disciplined people unstoppable. AI makes
+[752.6s] undisiplined people dangerous. You want
+[754.3s] to choose which one you want to

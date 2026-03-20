@@ -1,0 +1,383 @@
+[5.1s] 66% of developers say their number one
+[7.4s] frustration with AI coding tools is code
+[9.4s] that's almost right but not quite. And
+[11.5s] here's the thing that nobody's saying
+[12.6s] out loud. Almost right is more expensive
+[14.6s] than completely wrong. Completely wrong
+[16.3s] gets caught. Tests fail, build breaks,
+[18.6s] someone says this doesn't work and you
+[20.3s] throw it away. Almost right. Almost
+[22.6s] right passes code review. Almost right
+[24.3s] ships to production. Almost right sits
+[26.2s] in your codebase for six months before
+[27.8s] anyone realizes it's wrong. And by then,
+[30.4s] the cost to fix has compounded into
+[32.1s] something nobody budgeted for. We manage
+[34.6s] multiple client code bases right now.
+[36.4s] Every single one of them is generating
+[37.9s] this debt. I've been shipping production
+[39.8s] systems for 15 years. This is a new
+[41.9s] pattern and it's everywhere. Today, I'm
+[43.7s] going to show you the five specific
+[44.9s] patterns of AI generated debt, why
+[46.7s] they're harder to catch than traditional
+[48.1s] debt, and the three question code review
+[49.9s] framework we use on every AI generated
+[52.5s] PR. We got five patterns, one principle,
+[54.8s] one framework. Let's go.
+[59.0s] Let me tell you about a PR I reviewed
+[61.2s] three months ago. It's a client project,
+[63.1s] midsize startup. They've had great
+[64.6s] engineers and they adopted AI coding
+[66.6s] tools across the team. Cloud code,
+[68.3s] copilot cursor, the works. Their
+[70.2s] velocity was up. The PRs are flowing and
+[72.0s] everybody was happy. I opened the pull
+[73.8s] request. It was clean code. The tests
+[75.2s] were passing. TypeScript well
+[76.4s] structured. Everything looked great. And
+[78.0s] then I started reading the actual lines.
+[80.3s] ESLint disable next line. No explicit
+[82.7s] any. Then another one. ESLint disable
+[85.0s] next lines. No one use varss. Then
+[86.6s] another one, 11 ESLint disabled comments
+[89.6s] in one file. And this wasn't an outlier.
+[92.5s] I searched the rest of the codebase and
+[94.0s] there's over 200 ESLint disabled
+[95.8s] comments across the project. Most added
+[98.2s] in the last three months since the team
+[99.8s] started using AI tools. The AI hadn't
+[102.4s] fixed the TypeScript errors it was
+[103.7s] finding along the way. It had suppressed
+[105.1s] them. Every single one, the type system
+[107.0s] was screaming, "This is wrong." And the
+[108.6s] AI solution was to put tape over the
+[110.4s] warning light and hold it hostage. And
+[112.3s] here's the brutal part. This PR had been
+[114.0s] approved by a human. A senior engineer
+[116.1s] looked at this, saw green checks, and
+[117.5s] hit merge. Not because they were lazy,
+[119.3s] because the code looked right, and it
+[120.5s] passed every automated gate, as it
+[122.5s] should, and the suppressions were hidden
+[124.4s] in plain sight. Two weeks later, a
+[127.0s] production bug traced back to one of
+[128.5s] those suppressed type errors. The type
+[129.8s] system tried to warn us. We told it to
+[131.8s] shut up. That's the new techno vet. It
+[134.0s] doesn't look like dead. It looks like
+[135.3s] working code.
+[139.1s] And here's where it gets really
+[140.7s] interesting. I started cataloging the
+[142.6s] patterns and there are five and once you
+[144.2s] see them you can't unsee them. So
+[145.8s] pattern one broken flows that just
+[147.8s] nobody can debug. This is a true story.
+[149.8s] A client of mine had an oat PKC
+[152.0s] authentication flow. For anyone who
+[153.4s] doesn't know PKC is how your app
+[155.1s] security proves it's allowed to login
+[156.6s] users. Multi-step handshake between your
+[158.4s] app and the OP provider. The AI
+[160.2s] generated the entire flow. It looked
+[161.8s] correct. Variable names made sense.
+[164.0s] Steps were in the right order. It even
+[165.4s] had comments explaining what each step
+[166.9s] did. Now there was one problem. The
+[168.2s] token exchange assumed local storage
+[169.9s] would always be available for the code
+[171.1s] verifier. It works in Chrome, works in
+[172.8s] Firefox, failed silently in Safari
+[174.8s] private browsing, which is how 20% of
+[176.8s] their users logged in. Interestingly
+[178.2s] enough, the AI generated a common
+[179.7s] pattern that happens to break in one
+[181.2s] specific and very common scenario. And
+[183.4s] it took us two days to reproduce the bug
+[185.0s] and two hours to fix it. And yes, a Toro
+[187.4s] code review should have caught this. And
+[189.0s] that's the point. The AI generated code
+[190.9s] was good enough to pass the review that
+[192.5s] existed, which means your review process
+[194.5s] needs to be different for AI generated
+[196.2s] code. Now, why two days? Because nobody
+[197.8s] on the team understood the PKC flow well
+[200.0s] enough to debug it. The II wrote it. The
+[201.6s] I explained it. Nobody had to think
+[203.0s] about it until it broke. When AI writes
+[205.1s] code nobody understands, you haven't
+[206.8s] saved time. You borrowed it with
+[208.2s] interest. And here's the uncomfortable
+[209.8s] truth. Some code is too critical for AI
+[211.9s] generation. We've got offloads, payment
+[213.5s] processing, data migrations, and some
+[215.7s] code needs to be written by someone who
+[217.1s] understands it, not generated and
+[219.1s] reviewed. Written. Then we got pattern
+[221.1s] two. We have suppressed errors instead
+[222.8s] of fixed errors. This is that ESLint
+[225.0s] disabled pattern from a story I just
+[226.3s] told you. The AI encountered a
+[227.8s] TypeScript error. The correct fix
+[229.1s] required understanding the type system,
+[230.8s] the data flow, why that types exist. But
+[232.7s] the fast fix that AI went was to
+[234.2s] suppress the warning. It taught problem
+[235.9s] gone, warning gone. However, the error
+[238.2s] was still there, hidden behind a
+[239.4s] comment. And I've seen files with 15, 20
+[241.2s] suppressed comments. Each one is a lie.
+[242.9s] And each one says this is fine when a
+[244.4s] type system is saying this is wrong and
+[246.4s] an AI added it, not a human. Now these
+[249.5s] compound and the next AI generated code
+[251.8s] references the broken types suppresses
+[254.0s] the new errors too layer on layer until
+[255.8s] the type system is meaningless. Your
+[257.5s] type system is your immune system and AI
+[259.2s] is teaching your codebase to suppress
+[260.8s] its immune system.
+[264.2s] Then you got pattern three phantom code.
+[266.5s] This is where you have duplicate and
+[267.6s] dead exports. Your codebase has a
+[269.2s] utility function. Format dates used in
+[271.5s] 47 places handles edge cases. It's
+[273.6s] tested. You know it works. However,
+[275.5s] sometimes when you have these kind of
+[276.6s] functions, AI may not know it exists. So
+[278.6s] when developer asks AI to build a new
+[280.2s] feature that needs date formatting, the
+[281.7s] AI writes a new date formatting
+[283.1s] function, different name, slightly
+[284.6s] different imitation and same purpose.
+[286.5s] But now you have two and then the next
+[288.2s] AI system might add a third and then you
+[290.2s] might have five and it might grow. And
+[291.8s] this is also the same with type
+[293.3s] definitions. Your codebase has a user
+[295.0s] type. DI creates user data, then user
+[297.0s] info, then user response. Four different
+[299.8s] types all doing the same thing. And then
+[302.6s] it generates exports, nobody calls,
+[304.7s] functions, nobody references, constants,
+[306.6s] nobody imports. Why? Because AI
+[308.5s] generates complete modules based on
+[310.3s] training data, not based on your
+[311.8s] codebase. So if a new engineer joins the
+[313.8s] team, they see these experts and they're
+[315.4s] going to think they're used somewhere.
+[316.8s] They're afraid to remove them. They
+[318.3s] build around them. And now the dead code
+[319.7s] is alive and entangled. Your codebase is
+[321.8s] growing horizontally, not because you're
+[323.2s] adding features, but because you've
+[324.3s] added redundancy. I've rebuilt many
+[326.8s] projects like this. And you know when
+[328.5s] the founder called me, when the next
+[330.1s] feature costs three times what it
+[331.5s] should, when the simple change takes two
+[333.2s] weeks instead of two days, that's the
+[334.6s] compounded interest on code nobody
+[336.4s] needed in the first place. An unused
+[338.6s] code isn't harmless, it's confusing, and
+[340.4s] confusion is the root of all technical
+[342.3s] debt. Now, here's the one that keeps me
+[343.6s] up at night. Pattern four, code that
+[345.8s] works but doesn't follow your
+[347.3s] conventions. Every good team has
+[349.1s] conventions. How you name things, where
+[350.8s] state lives, how errors are handled, how
+[352.5s] files are structured. There's no right
+[353.8s] or wrong way of doing this. It's just
+[355.1s] opinions. However, AI doesn't know your
+[357.1s] conventions. It knows the internet's
+[358.6s] conventions. And the internet has a lot
+[360.4s] of opinions. And we had a client
+[361.8s] codebase where half the files used pass
+[363.2s] the case for components and half use
+[364.5s] camel case. Not a big deal. But then we
+[366.3s] also had three different error handling
+[367.5s] patterns. The I had generated each file
+[369.4s] using whatever convention it felt like
+[370.8s] on the day and never adhere to what we
+[372.4s] already had that existed. And yes, newer
+[374.6s] tools like cursor with codebased
+[375.8s] indencing are getting better at reading
+[377.6s] your context, but better isn't always
+[379.4s] reliable. And the question is still the
+[381.3s] same. Did the output actually follow
+[382.7s] your conventions or did it approximate
+[384.2s] them? One file that doesn't match is a
+[385.8s] quirk. However, 10 files that don't
+[387.4s] match as a codebase losing its identity.
+[392.2s] Now, these five patterns have the same
+[394.1s] root cause every time. The AI generates
+[397.0s] plausible code, but not correct code.
+[398.9s] And plausible is the most dangerous word
+[401.0s] in software engineering. And here's a
+[402.7s] principle. This is the thing I want you
+[404.1s] to walk away with. The most expensive
+[405.5s] code your AI writes is the code that
+[407.2s] almost works. Completely wrong code is
+[409.0s] cheap. It fails fast. Test catch it, you
+[411.0s] throw it away, and it costs minutes.
+[412.8s] almost right code is devastating. It
+[414.6s] passes tests, it ships, it sits in
+[416.6s] production and the other code gets built
+[418.3s] on top of it. Dependencies will form.
+[420.2s] Teams will adjust their mental model
+[421.4s] around it and then it breaks not today,
+[423.4s] not next week, but three months from now
+[425.5s] under load in an edge case during a
+[427.4s] critical demo. And the cost isn't fixing
+[429.5s] one file. It's untangling three months
+[431.1s] of code built on a flawed foundation.
+[433.2s] Only 29% of developers trust AI
+[435.8s] generated code. This was down from 40%
+[437.9s] the year before. Trust is dropping
+[439.7s] because the teams are learning this the
+[441.1s] hard way. Technical debt is financial
+[443.0s] debt. You're paying interest, whether
+[444.4s] you see the invoice or not. And every
+[446.2s] feature that takes longer than it
+[447.4s] should, that's interest. Every bug that
+[449.5s] keeps appearing, that's interest. Every
+[451.8s] senior engineer who says, "I don't
+[453.8s] understand this codebase anymore,"
+[455.2s] that's the interest. You're paying it
+[457.0s] whether you see the invoice or not.
+[461.3s] So, what do you do about it? You don't
+[463.0s] stop using AI because that's not the
+[464.7s] answer. And here's a military term for
+[466.3s] you. Force multiplier. Knife vision
+[468.6s] goggles don't give you more soldiers.
+[470.0s] They make the soldiers you have more
+[471.2s] effective, but only if those soldiers
+[472.7s] know how to fight. Night vision goggles
+[474.8s] on someone who never had a weapon is
+[477.0s] useless and dangerous. AI is the same.
+[479.6s] It's a force multiplier, but you need
+[481.3s] the discipline to aim it. The answer is
+[483.3s] reviewing AI code the way you'd review
+[485.4s] code from a talented and brand new
+[487.2s] contractor who's never seen your code
+[488.8s] before. Because that's exactly what AI
+[490.6s] is. And we built a three question
+[492.3s] framework for every AI generated PR.
+[494.7s] Three questions. It takes 30 seconds and
+[496.3s] catches most of the patterns I just
+[497.8s] showed you. So question one, does it
+[499.8s] reuse? Before this code was written, did
+[502.2s] something already exist in our codebase?
+[503.8s] Is there an existing utility, type,
+[505.7s] definition, or pattern that does the
+[507.2s] same thing? If yes, delete the new code
+[509.4s] and use the existing or modify the
+[511.3s] existing to facilitate the new pattern.
+[513.6s] This catches phantom code. One question,
+[516.2s] duplicates are dead and exports are
+[518.6s] gone. And question two, does it follow
+[520.6s] conventions. Does the naming match? Does
+[522.6s] the file structure match? Does the error
+[524.2s] handling match? Does this code look like
+[526.2s] it belongs in the codebase or does it
+[527.8s] look like it was dropped in from a
+[529.0s] different project? If it doesn't match,
+[531.1s] refactor it before it ships. This
+[533.1s] catches convention violations. And in
+[535.0s] question three, can the developer
+[536.5s] explain it without reading the AI's
+[538.2s] comments? Not does it work? Not can they
+[540.5s] read the AI's explanation back to me?
+[542.3s] But can the developer who submitted this
+[543.8s] PR walk through the logic line by line
+[545.6s] with the AI's comments deleted? And if
+[547.4s] they're reading documentation, that's
+[549.1s] not understanding. If they can't explain
+[550.8s] why PKC flow works the way it works
+[552.9s] without, you know, the AI's annotations,
+[555.0s] the code isn't ready. Send it back. Now,
+[557.0s] this is going to catch broken workflows
+[558.7s] and suppress errors. If the developer
+[560.5s] can't explain it and they can't maintain
+[562.2s] it and unmaintainable code is dead. Let
+[564.7s] me show you how fast this is. Last week,
+[566.6s] we had AI generated PR that landed. The
+[568.6s] question one was, does it reuse? I
+[570.1s] searched the codebase and we already
+[571.1s] have a date formatter, so we delete the
+[572.6s] new one. Question two, does it follow
+[574.4s] conventions? Error handling doesn't
+[575.8s] match our patterns, so we're going to
+[576.9s] refactor. And in question three, can the
+[578.8s] dev walk me through it? Yes, he walked
+[580.6s] me through, explained everything so we
+[582.1s] could ship it in three minutes and we're
+[583.6s] done. These are three questions and
+[585.1s] there's four patterns caught and that
+[586.5s] was it.
+[589.3s] Now, here's what happens when you
+[590.6s] install this. Review times don't go up,
+[593.0s] they go down because reviewers aren't
+[594.9s] reading every line trying to find
+[596.3s] something wrong. They're asking three
+[597.9s] specific questions with clear pass fall
+[600.6s] criteria. Each client team went from a
+[602.9s] three-day review turnaround the same
+[604.4s] day, not because they reviewed less,
+[606.2s] because they knew exactly what to look
+[607.4s] for. New engineers onboard faster
+[609.1s] because the codebase has one way of
+[610.8s] doing things, not five. And debugging
+[612.8s] goes from days to hours because the code
+[614.7s] is written by someone who understood it,
+[616.6s] not generated by a model that
+[617.9s] approximated it. And if you're the
+[619.7s] founder or executive hiring a dev team,
+[622.3s] this affects you, too. You should ask
+[623.8s] your engineers to show me the last five
+[625.2s] PRs where AI generated the code, and can
+[627.1s] you explain each one? If they can't,
+[628.8s] you're accumulating debt that you can't
+[630.7s] see on any dashboard. The teams that
+[632.7s] shipped fast as a place like Shopify and
+[634.4s] Brex weren't the ones who wrote the most
+[635.9s] code. They were the ones who code was
+[637.6s] most consistent, the most predictable,
+[639.5s] the most maintainable every single time.
+[641.8s] AI makes disciplined teams unstoppable.
+[643.7s] AI makes undisiplined teams dangerous.
+[645.8s] Same tool, different foundations.
+[650.0s] So there's four patterns, one principle,
+[652.2s] three questions. Phantom code,
+[654.1s] suppressed errors, broken workflows,
+[656.0s] nobody can debug. Convention violations
+[658.6s] the principle the most expensive code is
+[660.6s] the code that almost works the framework
+[662.4s] does it reuse does it follow convention
+[664.7s] can the developer explain it without
+[666.3s] AI's help if your team is using AI
+[668.5s] coding tools and they are pick 10 recent
+[670.6s] PRs ask those three questions what you
+[673.0s] find will tell you exactly where the
+[674.2s] debt is hiding and if you want help
+[675.9s] diagnosing what's already accumulated in
+[677.7s] your codebase that's what a strategy
+[679.4s] session is for we'll go through it
+[681.2s] identify where the debt is hiding and
+[682.7s] give you a plan to stop the compound
+[684.2s] interest the link to get started is in
+[686.2s] the description But even if you never
+[687.8s] talk to me and my team, take those three
+[689.7s] questions into your next code review.
+[691.4s] The I tools aren't going away. The debt
+[693.7s] doesn't have to be inevitable. Your next
+[695.3s] PR review is what, a few hours away.
+[697.2s] These are just three questions. Use
+[699.0s] them. That's all it takes. And if you
+[700.8s] want to understand the mindset that
+[702.0s] creates this debt in the first place, I
+[703.8s] made a whole video on VIP coding. And
+[705.4s] that video is about the mindset. This
+[706.8s] one is about the codebase. Same problem,
+[708.8s] different layer. Watch it next.

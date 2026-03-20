@@ -1,0 +1,330 @@
+[5.0s] Everybody's celebrating AI coding speed,
+[6.8s] but nobody's asking what we're losing.
+[8.5s] Now, a client called me recently. Their
+[10.2s] production was down, the authentication
+[11.8s] system was broken, and users couldn't
+[13.7s] log in. The code was clean, well
+[15.2s] structured, and tests been passing for
+[16.6s] months. But when the team tried to fix
+[18.2s] it, they couldn't. Not because the code
+[19.9s] was bad, but because nobody on the team
+[21.4s] understood how it worked. The IIA wrote
+[23.3s] it, but six months earlier, a PKC
+[25.2s] authentication flow, the token
+[27.0s] generation, code challenges, redirect
+[29.0s] handling, the developer who prompted it
+[30.6s] had moved on. Nobody else had ever read
+[32.2s] it line by line. A team of engineers
+[34.2s] staring at their own codebase, and they
+[35.8s] can't explain their own authentication
+[37.7s] system. Now, that's not technical debt.
+[39.6s] That's something new, something worse,
+[41.0s] and almost nobody is talking about it
+[43.1s] yet. I've been in this industry for 15
+[44.9s] years, working at companies like
+[46.0s] Shopify, Brex, Motorola, and Fizer. I've
+[48.2s] managed engineering teams and I've seen
+[49.7s] every form of technical debt there is,
+[51.4s] but I've never seen anything like this.
+[53.0s] It has a name now and it's called
+[54.6s] cognitive debt. And today I'm going to
+[56.2s] show you what it is and why it's more
+[57.8s] dangerous than technical debt and the
+[59.3s] three practices that prevent it.
+[63.3s] Margaret Anne Story, a computer science
+[65.0s] professor at the University of Victoria,
+[67.0s] introduced this concept in early 2026.
+[69.3s] She's been studying developer
+[70.5s] productivity for over two decades. When
+[72.4s] she named cognitive debt, it spread
+[74.0s] through the engineering community in
+[75.4s] days. Simon Willis, one of the most
+[77.4s] respected voices in AI development,
+[78.9s] amplified it within a week. The moment I
+[81.0s] read it, everything clicked. Here's a
+[83.2s] definition. Cognitive debt accumulates
+[85.5s] when AI writes code that human lose
+[87.8s] shared understanding of. Not bad code,
+[90.2s] not messy code. The code can be perfect,
+[92.7s] beautiful even. But if nobody on the
+[94.6s] team can explain what it does, how it
+[96.5s] works, or why it was designed that way,
+[99.0s] you have cognitive debt. The most
+[101.0s] dangerous code in your codebase is the
+[103.0s] code that nobody understands. even if it
+[105.4s] works. Now, you might be thinking,
+[107.0s] "Knowledge silos aren't new. They've
+[108.8s] existed since the first senior engineer
+[110.4s] left the company." And you'd be right.
+[112.2s] What's new is the scale. AI generates
+[114.4s] code at a rate that makes this systemic,
+[116.2s] not occasional. It's not one person who
+[118.1s] left. It's every module your team
+[119.5s] prompted into existence. And here's what
+[121.4s] makes it insidious. Technical shows up
+[124.0s] in your codebase. You can see it. Your
+[125.6s] llinter flags it. Your CI pipeline
+[127.2s] catches it. Cognitive is invisible. It
+[129.9s] lives in your team's heads. Or rather,
+[131.4s] it lives in the gap where understanding
+[133.0s] should be. story called it a silent loss
+[135.2s] of shared theory. Shared theory, the
+[137.5s] collective understanding your team has
+[139.2s] about how the system works, why
+[140.8s] decisions were made, and what the
+[142.5s] boundaries are. And the data backs her
+[144.6s] up. GitHub's own research shows
+[146.4s] developers using Copilot write about
+[148.1s] code about 55% faster. But the study
+[150.6s] didn't measure whether anyone could
+[151.9s] maintain that code 6 months later. Speed
+[154.2s] was measured, but understanding wasn't.
+[156.2s] Now, let me go back to that PKC outflow.
+[158.7s] 6 months after the AI wrote it, the OT
+[160.6s] server pushed a breaking change. The on
+[162.5s] call engineer opened the code but
+[163.9s] couldn't follow the flow. They couldn't
+[165.4s] trace the error handling. And I spent
+[167.4s] two days not fixing the bug but
+[169.3s] explaining the system to the team so
+[170.6s] they could fix it themselves. That's
+[172.2s] cognitive debt. The interest payment is
+[174.4s] time spent relearning your own system.
+[179.8s] And here's where it gets interesting.
+[181.4s] Everyone's measuring AI adaption by
+[183.7s] velocity. We shipped 40% more features
+[186.0s] this quarter. Our cycle time dropped by
+[187.8s] half. The dashboards look great. But
+[189.6s] those numbers are hiding something. When
+[191.3s] nobody understands the code, every
+[192.7s] modification requires going back to the
+[194.5s] AI. Hey Claude, explain this function.
+[196.6s] Hey co-pilot, what does this service do?
+[198.6s] You haven't built a faster team. You
+[200.1s] built a team that's dependent on a tool
+[201.6s] to understand their own system. If your
+[203.6s] team needs AI to understand your
+[205.2s] codebase, you don't have a tool. You
+[206.6s] have a dependency. Every team depends on
+[209.3s] tools. I get it. You depend on your IDE.
+[211.8s] You depend on documentation. You depend
+[213.3s] on Stack Overflow. Maybe not so much
+[215.0s] anymore. But here's the difference. Your
+[217.4s] IDE doesn't forget your project between
+[219.5s] sessions. Stack Overflow doesn't lose
+[221.3s] context, but AI does. Every conversation
+[223.8s] starts from scratch, but your codebase
+[225.7s] doesn't. Go run this experiment. That
+[227.4s] 40% velocity increase. What you want to
+[229.4s] do is measure incident resolution time.
+[231.4s] I've seen teams with heavy AI code
+[233.0s] generation where incidents take three to
+[234.6s] four times longer to resolve on AI
+[236.6s] written modules versus human written
+[238.6s] ones. That's the hidden cost nobody puts
+[240.4s] on the dashboard. Stack Overflow's
+[242.2s] latest developer survey shows only 29%
+[244.3s] of developers say they trust AI
+[245.8s] generated code. That's down 11 points
+[247.6s] from 2024. Developers are seeing this.
+[250.3s] They didn't have a name for it. Now they
+[252.1s] do. And let's talk about onboarding. New
+[254.2s] engineer joins. They won. They're
+[255.7s] supposed to ramp up on the codebase. In
+[257.3s] the old world, they would read PRs. They
+[259.0s] would see the history. They see the
+[260.2s] discussions in code review. And the
+[261.6s] knowledge is embedded in the process.
+[263.2s] But in a new world, they open a file.
+[264.9s] The AI wrote it. There's no PR
+[266.4s] discussion because the review was just
+[268.3s] looks good. Test pass. There's no author
+[270.7s] to ask because the AI doesn't have
+[272.2s] office hours. The new engineer is
+[274.0s] reverse engineering their own team's
+[275.9s] system. like reading a book in a
+[277.8s] language nobody speaks.
+[281.5s] At Shopify, code of view wasn't about
+[283.5s] catching bugs. It was a primary
+[285.6s] mechanism for knowledge transfer. Junior
+[287.4s] engineers learned architecture by
+[289.0s] reading senior engineer PRs. Seniors
+[291.1s] maintain context by reviewing
+[292.6s] everything. And code review was the
+[294.2s] learning loop. It was how shared theory
+[296.1s] was built and maintained across the
+[297.8s] entire team. But AI bypasses that entire
+[300.5s] loop. The code shows up, it works, it
+[302.6s] gets merged, but nobody learned
+[304.1s] anything. Nobody built context. Nobody
+[305.9s] can debug it at 3:00 a.m. without
+[307.4s] reprompting the AI. And code review was
+[309.9s] never about catching bugs. It was always
+[311.7s] about building shared understanding. AI
+[314.0s] skipped the most important step. Now,
+[316.9s] let me put this in perspective.
+[318.3s] Technical debt is like financial debt.
+[319.9s] You're paying interest whether you see
+[321.0s] the invoice or not. Every slow feature,
+[323.0s] every recurring bug, every developer who
+[325.4s] quits because the codebase is nightmare,
+[327.4s] that's interest. But cognitive debt is
+[329.4s] worse. With financial debt, at least you
+[331.1s] know you owe money. With cognitive debt,
+[332.9s] you don't even know where the debt
+[333.9s] exists. There's no dashboard for team
+[335.6s] understanding. Your velocity metrics
+[337.4s] look great right up until the moment
+[338.6s] they collapse. And I've rebuilt 12
+[340.6s] disaster projects in the last couple of
+[342.2s] years. And every single one had code
+[344.0s] nobody understood. Not because the
+[345.7s] developers were bad, but because nobody
+[347.8s] treated understanding as a requirement.
+[350.0s] And technical debt is a slow leak.
+[352.0s] Cognitive debt is a time bomb. Let that
+[354.2s] land. A slow leak you can see. You can
+[356.6s] mop it up. You can fix the pipe. But a
+[358.3s] time bomb, you don't know it's there.
+[361.0s] Not until it goes off. And by then
+[363.1s] you're not debugging code. You're
+[364.7s] rebuilding trust in the entire system.
+[369.6s] And here's the principle. Speed without
+[371.8s] understanding is not velocity. It's just
+[373.8s] luck. Your team shipping fast with AI is
+[376.0s] only real if they can debug, extend, and
+[377.8s] refactor that code without going back to
+[379.9s] the AI. If they can't, the speed is
+[382.2s] borrowed. And borrowed speed always
+[383.8s] comes due. Now, there's three practices.
+[386.0s] None of them slow you down. And all of
+[387.2s] them can help you prevent cognitive
+[388.6s] debt. So there's practice one. You want
+[390.2s] to review like a junior. When AI
+[392.2s] generates code, don't review it like a
+[393.8s] senior checking for bugs. Review it like
+[395.9s] a junior trying to learn. There's three
+[398.6s] questions. Can I explain every line to a
+[400.5s] teammate? Do I understand why this
+[402.2s] approach was chosen? And could I modify
+[404.1s] the code confidently without
+[405.6s] reprompting? If the answer to any of
+[407.4s] these is no, you don't merge it. You sit
+[409.6s] with it. You understand it or you
+[411.0s] rewrite the parts that you don't. It
+[413.1s] doesn't mean you spend a week studying
+[414.4s] every function. It means you spend 10 to
+[416.1s] 15 minutes asking, could I debug this at
+[418.5s] 3:00 a.m.? If yes, ship it. If no, take
+[422.0s] the time now. Compare that to the
+[423.6s] six-hour incident when nobody
+[425.0s] understands the code. The math is
+[426.5s] obvious. Now, don't review AI code for
+[428.6s] correctness. Review it for
+[429.8s] understanding. If you can't explain it,
+[431.9s] you don't own it. Now, practice two. You
+[434.1s] want to explain the ship before any AI
+[436.4s] generated code ships. The author writes
+[438.2s] a one paragraph explanation what it
+[440.4s] does, why it was designed this way, and
+[442.5s] what the known edge cases are. Not a
+[444.5s] comment in the code, not a commit
+[446.0s] message, a decision record. something
+[448.2s] like this service handles token refresh
+[450.6s] using PKC. Here's why we chose it. Here
+[453.2s] are the edge cases to watch for. It
+[454.8s] takes about five minutes to write. Now,
+[456.9s] you might be thinking, we tried
+[458.1s] documentation before and nobody kept it
+[459.7s] up. But here's the difference. You're
+[461.0s] writing one paragraph at the moment you
+[462.9s] understand the code. Not retroactively,
+[465.1s] not at a separate task. The moment you
+[467.3s] merge, the moment you write it, make it
+[469.0s] part of the PR template. Automate it.
+[471.4s] Automate the reminder. In fact, if you
+[473.2s] can put it in the code next to it in a
+[475.4s] readme file or even in a JS doc, this 5
+[477.5s] minute of documentation today saves two
+[479.5s] days of archaeology tomorrow. And those
+[482.1s] first two practices catch 80% of
+[484.6s] cognitive debt. But the third one is the
+[486.6s] one that makes your team bulletproof,
+[488.2s] which is practice tree, where you rotate
+[489.9s] the context. Regularly rotate engineers
+[492.6s] through AI generated modules, not to
+[494.5s] rebuild them, but to review and
+[496.2s] understand them and update the decision
+[497.8s] records. This isn't about making
+[499.2s] everyone an expert in everything. It's
+[501.0s] about baseline understanding of the
+[502.4s] critical paths. You want to start with
+[503.8s] your authentication, your payments and
+[505.5s] data pipeline. The systems were a
+[507.7s] failure at 3M means revenue loss. These
+[510.6s] are the core critical flows. At Brex, we
+[513.2s] handle billions in transactions. We
+[514.7s] rotated on call across every service.
+[516.6s] Not because we expected everyone to be
+[518.2s] an expert, but because we wanted
+[519.7s] baseline understanding when something
+[521.0s] broke, nobody was starting from scratch.
+[523.4s] Every engineer should be able to explain
+[524.7s] any critical pat in the system, not
+[526.4s] write it from memory. Explain it. And
+[528.2s] that's the bar. Here's
+[532.4s] what happens when you do this. One
+[534.1s] engineering team I advised started these
+[535.8s] three practices six months ago and their
+[537.6s] meantime to resolution, one of their
+[539.1s] doraometrics dropped from 4 hours to 45
+[541.5s] minutes. Same codebase, same team. The
+[544.1s] only difference, they understood it.
+[546.2s] Onboarding dropped from months to weeks.
+[548.1s] New engineers had decision records, not
+[550.1s] just code. And they understood the why,
+[551.9s] not just the what. The team stopped
+[553.7s] being dependent on AI for their own
+[555.4s] system. And they use AI to write code
+[557.3s] faster. and they understand what was
+[559.6s] written. And that's the difference
+[561.0s] between a tool and a crutch. The fastest
+[563.4s] team isn't the one that writes the most
+[565.0s] code. It's the one that understands all
+[567.2s] of it.
+[570.1s] Now, here's what I want you to do. Go to
+[572.4s] your codebase. Find the last five PRs
+[574.2s] where AI generated the majority of the
+[575.7s] code. Ask each engineer, explain this
+[577.8s] code to me without opening the file,
+[579.4s] without reprompting from memory. Three
+[581.8s] questions. What does it do? Why was it
+[584.1s] built this way? And what breaks if you
+[585.8s] change line 47? If they can answer all
+[588.3s] three, there's no cognitive debt and you
+[590.6s] can keep shipping. If they stumble on
+[592.2s] anyone, you have a number and now you
+[594.1s] know where to start. Review like a
+[595.7s] junior engineer. Explain to ship and
+[597.5s] rotate the context. Margaret's story
+[599.8s] named this problem in early 2026. Most
+[602.2s] engineering teams haven't heard of it
+[603.6s] yet. And the teams that fix this now
+[605.2s] before it compounds are the teams that
+[606.8s] win in the next 5 years of AI assisted
+[608.6s] development. The teams that ignore it
+[610.2s] will find out when something breaks and
+[611.8s] nobody can fix it. Cognitive debt is
+[613.8s] invisible until it isn't. And these
+[615.8s] practices aren't new. They're
+[617.0s] engineering fundamentals that most teams
+[618.7s] forgot when AI made the whole process
+[620.5s] feel slow. Every team that succeeds with
+[622.6s] AI will look back and realize the speed
+[624.7s] wasn't the advantage. The understanding
+[626.4s] was. If you're building something with
+[628.2s] AI and you want a team that operates
+[629.8s] with discipline, not just speed, that's
+[631.3s] what we do at Mo. Our link is in the
+[633.1s] description. You want to fix it now or
+[634.7s] I'll explain it later.
