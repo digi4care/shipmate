@@ -1,82 +1,50 @@
 {
-  "name": "@oh-my-opencode/shipmate",
-  "version": "0.1.0",
-  "description": "AI development workflow plugin for OpenCode — plan review, QA, shipping, retrospectives",
+  "name": "@digi4care/shipmate",
+  "version": "0.2.0",
+  "description": "AI development workflow skills for OpenCode — plan review, QA, shipping, retrospectives",
   "keywords": [
     "opencode",
-    "plugin",
-    "ai",
+    "skills",
+    "agents",
     "workflow",
     "code-review",
     "qa",
     "shipping",
     "retrospective"
   ],
-  "author": "OhMyOpenCode",
+  "author": "digi4care",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oh-my-opencode/shipmate.git"
+    "url": "https://github.com/digi4care/shipmate.git"
   },
   "bugs": {
-    "url": "https://github.com/oh-my-opencode/shipmate/issues"
+    "url": "https://github.com/digi4care/shipmate/issues"
   },
-  "homepage": "https://github.com/oh-my-opencode/shipmate#readme",
+  "homepage": "https://github.com/digi4care/shipmate#readme",
   "type": "module",
   "engines": {
     "node": ">=18.0.0"
   },
   "files": [
-    "agent/",
     "skill/",
-    "hook/",
+    "agent/",
+    "plugin/",
     "config/",
     "src/",
+    "postinstall.mjs",
+    "schema.json",
     "README.md",
     "LICENSE"
   ],
   "main": "src/index.js",
   "exports": {
     ".": "./src/index.js",
-    "./agents": "./agent/",
-    "./skills": "./skill/",
-    "./hooks": "./hook/"
-  },
-  "opencode": {
-    "plugin": true,
-    "agents": [
-      "agent/strategy.md",
-      "agent/architect.md",
-      "agent/designer.md",
-      "agent/second-opinion.md"
-    ],
-    "skills": [
-      "skill/ship",
-      "skill/review",
-      "skill/qa",
-      "skill/qa-quick",
-      "skill/retro",
-      "skill/browse",
-      "skill/browser-auth",
-      "skill/investigate",
-      "skill/design-audit",
-      "skill/design-help",
-      "skill/brainstorm",
-      "skill/release-notes",
-      "skill/shipmate-upgrade",
-      "skill/unfreeze"
-    ],
-    "hooks": [
-      "hook/careful",
-      "hook/freeze",
-      "hook/guard",
-      "hook/unfreeze"
-    ]
+    "./schema.json": "./schema.json"
   },
   "scripts": {
-    "test": "echo \"No tests yet\" && exit 0",
-    "lint": "echo \"No linter configured\" && exit 0",
-    "prepublishOnly": "node -e \"console.log('Publishing shipmate...')\""
+    "postinstall": "node postinstall.mjs",
+    "test": "echo \"No tests yet\" && exit 0"
   },
   "devDependencies": {},
   "dependencies": {},
