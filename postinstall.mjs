@@ -7,21 +7,8 @@ import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
-const DEFAULT_AGENT_OVERRIDES = {
-  strategy: { model: "inherit", temperature: 0.3 },
-  architect: { model: "inherit", temperature: 0.2 },
-  designer: { model: "inherit", temperature: 0.2 },
-  "second-opinion": { model: "inherit" }
-};
-
-function getInstallDir() {
-  return __dirname;
-}
-
-function getConfigPath() {
-  return join(homedir(), ".config", "opencode", "shipmate.json");
-}
+const CONFIG_DIR = join(homedir(), ".config", "opencode");
+const CONFIG_PATH = join(CONFIG_DIR, "shipmate.json");
 
 function ensureDir(filePath) {
   const dir = dirname(filePath);
@@ -39,10 +26,9 @@ function mergeWithExisting(configPath, newConfig) {
     const existing = JSON.parse(readFileSync(configPath, "utf-8"));
     return {
       ...newConfig,
-      agentOverrides: {
-        ...newConfig.agentOverrides,
-        ...(existing.agentOverrides || {})
-      }
+      // Preserve any user customizations
+      ...(existing.skills?.enable ? { skills: { ...newConfig.skills, enable: existing.skills.enable } } : {}),
+      ...(existing.skills?.disable ? { skills: { ...newConfig.skills, disable: existing.skills.disable } } : {}),
     };
   } catch {
     return newConfig;
@@ -52,26 +38,32 @@ function mergeWithExisting(configPath, newConfig) {
 function generateConfig(installDir) {
   return {
     $schema: "./node_modules/@digi4care/shipmate/schema.json",
-    skills: [join(installDir, "skill")],
-    agents: [join(installDir, "agent")],
-    agentOverrides: DEFAULT_AGENT_OVERRIDES
+    skills: {
+      sources: [
+        { path: join(installDir, "skill"), recursive: true }
+      ]
+    },
+    agents: {
+      sources: [
+        { path: join(installDir, "agent") }
+      ]
+    }
   };
 }
 
 function main() {
   try {
-    const installDir = getInstallDir();
+    const installDir = __dirname;
     const config = generateConfig(installDir);
-    const configPath = getConfigPath();
     
-    ensureDir(configPath);
+    ensureDir(CONFIG_PATH);
     
-    const mergedConfig = mergeWithExisting(configPath, config);
-    writeFileSync(configPath, JSON.stringify(mergedConfig, null, 2));
+    const mergedConfig = mergeWithExisting(CONFIG_PATH, config);
+    writeFileSync(CONFIG_PATH, JSON.stringify(mergedConfig, null, 2));
     
-    console.log(`✓ shipmate config written to: ${configPath}`);
-    console.log(`  skills: ${config.skills[0]}`);
-    console.log(`  agents: ${config.agents[0]}`);
+    console.log(`✓ shipmate config written to: ${CONFIG_PATH}`);
+    console.log(`  skills: ${config.skills.sources[0].path}`);
+    console.log(`  agents: ${config.agents.sources[0].path}`);
   } catch (error) {
     console.warn(`⚠ shipmate postinstall: ${error.message}`);
   }
