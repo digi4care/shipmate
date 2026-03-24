@@ -401,3 +401,10 @@ Before marking review complete:
 - [ ] Questions batched
 - [ ] Report generated
 - [ ] Recommendation provided
+
+---
+
+## References
+
+- [Code Review Best Practices](https://google.github.io/eng-practices/review/) — Google Engineering Practices
+- [Clean Code](https://www.oreilly.com/library/view/clean-code-a/0789756/) — Robert C. Martin

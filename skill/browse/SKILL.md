@@ -1,107 +1,145 @@
 ---
 name: browse
 description: |
-  Persistent headless Chromium for QA testing. First call auto-starts (~3s), then ~100ms per command. State persists between calls (cookies, tabs, login sessions). Use for browser automation and testing.
+  Browser automation for QA testing using Playwright tools. Navigate pages,
+  interact with elements, take screenshots, and verify UI behavior.
+  Use for browser automation and testing.
 triggers:
   - /browse
   - browser test
   - open browser
   - test page
 workflow:
-  - Setup: Auto-start browser on first command
-  - Navigation: goto, back, forward, reload
-  - Interaction: click, fill, type, hover
-  - Inspection: snapshot, screenshot, console, network
-  - Verification: is visible, is enabled, text contains
+  - Setup: Use playwright_browser tools
+  - Navigation: playwright_browser_navigate
+  - Interaction: playwright_browser_click, playwright_browser_type
+  - Inspection: playwright_browser_snapshot, playwright_browser_take_screenshot
+  - Verification: playwright_browser_evaluate
 ---
 
-# Browse: QA Testing & Dogfooding
+# Browse: QA Testing & Browser Automation
 
-Persistent headless Chromium. First call auto-starts (~3s), then ~100ms per command. State persists between calls (cookies, tabs, login sessions).
+Browser automation using OpenCode's Playwright tools. Navigate pages, interact with elements, capture evidence, and verify UI behavior.
+
+## Available Tools
+
+| Tool | Purpose |
+|------|---------|
+| `playwright_browser_navigate` | Navigate to URL |
+| `playwright_browser_snapshot` | Get accessibility tree with element refs |
+| `playwright_browser_click` | Click element by ref |
+| `playwright_browser_type` | Type text into element |
+| `playwright_browser_fill_form` | Fill multiple form fields |
+| `playwright_browser_take_screenshot` | Capture screenshot |
+| `playwright_browser_evaluate` | Run JavaScript |
+| `playwright_browser_press_key` | Press keyboard key |
+| `playwright_browser_hover` | Hover over element |
+| `playwright_browser_wait_for` | Wait for text/element |
+| `playwright_browser_console_messages` | Get console logs |
+| `playwright_browser_network_requests` | Get network requests |
 
 ## Core QA Patterns
 
 ### 1. Verify page loads correctly
-```bash
-$B goto https://yourapp.com
-$B text                          # content loads?
-$B console                       # JS errors?
-$B network                       # failed requests?
-$B is visible ".main-content"    # key elements present?
+```
+playwright_browser_navigate(url="https://yourapp.com")
+playwright_browser_snapshot()                    # see page structure
+playwright_browser_console_messages(level="error")  # JS errors?
+playwright_browser_network_requests()            # failed requests?
 ```
 
 ### 2. Test user flow
-```bash
-$B goto https://app.com/login
-$B snapshot -i                   # see all interactive elements
-$B fill @e3 "user@test.com"
-$B fill @e4 "password"
-$B click @e5                     # submit
-$B snapshot -D                   # diff: what changed after submit?
+```
+playwright_browser_navigate(url="https://app.com/login")
+playwright_browser_snapshot()                    # find element refs
+playwright_browser_fill_form(fields=[
+  {ref: "email_field", value: "user@test.com"},
+  {ref: "password_field", value: "password123"}
+])
+playwright_browser_click(ref="submit_button")
+playwright_browser_snapshot()                    # verify result
 ```
 
-### 3. Verify action worked
-```bash
-$B snapshot                      # baseline
-$B click @e3                     # do something
-$B snapshot -D                   # unified diff shows what changed
+### 3. Capture visual evidence
+```
+playwright_browser_take_screenshot(type="png", filename="bug-evidence.png")
 ```
 
-### 4. Visual evidence
-```bash
-$B snapshot -i -a -o /tmp/annotated.png   # labeled screenshot
-$B screenshot /tmp/bug.png
+### 4. Wait for content
+```
+playwright_browser_wait_for(text="Welcome back")
+playwright_browser_wait_for(textGone="Loading...")
 ```
 
-## Snapshot Flags
+## Element References
+
+The `playwright_browser_snapshot` returns an accessibility tree with `ref` values for each element. Use these refs for interactions:
 
 ```
--i        --interactive           Interactive elements only with @e refs
--c        --compact               Compact (no empty structural nodes)
--d <N>    --depth                 Limit tree depth
--s <sel>  --selector              Scope to CSS selector
--D        --diff                  Unified diff against previous snapshot
--a        --annotate              Annotated screenshot with ref labels
--o <path> --output                Output path for annotated screenshot
--C        --cursor-interactive    Cursor-interactive elements (@c refs)
+button "Submit" [ref=button1]
+textbox "Email" [ref=email_input]
+link "Forgot password?" [ref=link3]
 ```
 
-## User Handoff
-
-When you hit something you can't handle in headless mode (CAPTCHA, complex auth):
-
-```bash
-$B handoff "Stuck on CAPTCHA at login page"
-# User takes over in visible Chrome
-# When done:
-$B resume
+Then interact:
+```
+playwright_browser_click(ref="button1")
+playwright_browser_type(ref="email_input", text="test@example.com")
 ```
 
-## Full Command List
+---
 
-### Navigation
-- `goto <url>` - Navigate to URL
-- `back` / `forward` - History navigation
-- `reload` - Reload page
+## When to Use
 
-### Interaction
-- `click <sel>` - Click element
-- `fill <sel> <val>` - Fill input
-- `hover <sel>` - Hover element
-- `press <key>` - Press key
+Use when:
+- /browse
+- browser test
+- open browser
+- test page
+- check this page
+- verify in browser
+- navigate to
+- test login flow
+- fill form
 
-### Inspection
-- `snapshot [flags]` - Accessibility tree with @refs
-- `screenshot [path]` - Save screenshot
-- `text` - Clean page text
-- `console` - Console messages
-- `network` - Network requests
+## Do Not Use For
 
-### Verification
-- `is visible <sel>` - Check visibility
-- `is enabled <sel>` - Check if interactive
-- `js <expr>` - Run JavaScript
+- Unit testing (use test frameworks)
+- Performance profiling (use devtools)
+- API testing (use curl/http clients)
+- Accessibility audits (use design-audit skill)
 
-### Visual
-- `responsive <prefix>` - Mobile/tablet/desktop screenshots
-- `diff <url1> <url2>` - Compare two pages
+---
+
+## Error Handling
+
+| Issue | Action |
+|-------|--------|
+| Element not found | Use snapshot to see current page state, verify ref |
+| Page times out | Check URL, increase wait timeout |
+| Navigation fails | Verify URL is accessible |
+| Form submission fails | Check form validation, use snapshot to debug |
+
+---
+
+## Quick Tests
+
+Should trigger:
+- Open browser and test the page
+- Check this URL in browser
+- /browse
+- Navigate to the login page
+- Fill out the form
+
+Should not trigger:
+- Write a unit test
+- Test the API
+- Check code coverage
+- Review this PR
+
+---
+
+## References
+
+- [Playwright Docs](https://playwright.dev/python/docs/intro) — Browser automation
+- [OpenCode Plugin SDK](https://opencode.ai/docs/plugins/) — Custom tools

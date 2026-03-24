@@ -154,8 +154,8 @@ test.describe('QA Smoke Tests', () => {
 # Launch browser for manual exploration
 npx playwright test --ui
 
-# Or use shipmate browse
-shipmate browse $TARGET_URL
+# Or use playwright browser tools
+playwright_browser_navigate(url="$TARGET_URL")
 ```
 
 ### Phase 5: Form Testing Checklist
@@ -451,3 +451,11 @@ Before marking QA complete:
 - [ ] Full suite passes
 - [ ] No regressions
 - [ ] Report generated
+
+---
+
+## References
+
+- [Testing JavaScript](https://testingjavascript.com/) — Kent C. Dodds testing course
+- [The Practical Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html) — Martin Fowler
+- [Playwright Best Practices](https://playwright.dev/docs/best-practices) — E2E testing patterns

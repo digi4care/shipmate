@@ -282,3 +282,10 @@ Before marking ship complete:
 - [ ] Release tagged
 - [ ] Deployment verified
 - [ ] Changelog updated
+
+---
+
+## References
+
+- [Semantic Versioning](https://semver.org/) — Version bump strategy
+- [Trunk Based Development](https://trunkbaseddevelopment.com/) — CI/CD best practices

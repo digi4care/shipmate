@@ -67,3 +67,57 @@ ls -d test/ tests/ spec/ __tests__/ 2>/dev/null
 
 - **0**: All tests passed, lint clean
 - **1**: Test failures or lint errors found
+
+---
+
+## When to Use
+
+Use when:
+- /qa-quick
+- /qa-only
+- quick test
+- just check it works
+- fast verify
+- sanity check
+- smoke test
+
+## Do Not Use For
+
+- Full QA workflow (use qa skill)
+- Browser testing (use browse skill)
+- Code review (use review skill)
+- Debugging (use investigate skill)
+
+---
+
+## Error Handling
+
+| Issue | Action |
+|-------|--------|
+| No test framework found | Report: "No test framework detected" |
+| Tests fail | Report failures, suggest running full QA |
+| Lint errors | Report issues, do not auto-fix |
+| No changed files | Report: "No changes to test" |
+
+---
+
+## Quick Tests
+
+Should trigger:
+- Quick test this change
+- Just check it works
+- /qa-quick
+- Sanity check before commit
+
+Should not trigger:
+- Full QA suite
+- Browser testing
+- Code review
+- Debug this error
+
+---
+
+## References
+
+- [Testing Best Practices](https://testingjavascript.com/) — Kent C. Dodds
+- [The Practical Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html) — Martin Fowler

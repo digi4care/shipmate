@@ -98,3 +98,58 @@ Write DESIGN.md with:
 3. **Specificity over vibes** — "Clean, modern UI" is not a design decision
 4. **Edge cases are user experiences** — 47-char names, zero results, error states
 5. **AI slop is the enemy** — Generic patterns feel AI-generated, not intentional
+
+---
+
+## When to Use
+
+Use when:
+- /design-help
+- shipmate design consultation
+- design system setup
+- typography setup
+- color palette
+- visual hierarchy help
+- create DESIGN.md
+- set up design tokens
+
+## Do Not Use For
+
+- Auditing live designs (use design-audit skill)
+- Writing CSS code (use appropriate dev skill)
+- Component implementation (use frontend skills)
+- Brand strategy (out of scope)
+
+---
+
+## Error Handling
+
+| Issue | Action |
+|-------|--------|
+| User wants immediate code | Clarify: design-help produces design docs, not code |
+| No clear product context | Return to Phase 1 questions |
+| Competing design opinions | Document options with tradeoffs, let user decide |
+| DESIGN.md already exists | Read it first, calibrate updates against it |
+
+---
+
+## Quick Tests
+
+Should trigger:
+- Set up a design system
+- Help with typography and colors
+- /design-help
+- Create DESIGN.md for this project
+
+Should not trigger:
+- Audit the live site
+- Write CSS components
+- Fix this layout bug
+- Implement the design
+
+---
+
+## References
+
+- [Design Systems Handbook](https://www.designsystems.com/) — Design system best practices
+- [Tailwind CSS](https://tailwindcss.com/) — Utility-first design tokens

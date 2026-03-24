@@ -203,3 +203,57 @@ If DESIGN.md exists:
 1. **Audit report** in terminal
 2. **Screenshots** saved to `~/.shipmate/design-audit/[timestamp]/`
 3. **Findings file** (optional) for handoff to developers
+
+---
+
+## When to Use
+
+Use when:
+- /design-audit
+- shipmate design review
+- visual QA
+- design quality check
+- review live site
+- check design implementation
+- audit accessibility
+
+## Do Not Use For
+
+- Creating design systems (use design-help skill)
+- Code review (use review skill)
+- Functional testing (use qa skill)
+- Performance testing (use profiling tools)
+
+---
+
+## Error Handling
+
+| Issue | Action |
+|-------|--------|
+| Site requires auth | Use browser-auth skill first |
+| DESIGN.md missing | Note in report, audit against universal principles |
+| Browser fails to load | Check URL, try alternative browser |
+| Timeout on page load | Increase timeout, check network |
+
+---
+
+## Quick Tests
+
+Should trigger:
+- Design review of the live site
+- Visual QA check
+- /design-audit
+- Audit the UI for accessibility
+
+Should not trigger:
+- Create a design system
+- Write unit tests
+- Review this PR
+- Debug this error
+
+---
+
+## References
+
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/) — Accessibility standards
+- [Refactoring UI](https://www.refactoringui.com/) — Design principles for developers
