@@ -1,6 +1,6 @@
 {
   "name": "@digi4care/shipmate",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "AI development workflow skills for OpenCode — plan review, QA, shipping, retrospectives",
   "keywords": [
     "opencode",
