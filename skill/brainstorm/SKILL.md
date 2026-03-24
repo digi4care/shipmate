@@ -31,7 +31,7 @@ YC office hours for product design. Ask hard questions before proposing solution
 
 Understand the project and the area the user wants to change.
 
-1. Read `CLAUDE.md`, `TODOS.md`
+1. Read `AGENTS.md`, `TODO.md`
 2. Run `git log --oneline -30` for recent context
 3. Ask: **"What's your goal with this?"**
 
@@ -129,3 +129,60 @@ Write a design document summarizing:
 - Key decisions and rationale
 - Open questions
 - Next steps
+
+---
+
+## When to Use
+
+Use when:
+- /brainstorm
+- /office-hours
+- rethink this
+- think bigger
+- design consultation
+- office hours
+- help me think through
+- not sure what to build
+- product direction
+
+## Do Not Use For
+
+- Writing code (use appropriate dev skill)
+- Debugging issues (use investigate skill)
+- Code review (use review skill)
+- Testing (use qa skill)
+- Quick questions (answer directly)
+
+---
+
+## Error Handling
+
+| Issue | Action |
+|-------|--------|
+| User wants code immediately | Remind: "Brainstorm produces design docs, not code. Want to proceed with design first?" |
+| Vague product idea | Use YC questions to get specific |
+| User frustrated by questions | Switch to Builder mode for enthusiastic collaboration |
+| No clear problem statement | Return to Phase 1 context gathering |
+
+---
+
+## Quick Tests
+
+Should trigger:
+- Rethink this feature
+- Office hours for my startup
+- Help me brainstorm product direction
+- /brainstorm
+
+Should not trigger:
+- Write a function that
+- Fix this bug
+- Review my PR
+- Run tests
+
+---
+
+## References
+
+- [YC Startup School](https://www.startupschool.org/) — YC's free startup course
+- [Paul Graham Essays](http://www.paulgraham.com/articles.html) — YC founder's writings on startups

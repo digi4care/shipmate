@@ -55,14 +55,16 @@ Output: **"Root cause hypothesis: ..."** — a specific, testable claim about wh
 
 After forming your root cause hypothesis, lock edits to the affected module to prevent scope creep.
 
+The freeze is implemented by the Shipmate plugin's `guardHook`. Check if available:
+
 ```bash
-[ -x "${SHIPMATE_HOOK_DIR}/../freeze/bin/check-freeze.sh" ] && echo "FREEZE_AVAILABLE" || echo "FREEZE_UNAVAILABLE"
+[ -f "$HOME/.shipmate/freeze-dir.txt" ] && echo "FREEZE_ACTIVE" || echo "FREEZE_UNAVAILABLE"
 ```
 
-**If FREEZE_AVAILABLE:** Identify the narrowest directory containing the affected files. Write it to the freeze state file:
+**To set freeze:** Identify the narrowest directory containing the affected files:
 
 ```bash
-STATE_DIR="${SHIPMATE_DATA:-$HOME/.shipmate}"
+STATE_DIR="$HOME/.shipmate"
 mkdir -p "$STATE_DIR"
 echo "<detected-directory>/" > "$STATE_DIR/freeze-dir.txt"
 echo "Debug scope locked to: <detected-directory>/"
@@ -71,8 +73,6 @@ echo "Debug scope locked to: <detected-directory>/"
 Substitute `<detected-directory>` with the actual directory path (e.g., `src/auth/`). Tell the user: "Edits restricted to `<dir>/` for this debug session. This prevents changes to unrelated code. Run `/unfreeze` to remove the restriction."
 
 If the bug spans the entire repo or the scope is genuinely unclear, skip the lock and note why.
-
-**If FREEZE_UNAVAILABLE:** Skip scope lock. Edits are unrestricted.
 
 ---
 
@@ -90,7 +90,7 @@ Check if this bug matches a known pattern:
 | Stale cache | Shows old data, fixes on cache clear | Redis, CDN, browser cache, Turbo |
 
 Also check:
-- `TODOS.md` for related known issues
+- `TODO.md` for related known issues (router to TODOS.md or TODOS-beads.md)
 - `git log` for prior fixes in the same area — **recurring bugs in the same files are an architectural smell**, not a coincidence
 
 ---
@@ -159,7 +159,7 @@ Root cause:      [what was actually wrong]
 Fix:             [what was changed, with file:line references]
 Evidence:        [test output, reproduction attempt showing fix works]
 Regression test: [file:line of the new test]
-Related:         [TODOS.md items, prior bugs in same area, architectural notes]
+Related:         [TODO.md items, prior bugs in same area, architectural notes]
 Status:          DONE | DONE_WITH_CONCERNS | BLOCKED
 ════════════════════════════════════════
 ```
@@ -176,3 +176,58 @@ Status:          DONE | DONE_WITH_CONCERNS | BLOCKED
   - DONE — root cause found, fix applied, regression test written, all tests pass
   - DONE_WITH_CONCERNS — fixed but cannot fully verify (e.g., intermittent bug, requires staging)
   - BLOCKED — root cause unclear after investigation, escalated
+
+---
+
+## When to Use
+
+Use when:
+- /investigate
+- /debug
+- fix this
+- why is this broken
+- something is wrong
+- debugging
+- error in
+- investigate this issue
+
+## Do Not Use For
+
+- Feature development (use appropriate dev skill)
+- Code review (use review skill)
+- Testing (use qa skill)
+- Performance optimization (use profiling tools)
+
+---
+
+## Error Handling
+
+| Issue | Action |
+|-------|--------|
+| Cannot reproduce | Add logging, gather more evidence |
+| 3 hypotheses failed | STOP, question architecture |
+| Fix causes regression | Revert, investigate, try again |
+| Root cause in external dep | Check changelog, consider upgrade |
+
+---
+
+## Quick Tests
+
+Should trigger:
+- Fix this bug
+- Why is this not working
+- /investigate
+- Debug this error
+
+Should not trigger:
+- Write a new feature
+- Review this PR
+- Run tests
+- Optimize performance
+
+---
+
+## References
+
+- [Debug It!](https://pragprog.com/titles/pbdp/debug-it/) — Pragmatic debugging strategies
+- [The Art of Debugging](https://nostarch.com/debugging.htm) — No Starch Press guide

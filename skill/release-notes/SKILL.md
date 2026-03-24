@@ -2,7 +2,7 @@
 name: release-notes
 description: |
   Post-ship documentation update. Runs after /ship to update all documentation
-  files (README, CHANGELOG, CLAUDE.md, API docs) based on the diff. Automated, minimal stops for risky or subjective changes. Use when "ship completed" or "update docs".
+  files (README, CHANGELOG, AGENTS.md, API docs) based on the diff. Automated, minimal stops for risky or subjective changes. Use when "ship completed" or "update docs".
 triggers:
   - /release-notes
   - /document-release
@@ -13,7 +13,7 @@ workflow:
   - Analyze diff for changed files and features
   - Update README.md with new features/changes
   - Update CHANGELOG.md with release notes
-  - Update CLAUDE.md if architecture changed
+  - Update AGENTS.md if architecture changed
   - Update API documentation if endpoints changed
 ---
 
@@ -49,3 +49,57 @@ Post-ship documentation update. Runs **after `/ship`** to update all documentati
 3. **Discover docs:** Find all `.md` files in repo
 4. **Update docs:** Edit documentation to reflect changes
 5. **Verify:** Ensure no broken links or stale references
+
+---
+
+## When to Use
+
+Use when:
+- /release-notes
+- /document-release
+- update docs
+- update documentation
+- changelog
+- ship completed
+- post-ship documentation
+
+## Do Not Use For
+
+- Writing new documentation (write directly)
+- Creating release (use ship skill)
+- Code review (use review skill)
+- QA testing (use qa skill)
+
+---
+
+## Error Handling
+
+| Issue | Action |
+|-------|--------|
+| No diff found | Report: "No changes to document" |
+| Main branch | Warn: "Should run on feature branch after /ship" |
+| Conflicting docs | Stop, ask user to resolve |
+| Broken links detected | Report, suggest fixes |
+
+---
+
+## Quick Tests
+
+Should trigger:
+- Update the changelog
+- Document this release
+- /release-notes
+- Update docs after shipping
+
+Should not trigger:
+- Write new docs from scratch
+- Create a release
+- Review this PR
+- Test the app
+
+---
+
+## References
+
+- [Keep a Changelog](https://keepachangelog.com/) — Changelog best practices
+- [Conventional Commits](https://www.conventionalcommits.org/) — Commit message format

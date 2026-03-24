@@ -69,7 +69,7 @@ git log origin/<default> --since="<window>" --format="%s" | grep -oE '#[0-9]+' |
 git shortlog origin/<default> --since="<window>" -sn --no-merges
 
 # Check for TODOS (optional)
-cat TODOS.md 2>/dev/null || true
+cat TODO.md 2>/dev/null || true  # Router to TODOS.md or TODOS-beads.md
 ```
 
 ### Step 2: Compute Metrics
@@ -164,3 +164,58 @@ Retrospective data and reports are stored in:
 - **Balanced feedback**: Praise + growth for everyone
 - **Privacy**: Don't expose sensitive information in reports
 - **Actionable**: Every insight should suggest a concrete action
+
+---
+
+## When to Use
+
+Use when:
+- /retro
+- retro
+- weekly retro
+- retrospective
+- how did this week go
+- how did last week go
+- weekly review
+- engineering retrospective
+
+## Do Not Use For
+
+- Daily standups (out of scope)
+- Individual performance reviews (use HR tools)
+- Sprint planning (use planning tools)
+- Bug analysis (use investigate skill)
+
+---
+
+## Error Handling
+
+| Issue | Action |
+|-------|--------|
+| No commits in window | Report: "No activity in the selected period" |
+| Git fetch fails | Continue with local data, note limitation |
+| Single contributor | Still analyze, but note team context missing |
+| Private repo access | Use local git log only |
+
+---
+
+## Quick Tests
+
+Should trigger:
+- Run a retro for this week
+- How did this week go
+- /retro
+- Weekly engineering review
+
+Should not trigger:
+- Plan the next sprint
+- Review this PR
+- Debug this issue
+- Daily standup
+
+---
+
+## References
+
+- [Agile Retrospectives](https://retrospectivewiki.org/) — Retro patterns and formats
+- [The Five Dysfunctions of a Team](https://www.tablegroup.com/books/dysfunctions/) — Team dynamics
