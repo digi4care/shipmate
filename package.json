@@ -1,6 +1,6 @@
 {
   "name": "@digi4care/shipmate",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "AI development workflow skills for OpenCode — plan review, QA, shipping, retrospectives",
   "keywords": [
     "opencode",
@@ -27,27 +27,42 @@
     "node": ">=18.0.0"
   },
   "files": [
-    "skill/",
-    "agent/",
-    "plugin/",
-    "config/",
-    "src/",
-    "postinstall.mjs",
+    "dist",
+    "skill",
+    "agent",
     "schema.json",
-    "README.md",
-    "LICENSE"
+    "postinstall.mjs"
   ],
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "exports": {
-    ".": "./src/index.js",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
     "./schema.json": "./schema.json"
   },
   "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
     "postinstall": "node postinstall.mjs",
-    "test": "echo \"No tests yet\" && exit 0"
+    "lint": "biome check src/",
+    "lint:md": "markdownlint '**/*.md' --ignore node_modules --ignore dist",
+    "format": "biome format --write src/",
+    "format:check": "biome format src/",
+    "check": "npm run lint && npm run lint:md && npm run format:check",
+    "ci": "npm run build && npm run check"
   },
-  "devDependencies": {},
-  "dependencies": {},
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.2.24",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.8",
+    "@types/node": "^20.10.0",
+    "markdownlint-cli": "^0.48.0",
+    "typescript": "^5.3.0"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
