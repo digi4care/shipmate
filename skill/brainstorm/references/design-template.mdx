@@ -1,0 +1,139 @@
+# Design Document Template
+
+Templates for Phase 4 (Alternatives) and Phase 5 (Design Document) output.
+
+---
+
+## Options Format
+
+Present 2-4 options with clear tradeoffs:
+
+```
+OPTION A: [Name]
+  What: [One-line description]
+  Pros: [Key benefits, 2-3 bullets]
+  Cons: [Key drawbacks, 2-3 bullets]
+  Effort: [S/M/L with time estimate]
+
+OPTION B: [Name]
+  What: [One-line description]
+  Pros: [Key benefits, 2-3 bullets]
+  Cons: [Key drawbacks, 2-3 bullets]
+  Effort: [S/M/L with time estimate]
+
+OPTION C: [Name]
+  ...
+```
+
+### Effort Sizing Guide
+
+| Size | Time | Scope |
+|------|------|-------|
+| S | Hours to 1 day | Single file/function change |
+| M | 2-5 days | Multiple files, new feature |
+| L | 1-2 weeks | Major feature, architecture change |
+| XL | 2+ weeks | Platform change, rewrite |
+
+---
+
+## Design Document Structure
+
+```markdown
+# [Feature/Project Name]
+
+## Problem Statement
+
+[One paragraph: What problem are we solving? Who has it? Why now?]
+
+## Chosen Approach
+
+[One paragraph: What are we building? Why this approach over alternatives?]
+
+## Key Decisions
+
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| [What we decided] | [The choice] | [Why this choice] |
+
+## Tradeoffs
+
+**Accepted:**
+- [Tradeoff we're accepting and why it's okay]
+
+**Rejected alternatives:**
+- [Alternative]: [Why we didn't choose it]
+
+## Open Questions
+
+- [ ] [Question 1] — [Owner/Deadline]
+- [ ] [Question 2] — [Owner/Deadline]
+
+## Next Steps
+
+1. [First action with owner and date]
+2. [Second action with owner and date]
+3. [Third action with owner and date]
+
+## Appendix
+
+### Alternatives Considered
+
+[Link to full options analysis or paste from Phase 4]
+
+### References
+
+- [Relevant docs, PRDs, discussions]
+```
+
+---
+
+## Quick Design Document (Simplified)
+
+For smaller features or quick iterations:
+
+```markdown
+# [Feature Name]
+
+**Problem:** [One sentence]
+
+**Solution:** [One sentence]
+
+**Approach:**
+- [Key point 1]
+- [Key point 2]
+- [Key point 3]
+
+**Risks:**
+- [Risk 1 and mitigation]
+
+**Next:** [Single next step]
+```
+
+---
+
+## Builder Mode Output
+
+For hackathon/learning/fun projects, use lighter structure:
+
+```markdown
+# [Project Name]
+
+## Vision
+[What would make this amazing?]
+
+## Core Delight
+[The one thing users will love]
+
+## Build Plan
+1. [First milestone]
+2. [Second milestone]
+3. [Third milestone]
+
+## Constraints
+- Time: [Available time]
+- Skills: [What we have/need]
+- Resources: [Tools, APIs, budget]
+
+## Success Criteria
+[How do we know we succeeded?]
+```

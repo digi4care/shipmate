@@ -1,0 +1,73 @@
+{
+  "version": "1.0.0",
+  "created": "2026-03-24T00:00:00Z",
+  "last_updated": "2026-03-24T00:00:00Z",
+  "registry_type": "reference_documents",
+  "entries": [
+    {
+      "id": "workflow-playbook",
+      "title": "Workflow Playbook",
+      "filename": "workflow-playbook.mdx",
+      "category": "workflow",
+      "description": "Detailed execution steps for runtime detection, test commands, and lint commands by framework.",
+      "keywords": [
+        "workflow",
+        "test",
+        "lint",
+        "runtime",
+        "jest",
+        "vitest",
+        "rspec",
+        "pytest"
+      ],
+      "topics": [
+        "workflow",
+        "testing",
+        "linting"
+      ],
+      "language": "en",
+      "created": "2026-03-24T00:00:00Z",
+      "last_updated": "2026-03-24T00:00:00Z"
+    },
+    {
+      "id": "error-handling",
+      "title": "Error Handling",
+      "filename": "error-handling.mdx",
+      "category": "support",
+      "description": "Common issues, resolution strategies, and graceful degradation for quick QA checks.",
+      "keywords": [
+        "error",
+        "troubleshooting",
+        "recovery",
+        "graceful-degradation"
+      ],
+      "topics": [
+        "support",
+        "errors"
+      ],
+      "language": "en",
+      "created": "2026-03-24T00:00:00Z",
+      "last_updated": "2026-03-24T00:00:00Z"
+    },
+    {
+      "id": "test-patterns",
+      "title": "Test Patterns",
+      "filename": "test-patterns.mdx",
+      "category": "testing",
+      "description": "Trigger validation patterns, should/should-not trigger examples, and functional test prompts.",
+      "keywords": [
+        "triggers",
+        "patterns",
+        "functional-tests",
+        "regex"
+      ],
+      "topics": [
+        "testing",
+        "triggers"
+      ],
+      "language": "en",
+      "created": "2026-03-24T00:00:00Z",
+      "last_updated": "2026-03-24T00:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+# Retrospective Template
+
+Use this template structure for generating retrospective reports.
+
+## Report Structure
+
+```markdown
+# Engineering Retrospective: <DATE_RANGE>
+
+_Generated: <TIMESTAMP>_
+_Contributors: <N>_
+_Period: <WINDOW>_
+
+---
+
+## Summary
+
+<One paragraph executive summary of the period>
+
+---
+
+## Metrics
+
+| Metric            | Value |
+|-------------------|-------|
+| Commits to main   | N     |
+| Contributors      | N     |
+| PRs merged        | N     |
+| Total insertions  | N     |
+| Total deletions   | N     |
+| Net LOC added     | N     |
+| Test LOC ratio    | N%    |
+| Active days       | N     |
+| Detected sessions | N     |
+
+---
+
+## Commit Time Distribution
+
+<ASCII histogram of commits by hour>
+
+```
+00: ██ (2)
+01: █ (1)
+08: ████ (4)
+...
+```
+
+---
+
+## Work Sessions
+
+<Number of sessions, average length, patterns observed>
+
+---
+
+## Contributor Leaderboard
+
+| Contributor | Commits | +/- | Top Area |
+|-------------|---------|-----|----------|
+| You (name)  | N       | +N/-M | dir/ |
+| teammate1   | N       | +N/-M | dir/ |
+
+### Individual Feedback
+
+#### <Name>
+
+**Praise:**
+- <Specific accomplishment>
+- <Positive pattern observed>
+
+**Growth Opportunities:**
+- <Constructive suggestion>
+- <Area for development>
+
+---
+
+## Hotspot Analysis
+
+| File | Changes | Concern |
+|------|---------|---------|
+| path/to/file.ts | N | <flag if applicable> |
+
+---
+
+## PRs Merged
+
+| PR | Description |
+|----|-------------|
+| #123 | Brief description |
+| #124 | Brief description |
+
+---
+
+## Insights
+
+### What Went Well
+- <Positive observation>
+
+### Areas for Improvement
+- <Constructive observation>
+
+### Action Items
+- [ ] <Concrete next step>
+
+---
+
+## Compare Mode (if applicable)
+
+| Metric | Current | Prior | Delta |
+|--------|---------|-------|-------|
+| Commits | 45 | 38 | +18% |
+| Contributors | 4 | 3 | +1 |
+
+**Trends:** <improving/stable/declining>
+```
+
+## Storage Path
+
+```
+~/.shipmate/retros/
+├── YYYY-MM-DD-retro.md       # Standard retro
+└── compare/
+    └── YYYY-MM-DD-compare.md # Comparison retro
+```
+
+## Writing Guidelines
+
+### Tone
+
+- Celebrate wins genuinely
+- Frame growth opportunities constructively
+- Be specific, not vague
+- Balance individual and team feedback
+
+### Praise Examples
+
+```
+Good: "Sarah's auth refactor reduced test flakiness by 40%"
+Bad: "Good work on auth"
+```
+
+### Growth Opportunity Examples
+
+```
+Good: "Consider breaking large PRs into smaller, focused changes for faster review"
+Bad: "PRs are too big"
+```
+
+### Privacy
+
+- Never quote commit contents
+- Don't expose sensitive file paths
+- Aggregate individual data in team reports
+- Store locally, don't share externally

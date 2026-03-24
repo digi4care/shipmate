@@ -1,0 +1,141 @@
+# Debug Report Template
+
+Use this template to document completed debugging sessions. A structured report ensures nothing is missed and provides documentation for future reference.
+
+## Template
+
+```
+DEBUG REPORT
+════════════════════════════════════════
+Symptom:         [what the user observed]
+Root cause:      [what was actually wrong]
+Fix:             [what was changed, with file:line references]
+Evidence:        [test output, reproduction attempt showing fix works]
+Regression test: [file:line of the new test]
+Related:         [TODO.md items, prior bugs in same area, architectural notes]
+Status:          DONE | DONE_WITH_CONCERNS | BLOCKED
+════════════════════════════════════════
+```
+
+## Field Descriptions
+
+### Symptom
+
+What the user reported or observed. Be specific:
+- Error messages (full text)
+- Stack traces (relevant portions)
+- User-visible behavior
+- When it occurs (triggers, timing)
+
+Example:
+```
+Symptom: TypeError: Cannot read property 'id' of undefined
+         at src/auth/session.ts:45
+         Occurs when user logs in after session timeout
+```
+
+### Root Cause
+
+The actual underlying problem that caused the symptom. This is what you fixed, not what you saw.
+
+Example:
+```
+Root cause: session.validate() returned null when token expired,
+            but caller assumed non-null return. Missing null check
+            in auth middleware.
+```
+
+### Fix
+
+The changes made to resolve the root cause. Include file and line references.
+
+Example:
+```
+Fix: src/auth/middleware.ts:23-27
+     Added null check for session.validate() return value
+     Redirects to login when session is null/expired
+     
+     src/auth/session.ts:45
+     Added JSDoc clarifying null return behavior
+```
+
+### Evidence
+
+Proof that the fix works. Include:
+- Test output showing passing tests
+- Manual reproduction showing fix resolves the issue
+- Any before/after comparisons
+
+Example:
+```
+Evidence: 
+  - npm test: All 247 tests pass
+  - Manual test: Logged in, waited for timeout, refreshed page
+    Result: Redirected to login (expected)
+  - Previously: White screen with console error
+```
+
+### Regression Test
+
+Location of the new test that prevents this bug from recurring.
+
+Example:
+```
+Regression test: tests/auth/middleware.test.ts:89-102
+                 "should redirect to login when session is expired"
+```
+
+### Related
+
+Connections to other work or known issues:
+- TODO.md items that should be updated
+- Prior bugs fixed in the same area
+- Architectural concerns noted during investigation
+
+Example:
+```
+Related:
+  - TODOS-beads.md:auth-007 - "Improve session handling"
+  - git: Similar fix in commit abc123 (session timeout edge case)
+  - Note: This is the 3rd auth middleware bug - consider refactoring
+```
+
+### Status
+
+One of three values:
+
+| Status | Meaning |
+|--------|---------|
+| `DONE` | Root cause found, fix applied, regression test written, all tests pass |
+| `DONE_WITH_CONCERNS` | Fixed but cannot fully verify (e.g., intermittent bug, requires staging) |
+| `BLOCKED` | Root cause unclear after investigation, escalated |
+
+## Example Completed Report
+
+```
+DEBUG REPORT
+════════════════════════════════════════
+Symptom:         Users report stale cart contents after adding items.
+                 Cart shows old state until page refresh.
+Root cause:      Cart state not invalidated after mutation.
+                 Turbo cache returning stale HTML partial.
+Fix:             src/cart/controller.ts:67
+                 Added turbo_stream.action(:remove) before render
+                 
+                 src/cart/cache.ts:23
+                 Added cache key include cart.updated_at timestamp
+Evidence:        npm test: 312 tests pass
+                 Manual: Added item → cart updates immediately
+Regression test: tests/integration/cart.test.ts:145-158
+Related:         TODOS-beads.md:cart-003 "Investigate Turbo caching"
+Status:          DONE
+════════════════════════════════════════
+```
+
+## When to Write Reports
+
+Always write a debug report after completing Phase 5 (Verification). The report:
+- Documents the fix for future maintainers
+- Captures patterns for future debugging
+- Provides evidence for code review
+- Updates tracking files (TODO.md, etc.)

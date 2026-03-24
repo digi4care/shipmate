@@ -1,0 +1,390 @@
+# Browser Commands Reference
+
+Complete reference for Playwright browser automation tools available in OpenCode.
+
+## Navigation & Page Control
+
+### `playwright_browser_navigate`
+
+Navigate to a URL.
+
+```typescript
+playwright_browser_navigate(url: string)
+```
+
+**Parameters:**
+- `url` (required): The URL to navigate to
+
+**Example:**
+```
+playwright_browser_navigate(url="https://yourapp.com/login")
+```
+
+---
+
+### `playwright_browser_navigate_back`
+
+Go back to the previous page in browser history.
+
+```typescript
+playwright_browser_navigate_back()
+```
+
+---
+
+### `playwright_browser_tabs`
+
+List, create, close, or select browser tabs.
+
+```typescript
+playwright_browser_tabs(action: "list" | "new" | "close" | "select", index?: number)
+```
+
+**Parameters:**
+- `action` (required): Operation to perform
+- `index` (optional): Tab index for close/select operations
+
+---
+
+### `playwright_browser_resize`
+
+Resize the browser window.
+
+```typescript
+playwright_browser_resize(width: number, height: number)
+```
+
+---
+
+### `playwright_browser_close`
+
+Close the current page.
+
+```typescript
+playwright_browser_close()
+```
+
+---
+
+## Page Inspection
+
+### `playwright_browser_snapshot`
+
+Capture accessibility snapshot of the current page. Returns element references for interaction.
+
+```typescript
+playwright_browser_snapshot(filename?: string)
+```
+
+**Parameters:**
+- `filename` (optional): Save snapshot to markdown file instead of returning
+
+**Returns:** Accessibility tree with `ref` values for each interactive element.
+
+**Example output:**
+```
+button "Submit" [ref=button1]
+textbox "Email" [ref=email_input]
+link "Forgot password?" [ref=link3]
+```
+
+---
+
+### `playwright_browser_take_screenshot`
+
+Capture a screenshot of the page or element.
+
+```typescript
+playwright_browser_take_screenshot(
+  type: "png" | "jpeg",
+  filename?: string,
+  element?: string,
+  ref?: string,
+  fullPage?: boolean
+)
+```
+
+**Parameters:**
+- `type` (required): Image format - "png" or "jpeg"
+- `filename` (optional): File name to save screenshot
+- `element` (optional): Human-readable element description
+- `ref` (optional): Element reference from snapshot
+- `fullPage` (optional): Capture full scrollable page
+
+---
+
+### `playwright_browser_console_messages`
+
+Get all console messages from the page.
+
+```typescript
+playwright_browser_console_messages(
+  level: "error" | "warning" | "info" | "debug",
+  filename?: string
+)
+```
+
+**Parameters:**
+- `level` (required): Minimum severity level to return
+- `filename` (optional): Save messages to file
+
+---
+
+### `playwright_browser_network_requests`
+
+Get all network requests since page load.
+
+```typescript
+playwright_browser_network_requests(
+  includeStatic?: boolean,
+  filename?: string
+)
+```
+
+**Parameters:**
+- `includeStatic` (optional): Include static resources (images, fonts, scripts)
+- `filename` (optional): Save requests to file
+
+---
+
+## Element Interaction
+
+### `playwright_browser_click`
+
+Click on an element.
+
+```typescript
+playwright_browser_click(
+  ref: string,
+  element?: string,
+  button?: "left" | "right" | "middle",
+  doubleClick?: boolean,
+  modifiers?: ("Alt" | "Control" | "ControlOrMeta" | "Meta" | "Shift")[]
+)
+```
+
+**Parameters:**
+- `ref` (required): Element reference from snapshot
+- `element` (optional): Human-readable element description
+- `button` (optional): Mouse button to click (default: "left")
+- `doubleClick` (optional): Perform double click
+- `modifiers` (optional): Modifier keys to hold
+
+---
+
+### `playwright_browser_type`
+
+Type text into an input element.
+
+```typescript
+playwright_browser_type(
+  ref: string,
+  text: string,
+  element?: string,
+  submit?: boolean,
+  slowly?: boolean
+)
+```
+
+**Parameters:**
+- `ref` (required): Element reference from snapshot
+- `text` (required): Text to type
+- `element` (optional): Human-readable element description
+- `submit` (optional): Press Enter after typing
+- `slowly` (optional): Type character by character (triggers key handlers)
+
+---
+
+### `playwright_browser_fill_form`
+
+Fill multiple form fields at once.
+
+```typescript
+playwright_browser_fill_form(
+  fields: Array<{
+    name: string,
+    type: "textbox" | "checkbox" | "radio" | "combobox" | "slider",
+    ref: string,
+    value: string
+  }>
+)
+```
+
+**Parameters:**
+- `fields` (required): Array of form fields to fill
+  - `name`: Human-readable field name
+  - `type`: Field type
+  - `ref`: Element reference from snapshot
+  - `value`: Value to set (boolean for checkbox, text for others)
+
+**Example:**
+```
+playwright_browser_fill_form(fields=[
+  {name: "Email", type: "textbox", ref: "email_input", value: "user@test.com"},
+  {name: "Remember me", type: "checkbox", ref: "remember", value: "true"},
+  {name: "Country", type: "combobox", ref: "country", value: "Netherlands"}
+])
+```
+
+---
+
+### `playwright_browser_select_option`
+
+Select option(s) in a dropdown.
+
+```typescript
+playwright_browser_select_option(
+  ref: string,
+  values: string[],
+  element?: string
+)
+```
+
+---
+
+### `playwright_browser_hover`
+
+Hover over an element.
+
+```typescript
+playwright_browser_hover(ref: string, element?: string)
+```
+
+---
+
+### `playwright_browser_drag`
+
+Drag and drop between elements.
+
+```typescript
+playwright_browser_drag(
+  startElement: string,
+  startRef: string,
+  endElement: string,
+  endRef: string
+)
+```
+
+---
+
+### `playwright_browser_press_key`
+
+Press a keyboard key.
+
+```typescript
+playwright_browser_press_key(key: string)
+```
+
+**Parameters:**
+- `key` (required): Key name like "ArrowLeft", "Enter", "a", or "Control+A"
+
+---
+
+## Waiting & Timing
+
+### `playwright_browser_wait_for`
+
+Wait for text to appear/disappear or time to pass.
+
+```typescript
+playwright_browser_wait_for(
+  text?: string,
+  textGone?: string,
+  time?: number
+)
+```
+
+**Parameters:**
+- `text` (optional): Wait for this text to appear
+- `textGone` (optional): Wait for this text to disappear
+- `time` (optional): Wait for this many seconds
+
+---
+
+## Advanced Operations
+
+### `playwright_browser_evaluate`
+
+Execute JavaScript on the page.
+
+```typescript
+playwright_browser_evaluate(
+  function: string,
+  element?: string,
+  ref?: string
+)
+```
+
+**Parameters:**
+- `function` (required): JavaScript function as string
+- `element` (optional): Human-readable element description
+- `ref` (optional): Element reference (passed as argument to function)
+
+**Example:**
+```
+playwright_browser_evaluate(function="() => document.title")
+playwright_browser_evaluate(function="(el) => el.innerText", ref="heading1")
+```
+
+---
+
+### `playwright_browser_run_code`
+
+Execute custom Playwright code snippet.
+
+```typescript
+playwright_browser_run_code(code: string)
+```
+
+**Parameters:**
+- `code` (required): JavaScript function receiving `page` argument
+
+**Example:**
+```
+playwright_browser_run_code(code="async (page) => {
+  await page.getByRole('button', { name: 'Submit' }).click();
+  return await page.title();
+}")
+```
+
+---
+
+### `playwright_browser_file_upload`
+
+Upload files through file inputs.
+
+```typescript
+playwright_browser_file_upload(paths?: string[])
+```
+
+**Parameters:**
+- `paths` (optional): Absolute paths to files to upload. Omit to cancel file chooser.
+
+---
+
+### `playwright_browser_handle_dialog`
+
+Handle browser dialogs (alert, confirm, prompt).
+
+```typescript
+playwright_browser_handle_dialog(
+  accept: boolean,
+  promptText?: string
+)
+```
+
+**Parameters:**
+- `accept` (required): Accept or dismiss the dialog
+- `promptText` (optional): Text to enter for prompt dialogs
+
+---
+
+### `playwright_browser_install`
+
+Install the browser specified in config.
+
+```typescript
+playwright_browser_install()
+```
+
+Use when browser is not installed error occurs.

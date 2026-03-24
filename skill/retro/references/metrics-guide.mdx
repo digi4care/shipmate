@@ -1,0 +1,167 @@
+# Metrics Guide
+
+Detailed calculations for engineering retrospective metrics.
+
+## Core Metrics
+
+### Commit Statistics
+
+```bash
+# Total commits to main branch
+git log origin/main --since="<window>" --oneline | wc -l
+
+# Unique contributors
+git log origin/main --since="<window>" --format="%aN" | sort -u | wc -l
+
+# PRs merged (from commit messages)
+git log origin/main --since="<window>" --format="%s" | grep -oE '#[0-9]+' | sort -u | wc -l
+```
+
+### Lines of Code
+
+```bash
+# Insertions and deletions
+git log origin/main --since="<window>" --shortstat
+
+# Parse from output:
+# N files changed, M insertions(+), D deletions(-)
+```
+
+### Test LOC Ratio
+
+```
+Test LOC Ratio = (test file insertions / total insertions) * 100
+```
+
+Identify test files by pattern: `*.test.ts`, `*.spec.ts`, `*_test.go`, `test_*.py`
+
+## Work Session Detection
+
+### Algorithm
+
+1. Sort commits by timestamp (oldest first)
+2. Group commits where gap < 45 minutes into same session
+3. Count sessions per author
+
+```bash
+# Get timestamps sorted
+git log origin/main --since="<window>" --format="%at|%aN|%ai|%s" | sort -n
+```
+
+### Session Metrics
+
+- **Active days**: Days with at least one commit
+- **Detected sessions**: Number of distinct work sessions
+- **Average session length**: (Last commit - First commit) per session
+
+## Time Distribution
+
+### Hourly Histogram
+
+```bash
+# Get commit hours
+git log origin/main --since="<window>" --format="%ad" --date=format:"%H" | sort | uniq -c
+```
+
+Display as ASCII bar chart:
+
+```
+00: ██ (2)
+01: █ (1)
+08: ████ (4)
+09: ████████████ (12)
+10: ██████████████ (14)
+...
+```
+
+### Patterns to Flag
+
+- Late-night commits (22:00 - 06:00): May indicate burnout risk
+- Weekend work: Work-life balance concern
+- Lunch-time spike: Healthy break pattern
+- End-of-day rush: Deadline pressure
+
+## Hotspot Analysis
+
+### File Change Frequency
+
+```bash
+# Most changed files
+git log origin/main --since="<window>" --format="" --name-only | sort | uniq -c | sort -rn | head -20
+```
+
+### Author-to-File Mapping
+
+```bash
+# Which authors touch which files
+git log origin/main --since="<window>" --format="AUTHOR:%aN" --name-only
+```
+
+### Flags
+
+| Pattern | Concern |
+|---------|---------|
+| >20 changes to one file | Instability, needs refactoring |
+| Large files (1000+ LOC) in hotspots | Consider splitting |
+| Single author dominates hotspot | Knowledge silo |
+| Config files frequently changed | Infrastructure instability |
+
+## Per-Author Metrics
+
+### Leaderboard Calculation
+
+```
+| Contributor | Commits | +/- | Top Area |
+```
+
+1. Count commits per author
+2. Sum insertions/deletions per author
+3. Find most-touched directory per author
+
+### Praise Signals
+
+- High test coverage in changes
+- Small, focused commits
+- Good commit messages
+- Touches multiple areas (collaboration)
+- Consistent work hours
+
+### Growth Opportunities
+
+- Large commits (may need breaking down)
+- Low test coverage in changes
+- Single-area focus (potential silo)
+- Erratic commit timing
+- Sparse commit messages
+
+## Compare Mode Metrics
+
+### Delta Calculation
+
+```
+Delta % = ((Current - Prior) / Prior) * 100
+```
+
+### Trend Classification
+
+| Delta | Trend |
+|-------|-------|
+| > +10% | Improving |
+| -10% to +10% | Stable |
+| < -10% | Declining |
+
+### Period Comparison
+
+When `compare` flag is active:
+
+1. Calculate window: `--since="14 days ago"`
+2. Calculate prior: `--since="28 days ago" --until="14 days ago"`
+3. Run same metrics for both periods
+4. Compute deltas
+
+## Privacy Considerations
+
+- Never expose commit contents in reports
+- Aggregate data where possible
+- Store reports locally only (`~/.shipmate/retros/`)
+- Respect `.gitignore` patterns

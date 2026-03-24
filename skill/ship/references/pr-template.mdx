@@ -1,0 +1,81 @@
+# PR Template
+
+Standard pull request template for ship workflow.
+
+## Template
+
+```markdown
+## Summary
+
+- [Brief description of changes]
+- [Key feature or fix implemented]
+- [Related issue reference]
+
+## Changes
+
+- **Added**: [New features or files]
+- **Changed**: [Modified functionality]
+- **Fixed**: [Bug fixes]
+- **Removed**: [Deleted code or files]
+
+## Test Plan
+
+- [ ] Unit tests pass locally
+- [ ] Integration tests pass
+- [ ] Manual testing completed
+- [ ] Edge cases verified
+
+## Screenshots (if applicable)
+
+[Add screenshots for UI changes]
+
+## Checklist
+
+- [ ] Code follows project style guidelines
+- [ ] Self-review completed
+- [ ] Comments added for complex logic
+- [ ] Documentation updated
+- [ ] No new warnings introduced
+- [ ] Tests added for new functionality
+
+## Related Issues
+
+Closes #[issue-number]
+```
+
+## gh CLI Usage
+
+Create PR with template:
+
+```bash
+gh pr create --title "feat: brief description" --body "$(cat <<'EOF'
+## Summary
+
+- Brief description of changes
+- Key feature or fix implemented
+- Related issue reference
+
+## Test Plan
+
+- [ ] Unit tests pass locally
+- [ ] Integration tests pass
+- [ ] Manual testing completed
+
+Closes #[issue-number]
+EOF
+)"
+```
+
+## Title Conventions
+
+Use conventional commit prefixes:
+
+| Prefix | Use Case |
+|--------|----------|
+| `feat:` | New feature |
+| `fix:` | Bug fix |
+| `docs:` | Documentation only |
+| `style:` | Formatting, no code change |
+| `refactor:` | Code restructuring |
+| `test:` | Adding/updating tests |
+| `chore:` | Maintenance tasks |

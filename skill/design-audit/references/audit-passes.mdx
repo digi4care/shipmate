@@ -1,0 +1,101 @@
+# Audit Passes
+
+Detailed execution guide for each of the 6 audit passes.
+
+## Pass 1: Visual Hierarchy Scan
+
+Navigate to each key screen. For each:
+
+1. **Screenshot + snapshot** for evidence
+2. **Identify hierarchy:** What does user see first, second, third?
+3. **Check:** Is everything competing for attention?
+4. **Flag:** Elements that don't earn their pixels
+
+**Evidence:** Annotated screenshots with hierarchy markers
+
+---
+
+## Pass 2: Interaction State Coverage
+
+Test each interactive element for all states:
+
+| State | Check |
+|-------|-------|
+| Default | Visible, properly styled |
+| Hover | Visual feedback |
+| Focus | Visible focus ring (a11y) |
+| Active/Pressed | Visual feedback |
+| Disabled | Visually distinct, not confusing |
+| Loading | Spinner/skeleton, not nothing |
+| Empty | Warmth + action + context |
+| Error | Clear message + recovery path |
+| Success | Confirmation feedback |
+
+**Evidence:** Screenshots of each state, especially failures
+
+---
+
+## Pass 3: Responsive Behavior
+
+Test at standard breakpoints:
+
+```
+Mobile:  375px × 667px
+Tablet:  768px × 1024px
+Desktop: 1440px × 900px
+```
+
+For each breakpoint:
+
+1. **Screenshot** at each size
+2. **Check:** Is mobile just "stacked desktop" or intentional?
+3. **Flag:** Broken layouts, overflow, tiny tap targets
+4. **Verify:** Touch targets ≥ 44px on mobile
+
+**Evidence:** Side-by-side breakpoint comparisons
+
+---
+
+## Pass 4: Accessibility Audit
+
+Automated + manual checks:
+
+1. **Console check:** Any a11y errors?
+2. **Keyboard nav:** Tab through entire flow
+3. **Color contrast:** WCAG AA minimum (4.5:1 text, 3:1 UI)
+4. **Touch targets:** 44px minimum on touch devices
+5. **Screen reader:** Landmarks, labels, alt text
+6. **Focus visibility:** Can you see where focus is?
+
+**Evidence:** Screenshots of a11y issues with measurements
+
+---
+
+## Pass 5: AI Slop Detection
+
+Flag generic patterns that feel generated:
+
+- Hero sections with gradient backgrounds
+- 3-column feature grids
+- Card layouts with stock icons
+- "Clean, modern" without specificity
+- Generic testimonials sections
+- Cookie-cutter pricing tables
+
+**Key Question:** What makes this feel like THIS product? If nothing, flag as AI slop.
+
+**Evidence:** Screenshots with notes on what's generic
+
+---
+
+## Pass 6: Design System Compliance
+
+If DESIGN.md exists, verify compliance:
+
+1. **Typography:** Correct fonts, sizes, weights?
+2. **Colors:** Using palette tokens? Contrast compliant?
+3. **Spacing:** Following scale (4px/8px base)?
+4. **Components:** Using defined patterns?
+5. **New elements:** Fit the vocabulary?
+
+**Evidence:** Side-by-side DESIGN.md vs implementation

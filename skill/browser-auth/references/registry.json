@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "created": "2025-03-24T00:00:00Z",
+  "last_updated": "2025-03-24T00:00:00Z",
+  "registry_type": "reference_documents",
+  "entries": [
+    {
+      "id": "browser-setup",
+      "title": "Browser Setup Instructions",
+      "filename": "browser-setup.mdx",
+      "category": "setup",
+      "description": "Detailed setup instructions for Chrome DevTools and Playwright authentication.",
+      "keywords": [
+        "chrome",
+        "devtools",
+        "playwright",
+        "authentication",
+        "setup",
+        "cookies",
+        "storage",
+        "security"
+      ],
+      "topics": [
+        "setup",
+        "authentication"
+      ],
+      "language": "en",
+      "created": "2025-03-24T00:00:00Z",
+      "last_updated": "2025-03-24T00:00:00Z"
+    }
+  ]
+}

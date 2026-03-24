@@ -1,0 +1,116 @@
+# Design Principles
+
+Core principles that guide all design decisions in Shipmate projects.
+
+---
+
+## 1. Empty States Are Features
+
+Every empty state needs three things:
+
+1. **Warmth**: Friendly, not sterile. A human tone or illustration.
+2. **Action**: A clear next step. What should the user do?
+3. **Context**: Why is this empty? When will it have content?
+
+### Examples
+
+**Bad**: "No items found."
+
+**Good**: "No projects yet. Create your first project to get started."
+
+**Better**: 
+- "No projects yet."
+- Illustration or icon
+- "Create Project" button
+- "Projects will appear here as you add them."
+
+---
+
+## 2. Every Screen Has Hierarchy
+
+Users should instantly know:
+- What's most important (first read)
+- What's secondary (second read)
+- What's actionable (what can I do?)
+
+### Hierarchy Techniques
+
+| Technique | Effect |
+|-----------|--------|
+| Size | Larger = more important |
+| Contrast | High contrast = draws eye |
+| Position | Top-left (Western) = primary |
+| Spacing | Isolation = emphasis |
+| Color | Brand color = action |
+
+### Test Your Hierarchy
+
+Squint at the screen. What stands out first? Is it the most important thing?
+
+---
+
+## 3. Specificity Over Vibes
+
+"Clean, modern UI" is not a design decision. Every choice needs specificity.
+
+### Vague vs Specific
+
+| Vague | Specific |
+|-------|----------|
+| "Clean typography" | "Inter at 16px/1.5 for body, 600 weight for headings" |
+| "Good spacing" | "8px base unit, 16px card padding, 24px section gaps" |
+| "Nice colors" | "Primary #3B82F6, neutral scale from #F9FAFB to #111827" |
+| "Accessible" | "All text meets WCAG AA (4.5:1 contrast minimum)" |
+
+---
+
+## 4. Edge Cases Are User Experiences
+
+Design for extremes, not just happy paths:
+
+### Common Edge Cases
+
+| Element | Edge Cases |
+|---------|------------|
+| Names | 47-character names, names with special characters, single names |
+| Lists | Zero items, one item, 1000 items |
+| Text | Empty, single line, very long, RTL languages |
+| Numbers | Zero, negative, very large, fractions |
+| Dates | Today, far past, far future, invalid |
+| Images | Missing, broken, wrong aspect ratio, very large |
+
+### Design Questions
+
+- What does this look like with zero items?
+- What happens with the maximum possible content?
+- How does this behave on narrow screens?
+- What if the data fails to load?
+
+---
+
+## 5. AI Slop Is the Enemy
+
+Generic patterns feel AI-generated, not intentional. Avoid:
+
+### Signs of AI Slop
+
+- Generic hero sections with stock imagery
+- "Welcome to [Product Name]" copy
+- Lists of "features" instead of benefits
+- Symmetric layouts with no visual interest
+- Safe, bland color palettes
+- Cookie-cutter card grids
+
+### Intentional Alternatives
+
+| AI Slop | Intentional |
+|---------|-------------|
+| "Get started today" | "Create your first project in 2 minutes" |
+| Generic hero | Specific value proposition with proof |
+| Feature list | Outcome-focused copy |
+| Symmetric grid | Asymmetric layout with focal point |
+| Safe blues | Brand-specific palette with personality |
+
+### Test for Intentionality
+
+Ask: "Could this be on any website?" If yes, make it specific to this product.

@@ -9,6 +9,7 @@ triggers:
   - unfreeze
   - clear freeze
   - remove restriction
+  - unlock edits
 workflow:
   - Check for freeze state
   - Remove freeze-dir.txt
@@ -19,46 +20,35 @@ workflow:
 
 Clear the edit restriction boundary set by the freeze hook.
 
-## Usage
+## When to Use Me
 
-Run `/unfreeze` to remove the edit restriction.
-
-## Implementation
-
-The freeze is implemented by the `guardHook` in the Shipmate plugin (`src/hooks/guard.ts`). The freeze state is stored in:
-
-```
-~/.shipmate/freeze-dir.txt
-```
-
-To clear:
-```bash
-rm -f ~/.shipmate/freeze-dir.txt
-echo "Edit restriction removed. All directories are now editable."
-```
-
-## What it does
-
-- Removes the freeze state file
-- All directories are now editable
-- No confirmation needed — just run it
-
----
-
-## When to Use
-
-Use when:
-- /unfreeze
-- unfreeze
-- clear freeze
-- remove restriction
-- done with scoped work
-- unlock edits
+- `/unfreeze` — explicit command
+- Done with scoped/directory-restricted work
+- Need to edit files outside the frozen directory
+- Edit restriction is no longer needed
 
 ## Do Not Use For
 
-- Setting a freeze (not yet exposed as skill)
+- Setting a freeze (use `/freeze` hook)
 - General debugging (use investigate skill)
+- Permission issues unrelated to freeze
+
+---
+
+## Workflow
+
+1. **Check freeze state** — verify `~/.shipmate/freeze-dir.txt` exists
+2. **Remove the freeze file** — delete the restriction marker
+3. **Confirm removal** — report success to user
+
+```bash
+if [ -f ~/.shipmate/freeze-dir.txt ]; then
+  rm -f ~/.shipmate/freeze-dir.txt
+  echo "✓ Edit restriction removed. All directories are now editable."
+else
+  echo "No freeze in effect. Edits are already unrestricted."
+fi
+```
 
 ---
 
@@ -67,24 +57,34 @@ Use when:
 | Issue | Action |
 |-------|--------|
 | No freeze in effect | Report: "No freeze in effect. Edits are unrestricted." |
-| Cannot remove file | Check permissions, report error |
+| Cannot remove file | Check permissions on `~/.shipmate/`, report error details |
 
 ---
 
 ## Quick Tests
 
-Should trigger:
-- /unfreeze
-- Clear the freeze
-- Remove edit restriction
+**Should trigger:**
+- `/unfreeze`
+- "Clear the freeze"
+- "Remove edit restriction"
+- "I'm done with scoped work"
 
-Should not trigger:
-- Set a freeze
-- Debug this issue
+**Should not trigger:**
+- "Set a freeze"
+- "Debug this issue"
+- "Why can't I edit this file?"
+
+---
+
+## Implementation Notes
+
+The freeze is implemented by `guardHook` in `src/hooks/guard.ts`. When active, the hook reads `~/.shipmate/freeze-dir.txt` and blocks edits outside that directory.
+
+This skill simply removes that file to restore full edit access.
 
 ---
 
 ## References
 
-- [OpenCode Plugin SDK](https://opencode.ai/docs/plugins/) — Plugin hooks
 - Shipmate source: `src/hooks/freeze.ts`, `src/hooks/guard.ts`
+- [OpenCode Plugin SDK](https://opencode.ai/docs/plugins/) — Plugin hooks

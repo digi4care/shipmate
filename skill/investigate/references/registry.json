@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "created": "2026-03-24T00:00:00Z",
+  "last_updated": "2026-03-24T00:00:00Z",
+  "registry_type": "reference_documents",
+  "entries": [
+    {
+      "id": "root-cause-patterns",
+      "title": "Root Cause Patterns",
+      "filename": "root-cause-patterns.mdx",
+      "category": "debugging",
+      "description": "Common root cause patterns including race conditions, null propagation, state corruption, and cache issues with investigation steps.",
+      "keywords": [
+        "debugging",
+        "patterns",
+        "race-condition",
+        "null-propagation",
+        "state-corruption",
+        "stale-cache",
+        "integration-failure",
+        "configuration-drift"
+      ],
+      "topics": [
+        "debugging",
+        "patterns"
+      ],
+      "language": "en",
+      "created": "2026-03-24T00:00:00Z",
+      "last_updated": "2026-03-24T00:00:00Z"
+    },
+    {
+      "id": "debug-template",
+      "title": "Debug Report Template",
+      "filename": "debug-template.mdx",
+      "category": "templates",
+      "description": "Structured template for documenting debug sessions including symptom, root cause, fix, evidence, and regression test.",
+      "keywords": [
+        "template",
+        "debug-report",
+        "documentation",
+        "regression-test",
+        "evidence"
+      ],
+      "topics": [
+        "templates",
+        "documentation"
+      ],
+      "language": "en",
+      "created": "2026-03-24T00:00:00Z",
+      "last_updated": "2026-03-24T00:00:00Z"
+    }
+  ]
+}

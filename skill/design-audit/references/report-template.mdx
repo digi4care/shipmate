@@ -1,0 +1,68 @@
+# Report Template
+
+Use this template for the final audit report.
+
+## Standard Report Format
+
+```
++====================================================================+
+|              DESIGN AUDIT — COMPLETION REPORT                       |
++====================================================================+
+| Target               | [URL]                                       |
+| DESIGN.md            | [found/not found]                           |
+| Scope                | [pages/screens reviewed]                    |
++--------------------------------------------------------------------+
+| Pass 1 (Hierarchy)   | ___ issues found                            |
+| Pass 2 (States)      | ___ missing states                          |
+| Pass 3 (Responsive)  | ___ breakpoint issues                       |
+| Pass 4 (A11y)        | ___ violations                              |
+| Pass 5 (AI Slop)     | ___ generic patterns                        |
+| Pass 6 (Design Sys)  | ___ deviations from DESIGN.md               |
++--------------------------------------------------------------------+
+| Screenshots saved    | ~/.shipmate/design-audit/[timestamp]/       |
+| Critical issues      | [list]                                      |
+| Recommended fixes    | [prioritized list]                          |
++====================================================================+
+```
+
+## Report Sections
+
+### Header
+- Target URL
+- DESIGN.md status (found/not found)
+- Scope of review
+
+### Pass Results
+One row per pass with issue count.
+
+### Evidence
+- Screenshot directory path
+- Critical issues list (blocking issues)
+- Recommended fixes (prioritized by severity)
+
+## Screenshot Organization
+
+```
+~/.shipmate/design-audit/
+└── [timestamp]/
+    ├── hierarchy/
+    │   ├── homepage.png
+    │   └── dashboard.png
+    ├── states/
+    │   ├── button-hover.png
+    │   └── form-error.png
+    ├── responsive/
+    │   ├── mobile-homepage.png
+    │   └── desktop-homepage.png
+    ├── a11y/
+    │   ├── focus-ring.png
+    │   └── contrast-check.png
+    └── report.md
+```
+
+## Severity Levels
+
+- **Critical:** Blocks user task, accessibility violation
+- **High:** Significantly degrades experience
+- **Medium:** Noticeable but not blocking
+- **Low:** Polish issue, nice to fix

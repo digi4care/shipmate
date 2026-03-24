@@ -1,0 +1,133 @@
+# External Resources
+
+Curated resources for design system development and consultation.
+
+---
+
+## Design Systems
+
+### Reference Implementations
+
+| System | Organization | Why Study |
+|--------|--------------|-----------|
+| [Polaris](https://polaris.shopify.com/) | Shopify | Commerce patterns, tokens |
+| [Carbon](https://carbondesignsystem.com/) | IBM | Enterprise scale, accessibility |
+| [Material Design](https://m3.material.io/) | Google | Motion, theming |
+| [Human Interface](https://developer.apple.com/design/) | Apple | Native patterns |
+| [Fluent](https://fluentsite.z22.web.core.windows.net/) | Microsoft | Cross-platform |
+
+### Learning Resources
+
+- [Design Systems Handbook](https://www.designsystems.com/) — Comprehensive guide by InVision
+- [Adele](https://adele.uxpin.com/) — Design systems repository
+- [Style Dictionary](https://amzn.github.io/style-dictionary/) — Design token management
+
+---
+
+## Typography
+
+### Font Pairing
+
+- [Fontpair](https://fontpair.co/) — Curated Google Font pairs
+- [Typ.io](https://typ.io/) — Font combinations in the wild
+
+### Scale & Rhythm
+
+- [Type Scale](https://type-scale.com/) — Visual type scale generator
+- [Modular Scale](https://www.modularscale.com/) — Mathematical scale calculator
+
+### Readability
+
+- Readable body text: 16–20px on desktop
+- Line length: 65–75 characters
+- Line height: 1.5–1.75 for body text
+
+---
+
+## Color
+
+### Palette Generation
+
+- [Coolors](https://coolors.co/) — Palette generator
+- [Huemint](https://huemint.com/) — AI-assisted brand colors
+- [Realtime Colors](https://realtimecolors.com/) — Preview colors in context
+
+### Accessibility
+
+- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) — WCAG compliance
+- [Stark](https://www.getstark.co/) — Figma/Sketch accessibility plugin
+- [Color Safe](http://colorsafe.co/) — Accessible color combinations
+
+### Color Theory
+
+- Build tints (white) and shades (black) from base
+- Consider color blindness (~8% of men)
+- Use semantic naming (success, warning) not color names (green, yellow)
+
+---
+
+## Spacing & Layout
+
+### Grid Systems
+
+- 12-column grid for flexibility
+- 8px base unit for consistency
+- Container max-width: 1200–1440px
+
+### Responsive Breakpoints
+
+| Breakpoint | Width | Target |
+|------------|-------|--------|
+| sm | 640px | Mobile landscape |
+| md | 768px | Tablet portrait |
+| lg | 1024px | Tablet landscape |
+| xl | 1280px | Desktop |
+| 2xl | 1536px | Large desktop |
+
+---
+
+## Accessibility
+
+### Standards
+
+- [WCAG 2.1](https://www.w3.org/WAI/WCAG21/quickref/) — Web accessibility guidelines
+- [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) — Accessible rich applications
+
+### Quick Checks
+
+- [ ] All text meets 4.5:1 contrast ratio
+- [ ] Interactive elements have focus states
+- [ ] Forms have labels (not just placeholders)
+- [ ] Images have alt text
+- [ ] Color isn't the only indicator
+- [ ] Keyboard navigation works
+
+---
+
+## Tailwind CSS
+
+When using Tailwind as the implementation layer:
+
+- [Tailwind Documentation](https://tailwindcss.com/)
+- [Tailwind UI](https://tailwindui.com/) — Component examples
+- [Headless UI](https://headlessui.com/) — Unstyled accessible components
+
+### Design Tokens to Tailwind
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    colors: {
+      primary: { /* palette */ },
+      neutral: { /* palette */ },
+    },
+    fontFamily: {
+      sans: ['Inter', 'system-ui', 'sans-serif'],
+    },
+    spacing: {
+      // 4px base scale
+    }
+  }
+}
+```

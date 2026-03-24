@@ -1,0 +1,86 @@
+# Test Patterns
+
+Trigger validation and functional test examples.
+
+## Should Trigger
+
+These phrases should activate the qa-quick skill:
+
+| Phrase | Context |
+|--------|---------|
+| "Quick test this change" | After making code changes |
+| "Just check it works" | Before committing |
+| "/qa-quick" | Explicit command |
+| "/qa-only" | Alternative command |
+| "Sanity check before commit" | Pre-commit verification |
+| "Fast verify the changes" | Quick validation |
+| "Run tests on changed files" | Focused testing |
+| "Smoke test" | Basic verification |
+
+## Should Not Trigger
+
+These phrases should NOT activate qa-quick (use other skills):
+
+| Phrase | Redirect To |
+|--------|-------------|
+| "Full QA suite" | `qa` skill |
+| "Browser testing" | `browse` skill |
+| "Test the UI" | `qa` skill |
+| "Code review" | `review` skill |
+| "Debug this error" | `investigate` skill |
+| "Review my PR" | `review` skill |
+| "End-to-end test" | `qa` skill |
+
+## Functional Test Prompts
+
+### Basic Verification
+
+```
+Input: "Quick test this change"
+Expected: Detect runtime, run tests on changed files, report pass/fail
+```
+
+### Multiple Changed Files
+
+```
+Input: "Check these changes work"
+Expected: Run tests for all changed files, aggregate results
+```
+
+### Lint Only
+
+```
+Input: "Lint check only"
+Expected: Skip tests, run lint only on changed files
+```
+
+### No Changes
+
+```
+Input: "Quick test"
+Expected: Detect no changes, report "No changes to test"
+```
+
+### Test Failure
+
+```
+Input: "Just check it works"
+Scenario: Tests fail
+Expected: Report failures with details, suggest full QA
+```
+
+## Trigger Phrase Patterns
+
+Regex patterns for trigger detection:
+
+```regex
+(qa-quick|qa-only|quick[\s-]?test|sanity[\s-]?check|smoke[\s-]?test|fast[\s-]?verif|just[\s-]?check|check[\s-]?it[\s-]?works)
+```
+
+## Negative Trigger Patterns
+
+Regex patterns to avoid false triggers:
+
+```regex
+(full[\s-]?qa|browser[\s-]?test|e2e[\s-]?test|code[\s-]?review|debug|end-to-end|ui[\s-]?test)
+```

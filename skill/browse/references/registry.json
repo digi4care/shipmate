@@ -1,0 +1,54 @@
+{
+  "version": "1.0.0",
+  "created": "2025-03-24T00:00:00Z",
+  "last_updated": "2025-03-24T00:00:00Z",
+  "registry_type": "reference_documents",
+  "entries": [
+    {
+      "id": "browser-commands",
+      "title": "Browser Commands Reference",
+      "filename": "browser-commands.mdx",
+      "category": "api",
+      "description": "Complete reference for Playwright browser automation tools in OpenCode.",
+      "keywords": [
+        "playwright",
+        "browser",
+        "commands",
+        "navigation",
+        "interaction",
+        "snapshot",
+        "click",
+        "type"
+      ],
+      "topics": [
+        "api",
+        "browser"
+      ],
+      "language": "en",
+      "created": "2025-03-24T00:00:00Z",
+      "last_updated": "2025-03-24T00:00:00Z"
+    },
+    {
+      "id": "snapshot-format",
+      "title": "Snapshot Format",
+      "filename": "snapshot-format.mdx",
+      "category": "format",
+      "description": "Understanding accessibility tree format and element references for browser automation.",
+      "keywords": [
+        "snapshot",
+        "accessibility",
+        "tree",
+        "ref",
+        "element",
+        "format"
+      ],
+      "topics": [
+        "format",
+        "elements"
+      ],
+      "language": "en",
+      "created": "2025-03-24T00:00:00Z",
+      "last_updated": "2025-03-24T00:00:00Z"
+    }
+  ]
+}

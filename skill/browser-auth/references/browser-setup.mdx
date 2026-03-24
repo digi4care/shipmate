@@ -1,0 +1,184 @@
+# Browser Setup Instructions
+
+Detailed instructions for setting up authenticated browser sessions for QA testing.
+
+---
+
+## Chrome DevTools Protocol Setup
+
+### Prerequisites
+
+1. Chrome browser installed
+2. Remote debugging enabled
+3. User logged in to target site(s)
+
+### Step 1: Launch Chrome with Remote Debugging
+
+```bash
+# macOS
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222
+
+# Linux
+google-chrome --remote-debugging-port=9222
+
+# Windows
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222
+```
+
+### Step 2: Authenticate Manually
+
+1. Navigate to the target site
+2. Log in with test credentials
+3. Verify authentication is complete
+
+### Step 3: Use chrome-devtools Tools
+
+Once authenticated, use these tools for testing:
+
+| Tool | Purpose |
+|------|---------|
+| `chrome-devtools_list_pages` | List open browser tabs |
+| `chrome-devtools_navigate_page` | Navigate to URLs |
+| `chrome-devtools_take_snapshot` | Get page accessibility tree |
+| `chrome-devtools_click` | Click elements |
+| `chrome-devtools_fill` | Fill form fields |
+| `chrome-devtools_take_screenshot` | Capture screenshots |
+
+### Authentication Persistence
+
+Chrome stores authentication state in the user profile:
+- **Cookies**: Persist across sessions
+- **localStorage/sessionStorage**: Persist in profile
+- **Session cookies**: Valid until browser closes
+
+---
+
+## Playwright Setup
+
+### Step 1: First-Time Authentication
+
+```typescript
+// Navigate to login page
+playwright_browser_navigate(url="https://yourapp.com/login")
+
+// Get snapshot to find element refs
+playwright_browser_snapshot()
+
+// Fill login form
+playwright_browser_fill_form(fields=[
+  {name: "Email", type: "textbox", ref: "email_input", value: "test@example.com"},
+  {name: "Password", type: "textbox", ref: "password_input", value: "testpass123"}
+])
+
+// Submit form
+playwright_browser_click(ref="submit_button")
+
+// Wait for successful login
+playwright_browser_wait_for(text="Welcome")
+```
+
+### Step 2: Verify Authentication
+
+```typescript
+// Check authentication persisted
+playwright_browser_snapshot()
+
+// Verify user is logged in
+playwright_browser_evaluate(function="() => localStorage.getItem('auth_token')")
+```
+
+### Storage State Contents
+
+Playwright storage state includes:
+
+| Storage Type | Contents |
+|--------------|----------|
+| Cookies | All cookies including session cookies |
+| localStorage | Key-value pairs |
+| sessionStorage | Tab-specific data |
+
+---
+
+## Security Best Practices
+
+### Never Commit Authentication Data
+
+```gitignore
+# Add to .gitignore
+**/storage-state.json
+**/cookies.json
+**/.auth/
+```
+
+### Use Test Accounts Only
+
+- Never use production credentials
+- Create dedicated test accounts
+- Use environment variables for credentials
+
+### Token Handling
+
+```typescript
+// Bad: Hardcoded tokens
+const token = "eyJhbGciOiJIUzI1NiIs..."
+
+// Good: Environment variable
+const token = process.env.TEST_AUTH_TOKEN
+```
+
+---
+
+## Troubleshooting
+
+### Authentication Not Working
+
+1. **Check cookies are enabled**
+   - Site may require cookies for auth
+   - Verify browser settings allow cookies
+
+2. **Check localStorage**
+   - Modern apps often use localStorage for tokens
+   - Use browser dev tools to inspect
+
+3. **Check for CSRF tokens**
+   - Some sites require CSRF tokens
+   - May need additional requests
+
+### Session Expired
+
+1. **Re-authenticate manually**
+   - Log out and log back in
+   - Clear cookies and retry
+
+2. **Check token expiration**
+   - JWT tokens have expiry
+   - Use refresh tokens if available
+
+### Auth Not Persisting Across Sessions
+
+1. **Chrome DevTools**
+   - Ensure using same user profile
+   - Check profile directory permissions
+
+2. **Playwright**
+   - Storage state must be saved/loaded explicitly
+   - Check storage state file exists
+
+---
+
+## Platform-Specific Notes
+
+### macOS
+
+- Default Chrome profile: `~/Library/Application Support/Google/Chrome`
+- May need to grant accessibility permissions
+
+### Linux
+
+- Default Chrome profile: `~/.config/google-chrome`
+- Ensure Chrome is not already running when launching with debugging
+
+### Windows
+
+- Default Chrome profile: `%LOCALAPPDATA%\Google\Chrome\User Data`
+- May need administrator privileges for debugging port

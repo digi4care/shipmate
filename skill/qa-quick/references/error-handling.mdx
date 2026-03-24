@@ -1,0 +1,66 @@
+# Error Handling
+
+Common issues and resolution strategies for quick QA checks.
+
+## Issue Resolution Table
+
+| Issue | Detection | Action |
+|-------|-----------|--------|
+| No test framework found | No config files in project root | Report: "No test framework detected. Add jest.config.js, vitest.config.ts, .rspec, or pytest.ini" |
+| Tests fail | Non-zero exit code | Report failures with file:line, suggest running full QA |
+| Lint errors | Non-zero exit code from linter | Report issues, do not auto-fix |
+| No changed files | Empty diff output | Report: "No changes to test against base branch" |
+| Base branch unknown | `origin/HEAD` not set | Default to `main`, fallback to `master` |
+| Dependency missing | Command not found | Report: "Run `npm install` or `bundle install` first" |
+
+## Troubleshooting Flow
+
+1. **Runtime not detected**
+   - Check for package manager files
+   - Ask user to specify runtime explicitly
+
+2. **Tests timeout**
+   - Suggest running specific test file
+   - Check for hanging async operations
+
+3. **Lint config missing**
+   - Skip lint step silently
+   - Report: "Lint skipped - no config found"
+
+4. **Permission denied**
+   - Check file permissions
+   - Suggest running with appropriate permissions
+
+## Graceful Degradation
+
+When full workflow cannot complete:
+
+1. Run what's available (tests only, or lint only)
+2. Report what was skipped and why
+3. Provide actionable next steps
+
+Example output:
+
+```
+QA QUICK CHECK — PARTIAL RESULTS
+
+Tests:  PASS (5 passed)
+Lint:   SKIPPED (no .eslintrc found)
+
+To add linting:
+  npm install -D eslint
+  npx eslint --init
+```
+
+## Recovery Commands
+
+```bash
+# Reset test environment
+npm run test:clean 2>/dev/null || rm -rf node_modules/.cache
+
+# Reinstall dependencies
+npm ci || npm install
+
+# Clear Jest cache
+npx jest --clearCache
+```

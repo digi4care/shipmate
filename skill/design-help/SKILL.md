@@ -11,19 +11,13 @@ triggers:
   - typography setup
   - color palette
   - visual hierarchy help
-workflow:
-  - Phase 0: Check for existing DESIGN.md
-  - Phase 1: Product context (what are you building?)
-  - Phase 2: Research competitive landscape (optional)
-  - Phase 3: Propose design system
-  - Phase 4: Document DESIGN.md
 ---
 
 # Design Help / Consultation
 
 Design system consultation. Ask clarifying questions before proposing solutions.
 
-**Output:** A design document or DESIGN.md file.
+**Output:** A DESIGN.md file with typography, color, spacing, and component decisions.
 
 ---
 
@@ -45,9 +39,8 @@ Ask a single question covering:
 ## Phase 2: Research (optional)
 
 If user wants research:
-
 1. **WebSearch** for products in their space
-2. **Browse** top 3-5 sites for visual evidence (if available)
+2. **Browse** top 3-5 sites for visual evidence
 3. **Synthesize:** What patterns converge? Where's the opportunity to stand out?
 
 ---
@@ -56,69 +49,59 @@ If user wants research:
 
 Propose decisions for:
 
-### Typography
-- Font stack (system fonts vs custom)
-- Scale (heading sizes, body sizes, line heights)
-- Weight usage
+| Category | Decisions |
+|----------|-----------|
+| Typography | Font stack, scale, weights |
+| Color | Primary, semantic, neutrals, contrast |
+| Spacing | Base unit, scale, component padding |
+| Hierarchy | Heading styles, focal points |
 
-### Color
-- Primary palette (brand colors)
-- Semantic colors (success, warning, error, info)
-- Neutral scale (grays)
-- Accessibility (contrast ratios)
-
-### Spacing
-- Base unit (4px, 8px, etc.)
-- Scale (tight, normal, loose)
-- Component padding
-
-### Visual Hierarchy
-- Heading styles
-- Body text treatment
-- Interactive element prominence
+→ See `references/design-guidelines.mdx` for detailed specifications.
 
 ---
 
 ## Phase 4: Document
 
 Write DESIGN.md with:
-- Typography decisions
-- Color palette
-- Spacing scale
+- Typography decisions with specific values
+- Color palette with hex codes and semantic names
+- Spacing scale with tokens
 - Component patterns
-- Accessibility requirements
-- Usage examples
+- Accessibility requirements (4.5:1 contrast minimum)
 
 ---
 
 ## Key Principles
 
-1. **Empty states are features** — Every empty state needs warmth, action, context
-2. **Every screen has hierarchy** — What does user see first, second, third?
-3. **Specificity over vibes** — "Clean, modern UI" is not a design decision
-4. **Edge cases are user experiences** — 47-char names, zero results, error states
-5. **AI slop is the enemy** — Generic patterns feel AI-generated, not intentional
+1. **Empty states are features** — warmth + action + context
+2. **Every screen has hierarchy** — first read, second read, actions
+3. **Specificity over vibes** — "16px Inter" not "clean typography"
+4. **Edge cases are UX** — 47-char names, zero results, errors
+5. **AI slop is the enemy** — generic = unintentional
+
+→ See `references/design-principles.mdx` for elaboration.
 
 ---
 
 ## When to Use
 
-Use when:
-- /design-help
-- shipmate design consultation
-- design system setup
-- typography setup
-- color palette
-- visual hierarchy help
-- create DESIGN.md
-- set up design tokens
+- `/design-help`
+- Shipmate design consultation
+- Design system setup
+- Typography setup
+- Color palette definition
+- Visual hierarchy help
+- Create DESIGN.md
+- Set up design tokens
+
+---
 
 ## Do Not Use For
 
-- Auditing live designs (use design-audit skill)
-- Writing CSS code (use appropriate dev skill)
-- Component implementation (use frontend skills)
-- Brand strategy (out of scope)
+- Auditing live designs → use `design-audit` skill
+- Writing CSS code → use appropriate dev skill
+- Component implementation → use frontend skills
+- Brand strategy → out of scope
 
 ---
 
@@ -135,21 +118,25 @@ Use when:
 
 ## Quick Tests
 
-Should trigger:
-- Set up a design system
-- Help with typography and colors
-- /design-help
-- Create DESIGN.md for this project
+**Should trigger:**
+- "Set up a design system"
+- "Help with typography and colors"
+- "/design-help"
+- "Create DESIGN.md for this project"
 
-Should not trigger:
-- Audit the live site
-- Write CSS components
-- Fix this layout bug
-- Implement the design
+**Should not trigger:**
+- "Audit the live site"
+- "Write CSS components"
+- "Fix this layout bug"
+- "Implement the design"
 
 ---
 
 ## References
 
-- [Design Systems Handbook](https://www.designsystems.com/) — Design system best practices
-- [Tailwind CSS](https://tailwindcss.com/) — Utility-first design tokens
+| Document | Description |
+|----------|-------------|
+| `references/design-guidelines.mdx` | Typography, color, spacing, visual hierarchy specs |
+| `references/design-principles.mdx` | Core principles: empty states, hierarchy, specificity |
+| `references/external-resources.mdx` | External tools, design systems, accessibility resources |
+| `references/registry.json` | Reference document index |

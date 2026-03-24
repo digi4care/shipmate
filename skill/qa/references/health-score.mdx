@@ -1,0 +1,145 @@
+# Health Score & Severity Classification
+
+Bug severity rubric and health score calculation for QA reporting.
+
+## Bug Severity Classification
+
+| Severity | Definition | Examples | Action Required |
+|----------|------------|----------|-----------------|
+| **Critical** | System unusable, data loss, security breach | App crashes, auth bypass, payment failure | Fix immediately, block ship |
+| **High** | Major feature broken, significant user impact | Login fails, data not saving, API errors | Fix before ship |
+| **Medium** | Feature degraded, workaround exists | Form validation unclear, slow performance | Fix or document workaround |
+| **Low** | Minor issue, cosmetic, no user impact | Typos, alignment issues, color mismatch | Backlog for next sprint |
+| **Cosmetic** | Visual only, no functional impact | Font inconsistency, minor spacing | Fix when convenient |
+
+## Health Score Calculation
+
+### Formula
+
+```
+Health Score = (Passed Tests / Total Tests) × 100
+             - (Critical Bugs × 25)
+             - (High Bugs × 10)
+             - (Medium Bugs × 3)
+             - (Low Bugs × 1)
+```
+
+### Score Interpretation
+
+| Score | Status | Action |
+|-------|--------|--------|
+| 90-100 | **Ship Ready** | Clear to deploy |
+| 75-89 | **Acceptable** | Ship with known issues documented |
+| 60-74 | **Needs Work** | Address high/critical bugs before ship |
+| Below 60 | **Blocked** | Do not ship, major issues present |
+
+## Coverage Thresholds
+
+| Tier | Minimum Coverage | Target Coverage |
+|------|------------------|-----------------|
+| Quick | 60% | 70% |
+| Standard | 75% | 85% |
+| Exhaustive | 85% | 95% |
+
+## Bug Report Template
+
+```markdown
+### BUG-YYYYMMDD-XXX
+
+**Severity:** [Critical|High|Medium|Low|Cosmetic]
+**Location:** `file/path:line`
+**Description:** Brief description of the bug
+**Steps to Reproduce:**
+1. Navigate to X
+2. Click on Y
+3. Observe error
+
+**Expected:** What should happen
+**Actual:** What actually happens
+**Fix:** Summary of the fix applied
+**Commit:** abc1234
+**Test:** `tests/bugs/BUG-YYYYMMDD-XXX.spec.ts`
+```
+
+## QA Report Template
+
+```markdown
+# QA Report
+
+**Date:** YYYY-MM-DD HH:MM
+**Target:** http://localhost:3000
+**Tier:** [Quick|Standard|Exhaustive]
+**Duration:** XX minutes
+
+## Summary
+
+| Metric | Value |
+|--------|-------|
+| Tests Run | XX |
+| Passed | XX |
+| Failed | XX |
+| Bugs Found | XX |
+| Bugs Fixed | XX |
+| Coverage | XX% |
+| Health Score | XX |
+
+## Bugs Found
+
+### BUG-YYYYMMDD-001 (Fixed|Open)
+- **Severity:** High
+- **Location:** auth/login.ts:45
+- **Description:** Login fails with special characters in password
+- **Fix:** Added character escaping
+- **Commit:** abc1234
+
+## Coverage by Area
+
+| Area | Coverage |
+|------|----------|
+| Authentication | XX% |
+| Forms | XX% |
+| Navigation | XX% |
+| API | XX% |
+| Edge Cases | XX% |
+
+## Recommendations
+
+1. [Specific actionable recommendation]
+2. [Another recommendation]
+
+## Sign-off
+
+- [ ] All critical bugs fixed
+- [ ] All high bugs fixed
+- [ ] Medium bugs fixed or documented
+- [ ] Low bugs documented for backlog
+- [ ] Full test suite passes
+- [ ] No regressions detected
+```
+
+## Regression Policy
+
+| Bug Type | Regression Action |
+|----------|-------------------|
+| Critical | Immediate revert, investigate |
+| High | Revert within 1 hour |
+| Medium | Fix in hotfix branch |
+| Low | Fix in next release |
+
+## Atomic Commit Rules
+
+When fixing bugs:
+
+1. **One bug = One commit** — Never batch bug fixes
+2. **Commit includes test + fix** — Both in same commit
+3. **Clear commit message** — Follow conventional commits
+4. **Reference bug ID** — Include BUG-YYYYMMDD-XXX in message
+
+Example commit message:
+```
+fix(auth): resolve BUG-20260324-001 - escape special chars in password
+
+- Add character escaping in login validation
+- Add test for special character passwords
+- Closes #123
+```

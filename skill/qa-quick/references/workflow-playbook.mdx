@@ -1,0 +1,129 @@
+# Workflow Playbook
+
+Detailed execution steps for quick QA verification.
+
+## Runtime Detection
+
+```bash
+# Detect project runtime
+[ -f Gemfile ] && echo "RUNTIME:ruby"
+[ -f package.json ] && echo "RUNTIME:node"
+[ -f pyproject.toml ] && echo "RUNTIME:python"
+[ -f Cargo.toml ] && echo "RUNTIME:rust"
+[ -f go.mod ] && echo "RUNTIME:go"
+
+# Check test infrastructure
+ls jest.config.* vitest.config.* .rspec pytest.ini setup.cfg 2>/dev/null
+ls -d test/ tests/ spec/ __tests__/ src/**/*.test.* 2>/dev/null
+```
+
+## Changed Files Detection
+
+```bash
+# Get base branch (try common defaults)
+BASE_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+[ -z "$BASE_BRANCH" ] && BASE_BRANCH="main"
+[ -z "$(git branch -r | grep $BASE_BRANCH)" ] && BASE_BRANCH="master"
+
+# List changed files
+git diff origin/$BASE_BRANCH --name-only
+```
+
+## Test Commands by Framework
+
+### Node.js / JavaScript
+
+```bash
+# Jest
+npm test -- --findRelatedTests path/to/source.js
+
+# Vitest
+npx vitest run path/to/test.test.ts
+
+# Mocha
+npx mocha test/**/*.test.js
+```
+
+### Ruby
+
+```bash
+# RSpec - specific file
+bundle exec rspec spec/path/to/test_spec.rb
+
+# RSpec - related to changed file
+bundle exec rspec spec/ --pattern="**/$(basename $FILE .rb)_spec.rb"
+```
+
+### Python
+
+```bash
+# Pytest - specific file
+pytest tests/test_file.py
+
+# Pytest - with coverage
+pytest tests/test_file.py --cov=src/module
+```
+
+### Go
+
+```bash
+# Test package
+go test ./pkg/...
+
+# Test specific file
+go test -run TestFunctionName ./pkg/package
+```
+
+### Rust
+
+```bash
+# Cargo test
+cargo test --lib
+
+# Specific test
+cargo test test_name
+```
+
+## Lint Commands by Framework
+
+```bash
+# ESLint
+[ -f .eslintrc.* ] && npm run lint
+
+# Rubocop
+[ -f .rubocop.yml ] && bundle exec rubocop
+
+# Pylint / Flake8
+[ -f .flake8 ] && flake8 src/
+[ -f pyproject.toml ] && pylint src/
+
+# golangci-lint
+[ -f .golangci.yml ] && golangci-lint run
+```
+
+## Report Format
+
+```
++====================================================================+
+|                    QA QUICK CHECK — RESULTS                         |
++====================================================================+
+| Tests     | N passed, M failed, K skipped                          |
+| Lint      | CLEAN / N issues / SKIPPED                              |
++====================================================================+
+| VERDICT: PASS / FAIL (see details below)                           |
++====================================================================+
+
+Details:
+- [Test file 1]: PASS (3 tests)
+- [Test file 2]: FAIL (1 failure)
+- Lint: 2 warnings (unused imports)
+```
+
+## Exit Codes
+
+| Code | Meaning |
+|------|---------|
+| 0 | All tests passed, lint clean |
+| 1 | Test failures or lint errors |
+| 2 | No test framework detected |
+| 3 | No changed files found |

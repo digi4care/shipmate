@@ -42,19 +42,6 @@ Reviews implemented designs against DESIGN.md and design principles. Uses browse
 
 ---
 
-## Design Principles (Reference)
-
-1. **Empty states are features** — Every empty state needs warmth, action, context
-2. **Every screen has hierarchy** — What does user see first, second, third?
-3. **Specificity over vibes** — "Clean, modern UI" is not a design decision
-4. **Edge cases are user experiences** — 47-char names, zero results, error states
-5. **AI slop is the enemy** — Generic patterns feel AI-generated, not intentional
-6. **Responsive is not "stacked on mobile"** — Each viewport gets intentional design
-7. **Accessibility is not optional** — Keyboard nav, screen readers, contrast, touch targets
-8. **Subtraction default** — If UI element doesn't earn pixels, cut it
-
----
-
 ## Workflow
 
 ### Setup
@@ -64,129 +51,50 @@ Reviews implemented designs against DESIGN.md and design principles. Uses browse
 3. Start browser via `/browse`
 4. Navigate to target URL
 
----
+### The 6 Passes
 
-### Pass 1: Visual Hierarchy Scan
+Each pass generates screenshots and findings. See [audit-passes.mdx](references/audit-passes.mdx) for detailed execution guide.
 
-Navigate to each key screen. For each:
+| Pass | Focus | Key Checks |
+|------|-------|------------|
+| 1. Hierarchy | Visual priority | What's first, second, third? |
+| 2. States | Interaction coverage | Hover, focus, disabled, loading, error |
+| 3. Responsive | Viewport behavior | Mobile, tablet, desktop breakpoints |
+| 4. A11y | Accessibility | Keyboard, contrast, touch targets |
+| 5. AI Slop | Generic patterns | Cookie-cutter sections |
+| 6. Design System | DESIGN.md compliance | Typography, colors, spacing |
 
-1. **Screenshot + snapshot** for evidence
-2. **Identify hierarchy:** What does user see first, second, third?
-3. **Check:** Is everything competing for attention?
-4. **Flag:** Elements that don't earn their pixels
+### Report
 
-**Evidence:** Annotated screenshots with hierarchy markers
-
----
-
-### Pass 2: Interaction State Coverage
-
-Test each interactive element for:
-
-| State | Check |
-|-------|-------|
-| Default | Visible, properly styled |
-| Hover | Visual feedback |
-| Focus | Visible focus ring (a11y) |
-| Active/Pressed | Visual feedback |
-| Disabled | Visually distinct, not confusing |
-| Loading | Spinner/skeleton, not nothing |
-| Empty | Warmth + action + context |
-| Error | Clear message + recovery path |
-| Success | Confirmation feedback |
-
-**Evidence:** Screenshots of each state, especially failures
+Generate completion report with issue counts and screenshot directory. See [report-template.mdx](references/report-template.mdx) for format.
 
 ---
 
-### Pass 3: Responsive Behavior
+## When to Use
 
-Test at breakpoints:
+- `/design-audit`
+- shipmate design review
+- visual QA
+- design quality check
+- audit accessibility
+- check design implementation
 
-```
-Mobile:  375px × 667px
-Tablet:  768px × 1024px
-Desktop: 1440px × 900px
-```
+## Do Not Use For
 
-For each:
-1. **Screenshot** at each breakpoint
-2. **Check:** Is mobile just "stacked desktop" or intentional?
-3. **Flag:** Broken layouts, overflow, tiny tap targets
-4. **Verify:** Touch targets ≥ 44px on mobile
-
-**Evidence:** Side-by-side breakpoint comparisons
+- Creating design systems (use `/design-help`)
+- Code review (use `/review`)
+- Functional testing (use `/qa`)
 
 ---
 
-### Pass 4: Accessibility Audit
+## Error Handling
 
-Automated + manual checks:
-
-1. **Console check:** Any a11y errors?
-2. **Keyboard nav:** Tab through entire flow
-3. **Color contrast:** WCAG AA minimum (4.5:1 text, 3:1 UI)
-4. **Touch targets:** 44px minimum on touch devices
-5. **Screen reader:** Landmarks, labels, alt text
-6. **Focus visibility:** Can you see where focus is?
-
-**Evidence:** Screenshots of a11y issues with measurements
-
----
-
-### Pass 5: AI Slop Detection
-
-Flag generic patterns that feel generated:
-
-- Hero sections with gradient backgrounds
-- 3-column feature grids
-- Card layouts with stock icons
-- "Clean, modern" without specificity
-- Generic testimonials sections
-- Cookie-cutter pricing tables
-
-**Question:** What makes this feel like THIS product?
-
-**Evidence:** Screenshots with notes on what's generic
-
----
-
-### Pass 6: Design System Compliance
-
-If DESIGN.md exists:
-
-1. **Typography:** Correct fonts, sizes, weights?
-2. **Colors:** Using palette tokens? Contrast compliant?
-3. **Spacing:** Following scale (4px/8px base)?
-4. **Components:** Using defined patterns?
-5. **New elements:** Fit the vocabulary?
-
-**Evidence:** Side-by-side DESIGN.md vs implementation
-
----
-
-## Report Format
-
-```
-+====================================================================+
-|              DESIGN AUDIT — COMPLETION REPORT                       |
-+====================================================================+
-| Target               | [URL]                                       |
-| DESIGN.md            | [found/not found]                           |
-| Scope                | [pages/screens reviewed]                    |
-+--------------------------------------------------------------------+
-| Pass 1 (Hierarchy)   | ___ issues found                            |
-| Pass 2 (States)      | ___ missing states                          |
-| Pass 3 (Responsive)  | ___ breakpoint issues                       |
-| Pass 4 (A11y)        | ___ violations                              |
-| Pass 5 (AI Slop)     | ___ generic patterns                        |
-| Pass 6 (Design Sys)  | ___ deviations from DESIGN.md               |
-+--------------------------------------------------------------------+
-| Screenshots saved    | ~/.shipmate/design-audit/[timestamp]/       |
-| Critical issues      | [list]                                      |
-| Recommended fixes    | [prioritized list]                          |
-+====================================================================+
-```
+| Issue | Action |
+|-------|--------|
+| Site requires auth | Use `/browser-auth` first |
+| DESIGN.md missing | Note in report, audit against universal principles |
+| Browser fails to load | Check URL, try alternative browser |
+| Timeout on page load | Increase timeout, check network |
 
 ---
 
@@ -203,37 +111,6 @@ If DESIGN.md exists:
 1. **Audit report** in terminal
 2. **Screenshots** saved to `~/.shipmate/design-audit/[timestamp]/`
 3. **Findings file** (optional) for handoff to developers
-
----
-
-## When to Use
-
-Use when:
-- /design-audit
-- shipmate design review
-- visual QA
-- design quality check
-- review live site
-- check design implementation
-- audit accessibility
-
-## Do Not Use For
-
-- Creating design systems (use design-help skill)
-- Code review (use review skill)
-- Functional testing (use qa skill)
-- Performance testing (use profiling tools)
-
----
-
-## Error Handling
-
-| Issue | Action |
-|-------|--------|
-| Site requires auth | Use browser-auth skill first |
-| DESIGN.md missing | Note in report, audit against universal principles |
-| Browser fails to load | Check URL, try alternative browser |
-| Timeout on page load | Increase timeout, check network |
 
 ---
 
@@ -254,6 +131,12 @@ Should not trigger:
 ---
 
 ## References
+
+- [design-principles.mdx](references/design-principles.mdx) — Core design principles
+- [audit-passes.mdx](references/audit-passes.mdx) — Detailed pass execution guide
+- [report-template.mdx](references/report-template.mdx) — Report format and screenshot organization
+
+### External References
 
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/) — Accessibility standards
 - [Refactoring UI](https://www.refactoringui.com/) — Design principles for developers

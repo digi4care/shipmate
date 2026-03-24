@@ -1,0 +1,143 @@
+# Snapshot Format
+
+Understanding the accessibility tree format returned by `playwright_browser_snapshot`.
+
+## Overview
+
+The snapshot is an accessibility tree representation of the page. Each interactive element has a `ref` attribute used for interactions.
+
+## Format Structure
+
+```
+<role> "<accessible name>" [<state>] [ref=<reference>]
+```
+
+### Components
+
+| Component | Description |
+|-----------|-------------|
+| `role` | ARIA role or HTML element type |
+| `accessible name` | Text content or label |
+| `state` | Optional state indicators |
+| `ref` | Unique identifier for interactions |
+
+## Common Roles
+
+| Role | HTML Elements |
+|------|---------------|
+| `button` | `<button>`, `<input type="submit">` |
+| `link` | `<a>` |
+| `textbox` | `<input>`, `<textarea>` |
+| `checkbox` | `<input type="checkbox">` |
+| `radio` | `<input type="radio">` |
+| `combobox` | `<select>` |
+| `heading` | `<h1>`-`<h6>` |
+| `listitem` | `<li>` |
+| `image` | `<img>` |
+| `navigation` | `<nav>` |
+| `main` | `<main>` |
+| `form` | `<form>` |
+
+## State Indicators
+
+States appear in square brackets before the ref:
+
+| State | Meaning |
+|-------|---------|
+| `[disabled]` | Element is not interactive |
+| `[focused]` | Element has focus |
+| `[checked]` | Checkbox/radio is checked |
+| `[expanded]` | Expandable element is open |
+| `[selected]` | Option is selected |
+| `[required]` | Field requires input |
+| `[invalid]` | Field has validation error |
+
+## Example Snapshots
+
+### Login Form
+
+```
+main
+  heading "Sign In" [ref=heading1]
+  form
+    textbox "Email address" [required] [ref=email]
+    textbox "Password" [required] [ref=password]
+    checkbox "Remember me" [ref=remember]
+    button "Sign In" [ref=submit]
+    link "Forgot password?" [ref=forgot_link]
+  paragraph "Don't have an account? "
+    link "Sign up" [ref=signup_link]
+```
+
+### Navigation Menu
+
+```
+navigation
+  link "Home" [ref=nav_home]
+  link "Products" [expanded] [ref=nav_products]
+  list
+    listitem
+      link "Laptops" [ref=nav_laptops]
+    listitem
+      link "Phones" [ref=nav_phones]
+  link "Contact" [ref=nav_contact]
+  button "Search" [ref=search_btn]
+```
+
+### Data Table
+
+```
+table
+  rowgroup
+    row
+      cell "Name" [ref=th_name]
+      cell "Email" [ref=th_email]
+      cell "Actions" [ref=th_actions]
+  rowgroup
+    row
+      cell "John Doe" [ref=td_name_1]
+      cell "john@example.com" [ref=td_email_1]
+      cell
+        button "Edit" [ref=edit_1]
+        button "Delete" [ref=delete_1]
+```
+
+### Modal Dialog
+
+```
+dialog "Confirm Delete" [expanded] [ref=modal]
+  heading "Delete Item?" [ref=modal_title]
+  paragraph "This action cannot be undone."
+  textbox "Type 'DELETE' to confirm" [ref=confirm_input]
+  button "Cancel" [ref=cancel_btn]
+  button "Delete" [disabled] [ref=delete_btn]
+```
+
+## Using References
+
+After getting a snapshot, use the `ref` values for interactions:
+
+```
+# Get snapshot first
+playwright_browser_snapshot()
+
+# Output shows: textbox "Email" [ref=email_input]
+# Use the ref to interact
+playwright_browser_type(ref="email_input", text="user@test.com")
+```
+
+## Best Practices
+
+1. **Always snapshot before interacting** - The page may have changed since last snapshot
+2. **Use descriptive element names** - When providing `element` parameter for clarity
+3. **Check state indicators** - Don't try to click disabled elements
+4. **Verify refs exist** - If ref is missing, element may not be interactive
+
+## Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| Element has no ref | Element is not interactive; find the interactive child |
+| Ref not found | Page changed; take new snapshot |
+| Multiple matching refs | Use more specific text or path |
+| State says disabled | Wait for element to become enabled |

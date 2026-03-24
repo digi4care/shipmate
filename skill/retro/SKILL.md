@@ -2,174 +2,21 @@
 name: retro
 description: |
   Weekly engineering retrospective. Analyzes commit history, work patterns, and code quality metrics. Team-aware with per-person praise and growth opportunities. Use when user asks for "retro", "weekly review", or reflects on recent work.
-triggers:
-  - /retro
-  - retro
-  - weekly retro
-  - retrospective
-  - how did this week go
-  - how did last week go
-  - weekly review
-  - how did this year compare
-workflow:
-  - Gather raw data: git log, commits, metrics
-  - Compute metrics table
-  - Commit time distribution histogram
-  - Work session detection
-  - Per-author leaderboard
-  - Hotspot analysis
-  - PR summary
-  - Insights and recommendations
+license: MIT
+compatibility: opencode
+metadata:
+  author: shipmate
+  version: 2.0.0
 ---
 
 # Engineering Retrospective
 
 Generates a comprehensive engineering retrospective analyzing commit history, work patterns, and code quality metrics. Team-aware: identifies the user running the command, then analyzes every contributor with per-person praise and growth opportunities.
 
-## Arguments
-
-| Command | Description |
-|---------|-------------|
-| `/retro` | Default: last 7 days |
-| `/retro 24h` | Last 24 hours |
-| `/retro 14d` | Last 14 days |
-| `/retro 30d` | Last 30 days |
-| `/retro compare` | Compare current window vs prior same-length window |
-| `/retro compare 14d` | Compare with explicit window |
-
-## Workflow
-
-### Step 1: Gather Raw Data
-
-```bash
-# Fetch latest and get user identity
-git fetch origin <default> --quiet
-git config user.name
-git config user.email
-
-# Commit details with stats
-git log origin/<default> --since="<window>" --format="%H|%aN|%ae|%ai|%s" --shortstat
-
-# File changes per commit
-git log origin/<default> --since="<window>" --format="COMMIT:%H|%aN" --numstat
-
-# Timestamps for session detection
-git log origin/<default> --since="<window>" --format="%at|%aN|%ai|%s" | sort -n
-
-# Hotspot analysis (most changed files)
-git log origin/<default> --since="<window>" --format="" --name-only | sort | uniq -c | sort -rn
-
-# Author-to-file mapping
-git log origin/<default> --since="<window>" --format="AUTHOR:%aN" --name-only
-
-# PR references
-git log origin/<default> --since="<window>" --format="%s" | grep -oE '#[0-9]+' | sort -n | uniq
-
-# Quick summary
-git shortlog origin/<default> --since="<window>" -sn --no-merges
-
-# Check for TODOS (optional)
-cat TODO.md 2>/dev/null || true  # Router to TODOS.md or TODOS-beads.md
-```
-
-### Step 2: Compute Metrics
-
-Present metrics summary table:
-
-```
-| Metric            | Value |
-|-------------------|-------|
-| Commits to main   | N     |
-| Contributors      | N     |
-| PRs merged        | N     |
-| Total insertions  | N     |
-| Total deletions   | N     |
-| Net LOC added     | N     |
-| Test LOC ratio    | N%    |
-| Active days       | N     |
-| Detected sessions | N     |
-```
-
-### Step 3: Commit Time Distribution
-
-Show hourly histogram with bar chart using ASCII.
-
-### Step 4: Work Session Detection
-
-Detect sessions using 45-minute gap threshold between consecutive commits. Group commits into focused work sessions.
-
-### Step 5: Per-Author Leaderboard
-
-```
-Contributor         Commits   +/-          Top area
-────────────────────────────────────────────────────
-You (name)              N      +N/-M       dir/
-teammate1               N      +N/-M       dir/
-```
-
-For each contributor, provide:
-- **Praise**: What went well (e.g., high-quality commits, good test coverage)
-- **Growth opportunities**: Constructive suggestions for improvement
-
-### Step 6: Hotspot Analysis
-
-Show most frequently changed files. Flag files that may need attention:
-- Very high change count → potential instability
-- Large files → consider splitting
-
-### Step 7: PR Summary
-
-List PRs merged in the window with brief descriptions.
-
-### Step 8: Insights & Recommendations
-
-Provide actionable insights:
-- Work pattern observations (e.g., late-night commits, weekend work)
-- Team dynamics (e.g., collaboration hotspots, silos)
-- Process improvements
-- Celebrate wins
-
-## Compare Mode
-
-When `/retro compare` is used:
-
-1. Run the same analysis for current window and prior window
-2. Show side-by-side comparison:
-
-```
-| Metric            | Current | Prior | Delta |
-|-------------------|---------|-------|-------|
-| Commits           | 45      | 38    | +18%  |
-| Contributors      | 4       | 3     | +1    |
-| PRs merged        | 12      | 10    | +2    |
-```
-
-3. Highlight trends (improving, declining, stable)
-4. Identify what changed between periods
-
-## Storage
-
-Retrospective data and reports are stored in:
-
-```
-~/.shipmate/retros/
-├── <date>-retro.md      # Individual reports
-└── compare/             # Comparison reports
-```
-
-## Important Rules
-
-- **Always identify the user**: Use `git config user.name` to know who "you" is
-- **Team-aware**: Analyze ALL contributors, not just the user
-- **Balanced feedback**: Praise + growth for everyone
-- **Privacy**: Don't expose sensitive information in reports
-- **Actionable**: Every insight should suggest a concrete action
-
----
-
-## When to Use
+## When to Use Me
 
 Use when:
+
 - /retro
 - retro
 - weekly retro
@@ -178,44 +25,83 @@ Use when:
 - how did last week go
 - weekly review
 - engineering retrospective
+- how did this year compare
 
-## Do Not Use For
+Do not use for:
 
 - Daily standups (out of scope)
 - Individual performance reviews (use HR tools)
 - Sprint planning (use planning tools)
 - Bug analysis (use investigate skill)
+- PR code review (use review skill)
 
----
+## Arguments
+
+- `/retro` — Default: last 7 days
+- `/retro 24h|14d|30d` — Custom window
+- `/retro compare [window]` — Compare current vs prior window
+
+## Workflow
+
+1. **Gather raw data** — Fetch commits, stats, timestamps, hotspots, PRs
+2. **Compute metrics** — See `references/metrics-guide.mdx` for calculations
+3. **Time distribution** — Hourly histogram, flag late-night/weekend patterns
+4. **Session detection** — Group commits by 45-minute gap threshold
+5. **Per-author leaderboard** — Praise + growth opportunities for each contributor
+6. **Hotspot analysis** — Flag high-change files, large files, single-author silos
+7. **PR summary** — List merged PRs with descriptions
+8. **Insights** — Actionable recommendations with concrete next steps
+
+### Step 1: Data Collection
+
+```bash
+# User identity
+git config user.name && git config user.email
+
+# Commit details with stats
+git log origin/<default> --since="<window>" --format="%H|%aN|%ae|%ai|%s" --shortstat
+
+# Hotspot analysis
+git log origin/<default> --since="<window>" --format="" --name-only | sort | uniq -c | sort -rn
+
+# PR references
+git log origin/<default> --since="<window>" --format="%s" | grep -oE '#[0-9]+' | sort -n | uniq
+```
+
+## Compare Mode
+
+1. Run same analysis for current and prior windows
+2. Show side-by-side with deltas
+3. Classify: improving (>+10%), stable, declining (<-10%)
 
 ## Error Handling
 
 | Issue | Action |
 |-------|--------|
-| No commits in window | Report: "No activity in the selected period" |
-| Git fetch fails | Continue with local data, note limitation |
-| Single contributor | Still analyze, but note team context missing |
-| Private repo access | Use local git log only |
-
----
+| No commits | Report "No activity in selected period" |
+| Git fetch fails | Continue with local data |
+| Single contributor | Note team context missing |
+| Invalid window | Default to 7 days |
 
 ## Quick Tests
 
-Should trigger:
-- Run a retro for this week
-- How did this week go
-- /retro
-- Weekly engineering review
+**Should trigger:** "run a retro", "how did this week go", "/retro", "weekly engineering review"
 
-Should not trigger:
-- Plan the next sprint
-- Review this PR
-- Debug this issue
-- Daily standup
+**Should not trigger:** "plan sprint", "review PR", "debug issue", "daily standup"
 
----
+## Storage
+
+`~/.shipmate/retros/<date>-retro.md` — Reports saved locally
+
+## Important Rules
+
+- **Identify user**: Use `git config user.name` for "you" context
+- **Team-aware**: Analyze ALL contributors
+- **Balanced feedback**: Praise + growth for everyone
+- **Actionable**: Every insight should suggest concrete action
 
 ## References
 
-- [Agile Retrospectives](https://retrospectivewiki.org/) — Retro patterns and formats
-- [The Five Dysfunctions of a Team](https://www.tablegroup.com/books/dysfunctions/) — Team dynamics
+- `references/metrics-guide.mdx` - Detailed metric calculations
+- `references/retro-template.mdx` - Report template structure
+- [Agile Retrospectives Wiki](https://retrospectivewiki.org/) — Retro patterns

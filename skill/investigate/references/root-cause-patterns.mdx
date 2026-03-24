@@ -1,0 +1,145 @@
+# Root Cause Patterns
+
+Common debugging patterns and where to investigate when you encounter specific symptoms.
+
+## Pattern Reference Table
+
+| Pattern | Signature | Where to Look |
+|---------|-----------|---------------|
+| Race condition | Intermittent, timing-dependent | Concurrent access to shared state |
+| Nil/null propagation | NoMethodError, TypeError | Missing guards on optional values |
+| State corruption | Inconsistent data, partial updates | Transactions, callbacks, hooks |
+| Integration failure | Timeout, unexpected response | External API calls, service boundaries |
+| Configuration drift | Works locally, fails in staging/prod | Env vars, feature flags, DB state |
+| Stale cache | Shows old data, fixes on cache clear | Redis, CDN, browser cache, Turbo |
+
+## Detailed Pattern Analysis
+
+### Race Condition
+
+**Symptoms:**
+- Bug appears intermittently
+- Behavior changes with timing (delays make it appear/disappear)
+- Concurrent operations involved
+
+**Investigation Steps:**
+1. Identify all concurrent code paths
+2. Look for shared mutable state
+3. Check locking/synchronization mechanisms
+4. Add logging with timestamps
+
+**Common Causes:**
+- Missing mutex/lock
+- Async operations completing in unexpected order
+- Shared state without proper synchronization
+- Event handlers firing multiple times
+
+### Nil/Null Propagation
+
+**Symptoms:**
+- `NoMethodError`, `TypeError`, `NullPointerException`
+- "Cannot read property of undefined"
+- Cascading failures from optional values
+
+**Investigation Steps:**
+1. Trace the null back to its origin
+2. Check all optional/nullable fields in the data path
+3. Look for missing guards or early returns
+
+**Common Causes:**
+- Missing null checks
+- Optional fields without defaults
+- API responses with unexpected nulls
+- Database records with NULL columns
+
+### State Corruption
+
+**Symptoms:**
+- Data inconsistency
+- Partial updates visible to users
+- "impossible" states occurring
+
+**Investigation Steps:**
+1. Check transaction boundaries
+2. Look for callbacks/hooks that modify state
+3. Verify database constraints
+4. Check for concurrent writes
+
+**Common Causes:**
+- Missing transactions
+- Callbacks with side effects
+- Race conditions in state updates
+- Missing validation constraints
+
+### Integration Failure
+
+**Symptoms:**
+- Timeouts
+- Unexpected response formats
+- Service unavailable errors
+
+**Investigation Steps:**
+1. Check external service status
+2. Verify API contract matches expectations
+3. Review error handling and retry logic
+4. Check network connectivity and DNS
+
+**Common Causes:**
+- API version mismatch
+- Missing error handling
+- Network issues
+- Rate limiting
+
+### Configuration Drift
+
+**Symptoms:**
+- Works in one environment, fails in another
+- Sudden failures after deployment
+- Environment-specific behavior
+
+**Investigation Steps:**
+1. Compare environment configs
+2. Check all environment variables
+3. Verify feature flags
+4. Check database state differences
+
+**Common Causes:**
+- Missing environment variables
+- Different feature flag states
+- Database schema drift
+- Different dependency versions
+
+### Stale Cache
+
+**Symptoms:**
+- Shows old data
+- Fixes after cache clear
+- Inconsistent views between users
+
+**Investigation Steps:**
+1. Identify all caching layers
+2. Check cache invalidation logic
+3. Verify cache keys and TTLs
+4. Check for cache stampedes
+
+**Common Causes:**
+- Missing cache invalidation
+- Wrong cache keys
+- Overly long TTLs
+- Cache layering issues
+
+## Additional Investigation Paths
+
+### Check TODO.md
+
+Look for related known issues. The file routes to either:
+- `TODOS.md` — Long-term roadmap
+- `TODOS-beads.md` — Active BEADS issue tracker
+
+### Check Git History
+
+```bash
+git log --oneline -20 -- <affected-files>
+```
+
+**Critical insight:** Recurring bugs in the same files are an **architectural smell**, not a coincidence. If you see multiple fixes to the same area, the real problem may be the design, not the implementation.

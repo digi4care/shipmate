@@ -1,0 +1,170 @@
+# Design Guidelines
+
+Detailed guidelines for typography, color, spacing, and visual hierarchy decisions.
+
+## Typography
+
+### Font Stack
+
+Decide between:
+- **System fonts**: Fast loading, native feel, no licensing
+- **Custom fonts**: Brand differentiation, specific aesthetic
+
+System font stack example:
+```css
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+```
+
+### Type Scale
+
+Define a modular scale based on a ratio (e.g., 1.25, 1.333, 1.5):
+
+| Level | Size | Use Case |
+|-------|------|----------|
+| xs | 0.75rem | Captions, footnotes |
+| sm | 0.875rem | Small text, labels |
+| base | 1rem | Body text |
+| lg | 1.125rem | Large body, lead text |
+| xl | 1.25rem | H4, card titles |
+| 2xl | 1.5rem | H3 |
+| 3xl | 1.875rem | H2 |
+| 4xl | 2.25rem | H1 |
+| 5xl | 3rem | Display |
+
+### Line Heights
+
+- Body text: 1.5–1.75
+- Headings: 1.1–1.3
+- Tight UI text: 1.25
+
+### Weight Usage
+
+| Weight | Use |
+|--------|-----|
+| 400 (normal) | Body text |
+| 500 (medium) | Emphasis, labels |
+| 600 (semibold) | Subheadings, buttons |
+| 700 (bold) | Headings |
+
+---
+
+## Color
+
+### Primary Palette
+
+Define 2-3 brand colors with variants:
+
+```
+Primary-50   → Lightest tint (backgrounds)
+Primary-100  → Light tint
+Primary-300  → Medium tint (borders, hover)
+Primary-500  → Base color (buttons, links)
+Primary-700  → Dark shade (hover states)
+Primary-900  → Darkest shade (text on light)
+```
+
+### Semantic Colors
+
+| Semantic | Use | Hue Guidance |
+|----------|-----|--------------|
+| Success | Confirmations, positive states | Green |
+| Warning | Caution, attention needed | Yellow/Orange |
+| Error | Failures, destructive actions | Red |
+| Info | Neutral information | Blue |
+
+### Neutral Scale
+
+Build grays with a slight tint (warm or cool) to match brand:
+
+```
+Neutral-50   → Near-white (page backgrounds)
+Neutral-100  → Subtle backgrounds
+Neutral-200  → Borders, dividers
+Neutral-300  → Disabled states
+Neutral-500  → Placeholder text
+Neutral-700  → Secondary text
+Neutral-900  → Primary text
+```
+
+### Accessibility
+
+- **Text on backgrounds**: Minimum 4.5:1 contrast ratio (WCAG AA)
+- **Large text (>18px or 14px bold)**: Minimum 3:1 contrast ratio
+- **UI components**: Minimum 3:1 against adjacent colors
+- Use tools: WebAIM Contrast Checker, Stark plugin
+
+---
+
+## Spacing
+
+### Base Unit
+
+Choose a base unit for consistency:
+- **4px**: Fine-grained control, dense UIs
+- **8px**: Common baseline, good rhythm
+- **16px**: Generous spacing, simple scales
+
+### Spacing Scale
+
+Using 4px base:
+
+| Token | Value | Use |
+|-------|-------|-----|
+| space-1 | 4px | Tight gaps, inline spacing |
+| space-2 | 8px | Small gaps |
+| space-3 | 12px | Medium gaps |
+| space-4 | 16px | Default component padding |
+| space-6 | 24px | Section gaps |
+| space-8 | 32px | Large sections |
+| space-12 | 48px | Page sections |
+| space-16 | 64px | Major separations |
+
+### Component Padding
+
+| Component | Padding |
+|-----------|---------|
+| Button (sm) | 8px 12px |
+| Button (md) | 10px 16px |
+| Button (lg) | 12px 24px |
+| Card | 16px–24px |
+| Modal | 24px |
+| Page section | 24px–48px |
+
+---
+
+## Visual Hierarchy
+
+### Heading Hierarchy
+
+Each heading level should be visually distinct:
+
+1. **H1**: Page title, single per page, largest
+2. **H2**: Major sections
+3. **H3**: Subsections
+4. **H4**: Component headings, card titles
+
+Differentiation methods:
+- Size (most impactful)
+- Weight (subtle)
+- Color (secondary headings in lighter text)
+
+### Body Text Treatment
+
+- Max width: 65–75 characters for readability
+- Paragraph spacing: 1–1.5em between paragraphs
+- Links: Underlined or clearly distinguished
+
+### Interactive Element Prominence
+
+Hierarchy of affordance:
+1. **Primary buttons**: Filled, brand color
+2. **Secondary buttons**: Outlined or muted fill
+3. **Tertiary buttons**: Text-only, subtle
+4. **Links**: Underlined, distinct from body text
+
+### Focal Points
+
+Create visual priority:
+- **Primary CTA**: Highest contrast, largest interactive
+- **Secondary actions**: Lower contrast, smaller
+- **Tertiary elements**: Muted, smaller still

@@ -1,0 +1,174 @@
+# Ship Phases Reference
+
+Detailed phase-by-phase execution guide for the ship workflow.
+
+## Phase 1: Pre-Flight Checks
+
+```bash
+# Check working tree is clean
+git status --porcelain
+# Expected: empty output
+
+# Check current branch
+git branch --show-current
+
+# Verify tests pass
+npm test || bun test || pnpm test
+```
+
+**Stop if:**
+
+- Working tree dirty → commit or stash first
+- Tests failing → fix before shipping
+- On main/master → create feature branch first
+
+---
+
+## Phase 2: Branch Integration
+
+```bash
+# Fetch latest
+git fetch origin
+
+# Rebase on base branch
+git rebase origin/main
+
+# Resolve conflicts if any
+# Then continue: git rebase --continue
+```
+
+**Stop if:**
+
+- Merge conflicts → resolve manually, never force
+- Rebase fails → merge instead if appropriate
+
+---
+
+## Phase 3: Quality Gates
+
+```bash
+# Run linting
+npm run lint || bun run lint
+
+# Run type check (TypeScript)
+npm run typecheck || bun run typecheck
+
+# Run full test suite
+npm test -- --coverage || bun test --coverage
+
+# Build production
+npm run build || bun run build
+```
+
+**Stop if:**
+
+- Lint errors → fix before shipping
+- Type errors → fix before shipping
+- Test failures → fix before shipping
+- Build fails → fix before shipping
+
+---
+
+## Phase 4: Version Management
+
+```bash
+# Check current version
+cat package.json | grep '"version"'
+
+# Bump version based on changes
+npm version patch  # Bug fixes
+npm version minor  # New features
+npm version major  # Breaking changes
+```
+
+**Version bump rules:**
+
+| Bump Type | Version | When to Use |
+|-----------|---------|-------------|
+| `patch` | 0.0.x | Bug fixes, no new features |
+| `minor` | 0.x.0 | New features, backward compatible |
+| `major` | x.0.0 | Breaking changes |
+
+---
+
+## Phase 5: Create Pull Request
+
+```bash
+# Push branch
+git push -u origin HEAD
+
+# Create PR using gh CLI
+gh pr create --title "feat: description" --body "$(cat <<'EOF'
+## Summary
+- Change 1
+- Change 2
+
+## Test plan
+- [ ] Test case 1
+- [ ] Test case 2
+EOF
+)"
+```
+
+**PR requirements:**
+
+- Clear summary of changes
+- Test plan with checkboxes
+- Reference to related issues
+
+---
+
+## Phase 6: Merge and Deploy
+
+```bash
+# Wait for CI to pass (optional check)
+gh pr checks
+
+# Squash and merge (preferred)
+gh pr merge --squash --delete-branch
+
+# Or merge commit
+gh pr merge --merge --delete-branch
+
+# Pull latest
+git checkout main && git pull
+
+# Tag release
+git tag -a v$(node -p "require('./package.json').version") -m "Release"
+
+# Push tags
+git push origin --tags
+```
+
+---
+
+## Phase 7: Post-Deploy
+
+```bash
+# Verify deployment
+curl -s https://your-app.com/health || echo "Check deployment status"
+
+# Update changelog
+# Edit CHANGELOG.md with release notes
+
+# Notify team (optional)
+# Slack, Discord, email, etc.
+```
+
+---
+
+## Configuration
+
+Override defaults in `~/.shipmate/config.json`:
+
+```json
+{
+  "ship": {
+    "baseBranch": "main",
+    "autoTag": true,
+    "deleteBranch": true,
+    "requireTests": true,
+    "requireReview": true
+  }
+}
+```

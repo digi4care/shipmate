@@ -1,0 +1,131 @@
+# QA Checklist
+
+Comprehensive testing checklist for QA workflows.
+
+## Form Testing Checklist
+
+For each form in the application, verify:
+
+| Test Case | Description | Expected Result |
+|-----------|-------------|-----------------|
+| Empty submission | Submit with all fields blank | Validation errors shown |
+| Invalid email | Enter non-email format | Email validation error |
+| Required fields | Skip required fields | Field-specific error messages |
+| Max length | Enter text exceeding limits | Truncation or validation error |
+| Special characters | Enter `<>'"&\|` characters | Properly escaped/sanitized |
+| Valid submission | Complete all fields correctly | Success state or redirect |
+| Success display | After valid submission | Confirmation message shown |
+| Error recovery | Fix errors and resubmit | Submission succeeds |
+
+### Form Test Pattern
+
+```typescript
+// tests/form-validation.spec.ts
+import { test, expect } from '@playwright/test';
+
+test('form validation', async ({ page }) => {
+  await page.goto('/signup');
+
+  // Test empty submission
+  await page.click('button[type="submit"]');
+  await expect(page.locator('.error')).toContainText('required');
+
+  // Test invalid email
+  await page.fill('input[name="email"]', 'not-an-email');
+  await page.click('button[type="submit"]');
+  await expect(page.locator('.error')).toContainText('email');
+
+  // Test valid submission
+  await page.fill('input[name="email"]', 'valid@example.com');
+  await page.fill('input[name="password"]', 'SecurePass123!');
+  await page.click('button[type="submit"]');
+  await expect(page).toHaveURL(/\/success|\/dashboard/);
+});
+```
+
+## Edge Case Testing Matrix
+
+| Category | Test Cases | Priority |
+|----------|------------|----------|
+| **Input** | Empty, whitespace-only, special chars, unicode, emoji | High |
+| **Numbers** | Zero, negative, decimal, scientific notation, overflow | High |
+| **Dates** | Past dates, future dates, invalid format, timezone, leap year | Medium |
+| **Network** | Offline mode, slow 3G, timeout, retry behavior | Medium |
+| **State** | Authenticated, not-authenticated, empty state, loading, error | High |
+| **Responsive** | Mobile (375px), tablet (768px), desktop (1440px), resize | Medium |
+
+### Edge Case Test Examples
+
+```typescript
+// tests/edge-cases.spec.ts
+import { test, expect } from '@playwright/test';
+
+test('handles edge cases', async ({ page }) => {
+  await page.goto('/search');
+
+  // Empty search
+  await page.fill('input[type="search"]', '');
+  await page.press('input[type="search"]', 'Enter');
+  await expect(page.locator('.results')).toContainText('No results');
+
+  // Very long input
+  await page.fill('input[type="search"]', 'a'.repeat(1000));
+  await expect(page.locator('.error')).toBeVisible();
+
+  // Special characters (XSS prevention)
+  await page.fill('input[type="search"]', '<script>alert(1)</script>');
+  await page.press('input[type="search"]', 'Enter');
+  // Should not execute script
+  await expect(page.locator('body')).not.toContainText('alert');
+
+  // Unicode and emoji
+  await page.fill('input[type="search"]', '测试 🎉 тест');
+  await page.press('input[type="search"]', 'Enter');
+  // Should handle gracefully
+});
+```
+
+## Verification Checklist
+
+Before marking QA complete, verify:
+
+- [ ] Server accessible at target URL
+- [ ] Test framework configured and running
+- [ ] Existing test suite executed
+- [ ] Browser automation testing completed
+- [ ] All forms validated per checklist
+- [ ] Edge cases tested per matrix
+- [ ] Bugs documented with severity
+- [ ] Bugs fixed with corresponding tests
+- [ ] Full test suite passes after fixes
+- [ ] No regressions introduced
+- [ ] QA report generated
+
+## Test Scenarios by Priority
+
+### Critical (Must Test)
+
+1. Authentication flows (login, logout, password reset)
+2. Data submission (forms, API calls)
+3. Navigation (all major routes)
+4. Error handling (network failures, validation)
+
+### High Priority
+
+1. Search functionality
+2. Filtering and sorting
+3. Pagination
+4. User profile updates
+
+### Medium Priority
+
+1. UI responsiveness
+2. Accessibility (keyboard nav, screen reader)
+3. Loading states
+4. Empty states
+
+### Lower Priority
+
+1. Animation smoothness
+2. Cosmetic issues
+3. Minor UX improvements

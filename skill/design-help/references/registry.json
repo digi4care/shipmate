@@ -1,0 +1,77 @@
+{
+  "version": "1.0.0",
+  "created": "2026-03-24T00:00:00Z",
+  "last_updated": "2026-03-24T00:00:00Z",
+  "registry_type": "reference_documents",
+  "entries": [
+    {
+      "id": "design-guidelines",
+      "title": "Design Guidelines",
+      "filename": "design-guidelines.mdx",
+      "category": "guidelines",
+      "description": "Detailed guidelines for typography, color, spacing, and visual hierarchy decisions.",
+      "keywords": [
+        "typography",
+        "font",
+        "color",
+        "palette",
+        "spacing",
+        "visual hierarchy",
+        "accessibility"
+      ],
+      "topics": [
+        "typography",
+        "color",
+        "spacing",
+        "hierarchy"
+      ],
+      "language": "en",
+      "created": "2026-03-24T00:00:00Z",
+      "last_updated": "2026-03-24T00:00:00Z"
+    },
+    {
+      "id": "design-principles",
+      "title": "Design Principles",
+      "filename": "design-principles.mdx",
+      "category": "principles",
+      "description": "Core design principles: empty states, hierarchy, specificity, edge cases, avoiding AI slop.",
+      "keywords": [
+        "principles",
+        "empty states",
+        "hierarchy",
+        "specificity",
+        "edge cases",
+        "AI slop"
+      ],
+      "topics": [
+        "principles",
+        "philosophy"
+      ],
+      "language": "en",
+      "created": "2026-03-24T00:00:00Z",
+      "last_updated": "2026-03-24T00:00:00Z"
+    },
+    {
+      "id": "external-resources",
+      "title": "External Resources",
+      "filename": "external-resources.mdx",
+      "category": "resources",
+      "description": "Curated external resources for design systems, typography, color, accessibility, and Tailwind CSS.",
+      "keywords": [
+        "resources",
+        "design systems",
+        "typography",
+        "color",
+        "accessibility",
+        "tailwind"
+      ],
+      "topics": [
+        "resources",
+        "external"
+      ],
+      "language": "en",
+      "created": "2026-03-24T00:00:00Z",
+      "last_updated": "2026-03-24T00:00:00Z"
+    }
+  ]
+}

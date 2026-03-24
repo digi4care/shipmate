@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "references": [
+    {
+      "file": "design-principles.mdx",
+      "description": "Core design principles that guide all audit decisions",
+      "sections": ["8 Principles", "Application"]
+    },
+    {
+      "file": "audit-passes.mdx",
+      "description": "Detailed execution guide for each of the 6 audit passes",
+      "sections": ["Visual Hierarchy", "Interaction States", "Responsive", "Accessibility", "AI Slop", "Design System"]
+    },
+    {
+      "file": "report-template.mdx",
+      "description": "Template for final audit report and screenshot organization",
+      "sections": ["Report Format", "Screenshot Organization", "Severity Levels"]
+    }
+  ]
+}
