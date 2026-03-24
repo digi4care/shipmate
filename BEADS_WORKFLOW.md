@@ -2,7 +2,19 @@
 
 ## Overzicht
 
-Shipmate gebruikt **Beads** als issue tracker voor de OpenCode SDK migratie. Dit document beschrijft de workflow.
+Shipmate gebruikt **Beads** als issue tracker. Beads is een AI-native issue tracker met Dolt als backend.
+
+**GitHub Sync**: https://github.com/digi4care/shipmate-beads
+
+## Config
+
+```yaml
+# .beads/config.yaml
+dolt.auto-start: true
+no-db: false
+no-git-ops: false
+sync-branch: beads-sync
+```
 
 ## Huidige Status
 
@@ -10,24 +22,24 @@ Shipmate gebruikt **Beads** als issue tracker voor de OpenCode SDK migratie. Dit
 📊 Issue Database Status
 
 Total Issues:           8
-Open:                   7
-In Progress:            1
-Blocked:                5
-Closed:                 0
-Ready to Work:          2
+Open:                   0
+Closed:                 8
+Ready to Work:          0
+
+✅ OpenCode SDK Migration voltooid!
 ```
 
-## Issue Hierarchy
+## Voltooide Issues
 
 ```
-shipmate-pjf (Epic: OpenCode SDK Migration)
-├── shipmate-yqk (Fase 1: TypeScript Setup) ◀ READY
-├── shipmate-3kf (Fase 2: Skill Loader) ⏸ blocked by Fase 1
-├── shipmate-cuk (Fase 3: Hooks Migratie) ⏸ blocked by Fase 1
-├── shipmate-mtw (Fase 4: Plugin Entry Point) ⏸ blocked by Fase 2, 3
-├── shipmate-3jw (Fase 5: postinstall.mjs) ⏸ blocked by Fase 4
-├── shipmate-pc8 (Fase 6: schema.json) ◀ READY
-└── shipmate-bu8 (Fase 7: Cleanup) ⏸ blocked by Fase 4
+✓ shipmate-pjf (Epic: OpenCode SDK Migration)
+✓ shipmate-yqk (Fase 1: TypeScript Setup)
+✓ shipmate-3kf (Fase 2: Skill Loader)
+✓ shipmate-cuk (Fase 3: Hooks Migratie)
+✓ shipmate-mtw (Fase 4: Plugin Entry Point)
+✓ shipmate-3jw (Fase 5: postinstall.mjs)
+✓ shipmate-pc8 (Fase 6: schema.json)
+✓ shipmate-bu8 (Fase 7: Cleanup)
 ```
 
 ## Dependency Graph
@@ -56,11 +68,28 @@ stall    .json
 
 ## Workflow Commands
 
-### Start aan een fase
+### Sync met GitHub
+
+```bash
+# Push lokale changes naar GitHub
+bd dolt push
+
+# Pull changes van GitHub
+bd dolt pull
+```
+
+### Nieuwe issue maken
+
+```bash
+# Maak nieuwe issue
+bd create "Issue titel" --description "Details..."
+```
+
+### Start aan een issue
 
 ```bash
 # Claim en start issue
-bd update shipmate-yqk --claim
+bd update <id> --claim
 ```
 
 ### Toon ready issues
@@ -77,60 +106,46 @@ bd ready
 bd list
 ```
 
-### Sluit een fase af
+### Sluit een issue
 
 ```bash
-# Na afronden van een fase
-bd close shipmate-yqk --reason "Completed: tsconfig.json en package.json geüpdatet"
+# Na afronden
+bd close <id> --reason "Completed: ..."
 ```
 
 ### Voeg notities toe
 
 ```bash
 # Tussentijds werk documenteren
-bd note shipmate-yqk "TypeScript configuratie voltooid, nu skills testen"
+bd note <id> "Notitie..."
 ```
 
 ### Check dependencies
 
 ```bash
 # Toon wat een issue blokkeert
-bd show shipmate-3kf
+bd show <id>
 ```
 
 ## Startprompt voor Nieuwe Chat
 
 ```
-Continue work on shipmate-yqk: Fase 1 TypeScript Setup.
-
-Doel: Setup TypeScript configuratie voor shipmate OpenCode SDK migratie.
-
-Context: Dit is fase 1 van de migratie. Na afronding worden Fase 2 (Skill Loader) en Fase 3 (Hooks Migratie) unblocked.
+Continue BEADS issue tracking.
 
 Beads commands:
-- bd ready # toon ready issues
-- bd show shipmate-yqk # toon issue details
-- bd update shipmate-yqk --claim # claim issue
-- bd close shipmate-yqk --reason "..." # sluit issue
+- bd list        # alle issues
+- bd ready       # unblocked issues
+- bd create      # nieuwe issue
+- bd update <id> --claim  # claim issue
+- bd close <id> --reason "..."  # sluit issue
+- bd dolt push   # sync naar GitHub
 
-Plan: .sisyphus/plans/opencode-sdk-migration.md
+GitHub: https://github.com/digi4care/shipmate-beads
 ```
 
 ## Belangrijke Regels
 
 1. **Claim voor start**: Altijd `bd update <id> --claim` voordat je begint
-2. **Sluit bij afronding**: `bd close <id> --reason "..."` als fase klaar is
+2. **Sluit bij afronding**: `bd close <id> --reason "..."` als issue klaar is
 3. **Note tussenresultaten**: `bd note <id> "..."` voor belangrijke beslissingen
-4. **Check ready**: `bd ready` om te zien wat unblocked is na sluiten
-
-## Fase Details
-
-| Fase | ID | Description |
-|------|-----|-------------|
-| 1 | shipmate-yqk | tsconfig.json, package.json, dependencies |
-| 2 | shipmate-3kf | src/config/schema.ts, src/config/reader.ts, src/skill-loader.ts |
-| 3 | shipmate-cuk | src/hooks/careful.ts, freeze.ts, guard.ts, unfreeze.ts |
-| 4 | shipmate-mtw | src/index.ts met Plugin export |
-| 5 | shipmate-3jw | postinstall.mjs update met sources format |
-| 6 | shipmate-pc8 | schema.json update |
-| 7 | shipmate-bu8 | Verwijder plugin/ folder, oude src/index.js |
+4. **Sync regelmatig**: `bd dolt push` om naar GitHub te syncen
